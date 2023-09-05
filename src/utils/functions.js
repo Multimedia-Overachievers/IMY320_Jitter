@@ -32,10 +32,10 @@ export function getAverage(array) {
  */
 export function getAverageColor(average) {
     if (average < 50) {
-        return 'text-danger'
+        return 'danger'
     } else if (average < 70) {
-        return 'text-warning'
+        return 'warning'
     } else {
-        return 'text-success'
+        return 'success'
     }
 }

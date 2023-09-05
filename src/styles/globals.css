@@ -1,5 +1,15 @@
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+.scrollable {
+  overflow-y: scroll;
 }/*# sourceMappingURL=globals.css.map */

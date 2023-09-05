@@ -6,6 +6,8 @@ import Chapters from '../components/home/Chapters';
 
 export default function Home() {
 
+    let module = "IMY 310";
+
     // Dummy data
     let chapters = [
         {
@@ -15,7 +17,17 @@ export default function Home() {
         },
         {
             chapter: 'Chapter 2',
-            progress: 20,
+            progress: 80,
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.'
+        },
+        {
+            chapter: 'Chapter 3',
+            progress: 50,
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.'
+        },
+        {
+            chapter: 'Chapter 4',
+            progress: 30,
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.'
         },
     ]
@@ -27,13 +39,13 @@ export default function Home() {
     return (
         <div className="bg-light vh-100">
             <Row>
-                <Col lg={9}>
-                    <div className="p-5 m-5">
+                <Col lg={9} className='scrollable'>
+                    <div className="p-5 m-4">
                         {/* Home page header */}
                         <div className='d-flex justify-content-between'>
                             <div>
                                 <h4 className='text-secondary'>Dashboard</h4>
-                                <h1 className='text-primary fw-bold'>IMY 310</h1>
+                                <h1 className='text-primary fw-bold'>{module}</h1>
                             </div>
                             {/*  Calculate and display the current date */}
                             <h4 className='text-secondary'>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
