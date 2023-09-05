@@ -3,6 +3,15 @@ import ModuleList from './ModuleList';
 import OverallStatistics from './OverallStatistics';
 
 export default function SideBar() {
+
+    // Function to convert minutes (80 minutes) into format 1h 20m
+    function formatMinutes(minutes) {
+        let hours = Math.floor(minutes / 60);
+        let remainingMinutes = minutes % 60;
+
+        return `${hours}h ${remainingMinutes}m`;
+    }
+
     return (
         <>
             {/* Logo */}
@@ -27,7 +36,7 @@ export default function SideBar() {
             <ModuleList />
 
             {/* Overall statistics */}
-            <OverallStatistics />
+            <OverallStatistics totalHours={formatMinutes(80)} contentCovered={21} />
         </>
     )
 }
