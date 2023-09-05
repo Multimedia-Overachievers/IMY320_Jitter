@@ -40,6 +40,10 @@ export default function Home() {
         <div className="bg-light vh-100">
             <Row>
                 <Col lg={9} className='scrollable'>
+                    {/* Background image */}
+                    <div className='position-absolute w-100 h-100 d-flex align-items-center background-image'>
+                        <img src="/images/home-background.svg" alt="" />
+                    </div>
                     <div className="p-5 m-4">
                         {/* Home page header */}
                         <div className='d-flex justify-content-between'>

@@ -2,9 +2,7 @@ import React from 'react';
 import ModuleList from './ModuleList';
 import OverallStatistics from './OverallStatistics';
 import { formatMinutes } from '../../utils/functions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faTerminal, faImage } from '@fortawesome/free-solid-svg-icons';
-import { BiLogOut } from 'react-icons/bi';
+import { BiLogOut, BiCoffeeTogo, BiImage, BiTerminal } from 'react-icons/bi';
 
 export default function SideBar() {
 
@@ -14,24 +12,24 @@ export default function SideBar() {
             completion: 80,
             // you might need to make a function that takes in a module name and returns an icon if you can't hard store 
             // these components
-            icon: <FontAwesomeIcon icon={faCoffee} />
+            icon: <BiCoffeeTogo size="70" />
         },
         {
             name: 'Module 2',
             completion: 80,
-            icon: <FontAwesomeIcon icon={faTerminal} />
+            icon: <BiTerminal size="70" />
         },
         {
             name: 'Module 3',
             completion: 80,
-            icon: <FontAwesomeIcon icon={faImage} />
+            icon: <BiImage size="70" />
         },
     ]
 
     return (
-        <div className='bg-white vh-100 p-5'>
+        <div className='vh-100 p-5 pb-3 d-flex flex-column justify-content-between' style={{backgroundColor: '#FCFDFE'}}>
             {/* Logo */}
-            <div className='d-flex justify-content-center mb-5'>
+            <div className='d-flex justify-content-center'>
                 <img src='images/logo.svg' alt='logo' className='img-fluid' />
             </div>
 
@@ -39,7 +37,7 @@ export default function SideBar() {
             <div className='d-flex justify-content-between align-items-start'>
                 <div>
                     <h4 className='text-secondary'>Welcome,</h4>
-                    <h2>Tristan Nel</h2>
+                    <h2 className='text-dark'>Tristan Nel</h2>
                 </div>
 
                 {/* Log out */}
@@ -54,6 +52,8 @@ export default function SideBar() {
 
             {/* Overall statistics */}
             <OverallStatistics totalHours={formatMinutes(80)} contentCovered={21} />
+
+            <small className='text-secondary text-center p-0 m-0'>jitter co.</small>
         </div>
     )
 }

@@ -12,4 +12,12 @@ body {
 
 .scrollable {
   overflow-y: scroll;
+}
+
+p {
+  color: #4E5662;
+}
+
+.background-image {
+  transform: translateX(20%);
 }/*# sourceMappingURL=globals.css.map */
