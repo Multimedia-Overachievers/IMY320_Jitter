@@ -22,3 +22,8 @@ p {
 .background-image {
 	transform: translateX(20%);
 }
+
+// Rounded corners for react bootstrap accordion
+.accordion-item, .accordion-button  {
+	border-radius: 0.5625rem !important;
+  }
