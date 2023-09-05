@@ -9,7 +9,7 @@ export default function ModuleList({ modules }) {
             {/* Modules */}
             {modules?.map((module, index) => (
                 // SET THE ACTIVE PROPERTY TO TRUE IF THE MODULE IS THE CURRENTLY ACTIVE MODULE
-                <Module key={index} name={module.name} completion={module.completion} icon={module.icon} />
+                <Module key={index} name={module.name} completion={module.completion} icon={module.icon} active={module.active} />
             ))}
         </div>
     )

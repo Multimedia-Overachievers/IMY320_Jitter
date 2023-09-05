@@ -12,17 +12,20 @@ export default function SideBar() {
             completion: 80,
             // you might need to make a function that takes in a module name and returns an icon if you can't hard store 
             // these components
-            icon: <BiCoffeeTogo size="70" />
+            icon: <BiCoffeeTogo size="70" />,
+            active: true
         },
         {
             name: 'Module 2',
             completion: 80,
-            icon: <BiTerminal size="70" />
+            icon: <BiTerminal size="70" />,
+            active: false
         },
         {
             name: 'Module 3',
             completion: 80,
-            icon: <BiImage size="70" />
+            icon: <BiImage size="70" />,
+            active: false
         },
     ]
 
