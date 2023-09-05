@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import SideBar from '../components/sidebar/SideBar';
-import ChapterStatistics from '../components/home/ChapterStatistics';
+import ChapterStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
 
 export default function Home() {

@@ -1,16 +1,9 @@
 import React from 'react';
 import ModuleList from './ModuleList';
 import OverallStatistics from './OverallStatistics';
+import { formatMinutes } from '../../utils/functions';
 
 export default function SideBar() {
-
-    // Function to convert minutes (80 minutes) into format 1h 20m
-    function formatMinutes(minutes) {
-        let hours = Math.floor(minutes / 60);
-        let remainingMinutes = minutes % 60;
-
-        return `${hours}h ${remainingMinutes}m`;
-    }
 
     return (
         <>
