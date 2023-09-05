@@ -8,8 +8,8 @@ export default function Module({ name, completion, icon}) {
             </div>
             <div>
                 <p>{name}</p>
-                <small>Completion</small>
-                <small>{completion}</small>
+                <small className='d-block'>Completion</small>
+                <small>{completion}%</small>
             </div>
         </div>
     )

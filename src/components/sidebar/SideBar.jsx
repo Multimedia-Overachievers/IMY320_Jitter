@@ -2,8 +2,30 @@ import React from 'react';
 import ModuleList from './ModuleList';
 import OverallStatistics from './OverallStatistics';
 import { formatMinutes } from '../../utils/functions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faTerminal, faImage } from '@fortawesome/free-solid-svg-icons';
 
 export default function SideBar() {
+
+    let moduleList = [
+        {
+            name: 'Module 1',
+            completion: 80,
+            // you might need to make a function that takes in a module name and returns an icon if you can't hard store 
+            // these components
+            icon: <FontAwesomeIcon icon={faCoffee} />
+        },
+        {
+            name: 'Module 2',
+            completion: 80,
+            icon: <FontAwesomeIcon icon={faTerminal} />
+        },
+        {
+            name: 'Module 3',
+            completion: 80,
+            icon: <FontAwesomeIcon icon={faImage} />
+        },
+    ]
 
     return (
         <>
@@ -26,7 +48,7 @@ export default function SideBar() {
             </div>
 
             {/* Module list */}
-            <ModuleList />
+            <ModuleList modules={moduleList} />
 
             {/* Overall statistics */}
             <OverallStatistics totalHours={formatMinutes(80)} contentCovered={21} />
