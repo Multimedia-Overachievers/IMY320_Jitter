@@ -49,7 +49,7 @@ export default function Home() {
                         <div className='d-flex justify-content-between'>
                             <div>
                                 <h4 className='text-secondary'>Dashboard</h4>
-                                <h1 className='text-primary fw-bold'>{module}</h1>
+                                <h1 className='text-primary fw-bold display-4'>{module}</h1>
                             </div>
                             {/*  Calculate and display the current date */}
                             <h4 className='text-secondary'>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
