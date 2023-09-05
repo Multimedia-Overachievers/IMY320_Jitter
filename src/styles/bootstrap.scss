@@ -1,3 +1,27 @@
+// Use Poppins for the headings and text
+$headings-font-family: 'Poppins', sans-serif;
+$body-font-family: 'Poppins', sans-serif;
+
+// H1 to H6 sizes
+$h1-font-size: 3rem;
+$h2-font-size: 2rem;
+$h3-font-size: 1.25rem;
+$h4-font-size: 1rem;
+
+// Colors
+$primary: #6299EB;
+$secondary: #B3BAC5;
+$success: #94D1B4;
+$danger: #E58484;
+$warning: #F4AA75;
+$light: #F2F5F9;
+$dark: #4E5662;
+
+// Border radius
+$border-radius: 0.5625rem;
+
+// drop shadow
+$box-shadow: 1px 4px 6px 0px rgba(212, 212, 212, 0.346);
+
 //Import bootstrap
 @import '../../node_modules/bootstrap/scss/bootstrap';
-

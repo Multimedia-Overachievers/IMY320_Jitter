@@ -28,7 +28,7 @@ export default function SideBar() {
     ]
 
     return (
-        <>
+        <div className='bg-white vh100'>
             {/* Logo */}
             <div className='d-flex justify-content-center'>
                 <img src='images/logo.svg' alt='logo' className='img-fluid' />
@@ -52,6 +52,6 @@ export default function SideBar() {
 
             {/* Overall statistics */}
             <OverallStatistics totalHours={formatMinutes(80)} contentCovered={21} />
-        </>
+        </div>
     )
 }

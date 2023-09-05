@@ -19,33 +19,37 @@ export default function Home() {
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.'
         },
     ]
-    let moduleOverview = { 
-        numChapters: 5, 
-        scores: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] 
+    let moduleOverview = {
+        numChapters: 5,
+        scores: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     };
 
     return (
-        <Row>
-            <Col lg={9}>
-                {/* Home page header */}
-                <div className='d-flex justify-content-between'>
-                    <div>
-                        <h4>Dashboard</h4>
-                        <h1>IMY 310</h1>
+        <div className="bg-light vh-100">
+            <Row>
+                <Col lg={9}>
+                    <div className="p-5 m-5">
+                        {/* Home page header */}
+                        <div className='d-flex justify-content-between'>
+                            <div>
+                                <h4 className='text-secondary'>Dashboard</h4>
+                                <h1 className='text-primary fw-bold'>IMY 310</h1>
+                            </div>
+                            {/*  Calculate and display the current date */}
+                            <h4 className='text-secondary'>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
+                        </div>
+                        {/* Statistics section */}
+                        <ModuleStatistics moduleOverview={moduleOverview} completedChapters={1} timeSpent={91} />
+                        {/* Chapters section */}
+                        <Chapters chapters={chapters} />
                     </div>
-                    {/*  Calculate and display the current date */}
-                    <h4>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
-                </div>
-                {/* Statistics section */}
-                <ModuleStatistics moduleOverview={moduleOverview} completedChapters={1} timeSpent={91} />
-                {/* Chapters section */}
-                <Chapters chapters={chapters} />
-            </Col>
+                </Col>
 
-            <Col lg={3}>
-                {/* Side bar */}
-                <SideBar />
-            </Col>
-        </Row>
+                <Col lg={3}>
+                    {/* Side bar */}
+                    <SideBar />
+                </Col>
+            </Row>
+        </div>
     )
 }
