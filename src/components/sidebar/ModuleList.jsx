@@ -1,15 +1,15 @@
 import React from 'react';
 import Module from './Module';
 
-export default function ModuleList() {
+export default function ModuleList({ modules }) {
     return (
         <div>
             <h3>Modules</h3>
 
-            {/* Create these dynamically!! */}
-            <Module name='IMY 310' completion='50%' icon='icon' />
-            <Module name='IMY 300' completion='50%' icon='icon' />
-            <Module name='IMY 320' completion='50%' icon='icon' />
+            {/* Modules */}
+            {modules?.map((module, index) => (
+                <Module key={index} name={module.name} completion={module.completion} icon={module.icon} />
+            ))}
         </div>
     )
 }
