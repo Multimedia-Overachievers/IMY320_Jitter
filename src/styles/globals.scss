@@ -37,6 +37,13 @@ p {
 }
 
 // Rounded corners for react bootstrap accordion
-.accordion-item, .accordion-button  {
+.accordion-item,
+.accordion-button {
 	border-radius: 0.5625rem !important;
-  }
+}
+
+.chapter-form {
+	// Max height
+	max-height: 70vh;
+	overflow-y: scroll;
+}
