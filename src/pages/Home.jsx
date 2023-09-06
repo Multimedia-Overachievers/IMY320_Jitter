@@ -1,45 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import SideBar from '../components/sidebar/SideBar';
 import ModuleStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
 
+import data from '../backend/json/modules.json';
+
 export default function Home() {
 
-    let module = "IMY 310";
+    const [module, setModule] = useState(null);
 
-    // Dummy data
-    let chapters = [
-        {
-            chapter: 'Chapter 1',
-            progress: 10,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.'
-        },
-        {
-            chapter: 'Chapter 2',
-            progress: 80,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.'
-        },
-        {
-            chapter: 'Chapter 3',
-            progress: 50,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.'
-        },
-        {
-            chapter: 'Chapter 4',
-            progress: 30,
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.'
-        },
-    ]
-    let moduleOverview = {
-        numChapters: 5,
-        scores: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-    };
+    useEffect(() => {
+        // Set the initial state once the data is loaded
+        if (data && data.data && data.data.length > 0) {
+            setModule(data.data[0]);
+        }
+    }, []);
 
     return (
-        <div className="bg-light vh-100">
+        <div className="vh-100">
             <Row>
-                <Col lg={9} className='scrollable'>
+                <Col lg={9} className='bg-light scrollable vh-100'>
                     {/* Background image */}
                     <div className='position-absolute w-100 h-100 d-flex align-items-center background-image'>
                         <img src="/images/home-background.svg" alt="" />
@@ -49,15 +30,15 @@ export default function Home() {
                         <div className='d-flex justify-content-between'>
                             <div>
                                 <h4 className='text-secondary'>Dashboard</h4>
-                                <h1 className='text-primary fw-bold display-4'>{module}</h1>
+                                <h1 className='text-primary fw-bold display-4'>{module?.name}</h1>
                             </div>
                             {/*  Calculate and display the current date */}
                             <h4 className='text-secondary'>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
                         </div>
                         {/* Statistics section */}
-                        <ModuleStatistics moduleOverview={moduleOverview} completedChapters={1} timeSpent={91} />
+                        <ModuleStatistics moduleOverview={module?.moduleOverview} completedChapters={1} timeSpent={91} />
                         {/* Chapters section */}
-                        <Chapters chapters={chapters} />
+                        <Chapters chapters={module?.chapters} />
                     </div>
                 </Col>
 

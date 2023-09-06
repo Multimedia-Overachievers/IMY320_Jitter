@@ -1,0 +1,33 @@
+{
+    "data": [
+        {
+            "name": "IMY 320",
+            "moduleOverview": {
+                "numChapters": 5,
+                "scores": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            },
+            "chapters":  [
+                    {
+                        "chapter": "Chapter 1",
+                        "progress": 10,
+                        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl."
+                    },
+                    {
+                        "chapter": "Chapter 2",
+                        "progress": 80,
+                        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl."
+                    },
+                    {
+                        "chapter": "Chapter 3",
+                        "progress": 50,
+                        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl."
+                    },
+                    {
+                        "chapter": "Chapter 4",
+                        "progress": 30,
+                        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl."
+                    }
+                ]
+        }
+    ]
+}

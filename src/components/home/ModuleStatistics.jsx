@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { formatMinutes, getAverage } from '../../utils/functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceLaughBeam, faFaceMeh, faFaceSurprise } from '@fortawesome/free-solid-svg-icons';
 import { getAverageColor } from '../../utils/functions';
+
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
+import { BarChart } from "./BarChart";
+
+Chart.register(CategoryScale);
 
 export default function ModuleStatistics({ moduleOverview, completedChapters, timeSpent }) {
 
@@ -22,6 +28,32 @@ export default function ModuleStatistics({ moduleOverview, completedChapters, ti
         }
     }
 
+    // Convert the moduleOverview.chapters array into an array of chapter labels
+    const getChapterLabels = () => {
+        const labels = [];
+        for (let i = 0; i < moduleOverview?.numChapters; i++) {
+            labels.push(`Ch${i + 1}`);
+        }
+
+        return labels;
+    }
+
+    // Chartjs data that will be used to display the chart. Specifically, the progress per chapter
+    const data = {
+        labels: getChapterLabels(),
+        datasets: [
+            {
+                label: 'Progress',
+                data: moduleOverview?.progress,
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgba(255, 99, 132, 0.2)',
+            },
+        ],
+    };
+
+    const [chartData, setChartData] = useState(data);
+
     return (
         <Row>
             <Col lg={6}>
@@ -29,7 +61,7 @@ export default function ModuleStatistics({ moduleOverview, completedChapters, ti
                     <div>
                         <p className='text-secondary mb-4'>Overview</p>
                         <div>
-                            {/* Chart.js here */}
+                            {/* <BarChart data={chartData} /> I CANT GET THIS TO WORK LOL */} 
                         </div>
                     </div>
                 </div>

@@ -2,10 +2,10 @@ import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import { getAverageColor } from '../../utils/functions';
 
-export default function Chapter({ key, chapter, progress, description }) {
+export default function Chapter({ index, chapter, progress, description }) {
     return (
         <Accordion flush className='shadow m-1 my-4'>
-            <Accordion.Item eventKey='{key}'>
+            <Accordion.Item eventKey={index}>
                 <Accordion.Header className='rounded'>
                     <div className="d-flex justify-content-between align-items-center w-100 m-3">
                         <h2>{chapter}</h2>

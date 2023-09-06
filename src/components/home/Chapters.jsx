@@ -27,7 +27,7 @@ export default function Chapters({ chapters }) {
 
             {/* Chapters */}
             {chapters?.map((chapter, index) => (
-                <Chapter key={index} chapter={chapter.chapter} progress={chapter.progress} description={chapter.description} />
+                <Chapter key={index} index={index} chapter={chapter.chapter} progress={chapter.progress} description={chapter.description} />
             ))}
         </div>
     )

@@ -15,6 +15,19 @@ body {
 	overflow-y: scroll;
 }
 
+// Styles for scrollbars
+::-webkit-scrollbar {
+	width: 0.3rem;
+}
+
+::-webkit-scrollbar-track {
+	background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #dbdbdb;
+}
+
 p {
 	color: #4E5662;
 }
