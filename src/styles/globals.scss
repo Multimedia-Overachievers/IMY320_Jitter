@@ -62,3 +62,48 @@ p {
 	border-bottom: 12px solid #4E5662;
 	/* or any color you prefer */
 }
+
+// Pseudo before circles
+.circle-blue::before {
+	content: "";
+	position: absolute;
+	top: -10%;
+	left: -29px;
+	transform: translateY(50%);
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background-color: #6299EB;
+}
+
+.circle-grey::before {
+	content: "";
+	position: absolute;
+	top: -10%;
+	left: -29px;
+	transform: translateY(50%);
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background-color: #B3BAC5;
+}
+
+.circle-red::before {
+	content: "";
+	position: absolute;
+	top: -10%;
+	left: -29px;
+	transform: translateY(50%);
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background-color: #e07b7b;
+}
+
+// Fixing accordion styling
+.accordion-button:focus, .accordion, .item, .accordion-header {
+    box-shadow: none !important;
+    border: none !important;
+	outline: none !important;
+	background-color: transparent !important;
+}
