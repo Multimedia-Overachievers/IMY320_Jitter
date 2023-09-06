@@ -5,6 +5,7 @@ import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
 import { Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { BiLogOut } from 'react-icons/bi';
 
 import data from '../backend/json/questions.json';
 
@@ -51,7 +52,7 @@ export default function Test() {
 
     return (
         <div className="bg-light vh-100">
-            <div className="p-5 m-4">
+            <div className="p-5">
                 {/* Test header */}
                 <div className='d-flex justify-content-between'>
                     <div>
@@ -59,7 +60,11 @@ export default function Test() {
                         <h1 className='text-primary fw-bold display-4'>{module?.name}</h1>
                     </div>
 
-                    {/* log out */}
+                    {/* Log out */}
+                    <div className='d-flex justify-content-center text-secondary align-items-center p-4 shadow rounded' style={{height: '70px'}}>
+                        <p className='m-0 p-0 text-secondary'>Log out</p>
+                        <BiLogOut className='ms-2' size='1.3em' style={{ rotate: '180deg' }} />
+                    </div>
                 </div>
 
                 {/*  Leave test */}
@@ -69,7 +74,7 @@ export default function Test() {
                 </div>
 
                 <Container className='d-flex justify-content-center'>
-                    <div style={{width: '43.0625rem'}}>
+                    <div style={{ width: '43.0625rem' }}>
                         {/* Test heading with time bar */}
                         <div className="d-flex justify-content-center flex-column text-center">
                             <h2 className="text-primary">{module?.chapters[0].name}</h2>
@@ -100,6 +105,11 @@ export default function Test() {
 
                         {/* Question bar */}
                         <QuestionBar questionData={questionBarData} />
+
+                        {/* Logo */}
+                        <div className="d-flex justify-content-center mt-5">
+                            <img src="/images/logo.svg" alt="logo" style={{ width: '4rem' }} />
+                        </div>
                     </div>
                 </Container>
             </div>

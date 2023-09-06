@@ -45,7 +45,7 @@ export default function SideBar() {
 
                 {/* Log out */}
                 <div className='d-flex justify-content-center text-secondary align-items-center'>
-                    <p className='m-0 p-0'>Log out</p>
+                    <p className='m-0 p-0 text-secondary'>Log out</p>
                     <BiLogOut className='ms-2' size='1.3em' style={{ rotate: '180deg' }} />
                 </div>
             </div>
