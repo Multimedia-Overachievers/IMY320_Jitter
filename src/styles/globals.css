@@ -42,4 +42,19 @@ p {
 .chapter-form {
   max-height: 70vh;
   overflow-y: scroll;
+}
+
+.triangle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -200%) rotate(180deg);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  /* Adjust the size as needed */
+  border-right: 8px solid transparent;
+  /* Adjust the size as needed */
+  border-bottom: 12px solid #4E5662;
+  /* or any color you prefer */
 }/*# sourceMappingURL=globals.css.map */

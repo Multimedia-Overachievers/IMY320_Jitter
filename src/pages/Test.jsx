@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Question from '../components/test/Question';
+import QuestionBar from '../components/test/QuestionBar';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
 import { Container } from 'react-bootstrap';
@@ -12,6 +13,33 @@ export default function Test() {
     const [module, setModule] = useState(null);
 
     const isExam = false;
+
+    const questionBarData = [
+        {
+            completed: true,
+            active: false,
+        },
+        {
+            completed: true,
+            active: false,
+        },
+        {
+            completed: false,
+            active: true,
+        },
+        {
+            completed: false,
+            active: false,
+        },
+        {
+            completed: false,
+            active: false,
+        },
+        {
+            completed: false,
+            active: false,
+        },
+    ];
 
     useEffect(() => {
         // Set the initial state once the data is loaded
@@ -69,6 +97,9 @@ export default function Test() {
                             <p className="text-secondary fw-bold m-0 p-0">1 / {module?.chapters[0].questions.length}</p>
                             <Button size="lg" className="text-white fw-bold">Next</Button>
                         </div>
+
+                        {/* Question bar */}
+                        <QuestionBar questionData={questionBarData} />
                     </div>
                 </Container>
             </div>
