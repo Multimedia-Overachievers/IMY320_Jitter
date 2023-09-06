@@ -8,8 +8,8 @@ function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route render exact path="/" element={<Home/>} />
-				<Route render exact path="/test" element={<Test/>} />
+				<Route render exact path="/" element={<Test/>} />
+				{/* <Route render exact path="/test" element={} /> */}
 			</Routes>
 		</Router>
 	);
