@@ -74,7 +74,7 @@ function ExamChaptersModal(props) {
                     <Form.Group className='chapter-form'>
                         {
                             props.chapters?.map((chapter, index) => (
-                                <div key={index} className='shadow p-3 bg-white text-dark fs-2 my-4'>
+                                <div key={index} className='shadow p-3 bg-white text-dark fs-2 my-4 rounded'>
                                     <Form.Check type="checkbox" label={chapter.chapter} />
                                 </div>
                             ))
