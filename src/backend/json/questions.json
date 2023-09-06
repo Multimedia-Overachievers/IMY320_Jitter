@@ -1,0 +1,40 @@
+{
+    "module": [
+        {
+            "name": "IMY 320",
+            "chapters": [
+                {
+                    "name": "Chapter 1",
+                    "questions": [
+                        {
+                            "question": "What is the meaning of life?",
+                            "answers": [
+                                {
+                                    "answer": "42",
+                                    "correct": true
+                                },
+                                {
+                                    "answer": "I don't know",
+                                    "correct": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "What is the meaning of life?",
+                            "answers": [
+                                {
+                                    "answer": "42",
+                                    "correct": true
+                                },
+                                {
+                                    "answer": "I don't know",
+                                    "correct": false
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
