@@ -7,35 +7,270 @@
                     "name": "Chapter 1",
                     "questions": [
                         {
-                            "question": "What is the meaning of life?",
+                            "question": "What are the three rules of epidemics?",
                             "answers": [
                                 {
-                                    "answer": "42",
+                                    "answer": "The Law of the Few, the Stickiness Factor and the Power of Context",
                                     "correct": true
                                 },
                                 {
-                                    "answer": "I don't know",
+                                    "answer": "The Law of the Few, the Stickiness Factor and the Strength of Content",
                                     "correct": false
                                 },
                                 {
-                                    "answer": "Skrrrrrr",
+                                    "answer": "The Law of the Scarce, the Fusion Factor and the Power of Context",
                                     "correct": false
                                 },
                                 {
-                                    "answer": "I am bird",
+                                    "answer": "The Law of the Few, the Fusion Factor and the Strength of Context",
                                     "correct": false
                                 }
                             ]
                         },
                         {
-                            "question": "What is the meaning of life?",
+                            "question": "A fad can be described as the direction that some form of behaviour develops in a large population and this behaviour takes long to fade away.",
                             "answers": [
                                 {
-                                    "answer": "42",
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pick the most correct option.",
+                            "answers": [
+                                {
+                                    "answer": "A trend can only be inferred from one point",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "A change can only be a trend when a statistical test confirms it",
+                                    "correct": true
+                                }
+                                ,
+                                {
+                                    "answer": "You can draw a straight line from the first point to the last in your data series",
+                                    "correct": false
+                                }
+                                ,
+                                {
+                                    "answer": "Trends begin and end only at the areas you consider in your dataset",
+                                    "correct": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Diffusion of Innovation can be described as the process in which an innovation is spread around through different channels in an economic system.",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ]
+                        },
+                        {
+                            "question": "The Technology Adoption Lifecycle:",
+                            "answers": [
+                                {
+                                    "answer": "Is a sociological model that describes the rejection of an innovation",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "Is an economic model that describes how and when an innovation is accepted by certain groups",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "Is also known as the Roger Bell Curve and describes how a new product is adopted according to the psychological characteristics of certain user groups",
                                     "correct": true
                                 },
                                 {
-                                    "answer": "I don't know",
+                                    "answer": "Illustrates the progress of a piece of technology through a pattern of overenthusiasm and disillusionment",
+                                    "correct": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "It is predicted that the Nexus of Forces will drive 90% of growth in the IoT market.",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ]
+                        },
+                        {
+                            "question": "The first phase of the Gartner Hype Cycle is:",
+                            "answers": [
+                                {
+                                    "answer": "Technology Triggering",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "Technology Spark",
+                                    "correct": false
+                                }
+                                ,
+                                {
+                                    "answer": "Technology Prompt",
+                                    "correct": false
+                                }
+                                ,
+                                {
+                                    "answer": "Technology Trigger",
+                                    "correct": true
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pick the most correct option.",
+                            "answers": [
+                                {
+                                    "answer": "In the Slope of Enlightenment the adoption of a piece of technology accelerates",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "In the Trough of Disillusionment, the overenthusiasm of a piece of technology results in expectations being met.",
+                                    "correct": false
+                                }
+                                ,
+                                {
+                                    "answer": "In the Technology Trigger is when a piece of technology has already been hyped up.",
+                                    "correct": false
+                                }
+                                ,
+                                {
+                                    "answer": "In the Peak of Inflated Expectations is when a piece of technology begins to become hyped up",
+                                    "correct": true
+                                }
+                            ]
+                        },
+                        {
+                            "question": "An aggregator is a website that accumulates different types of information from various sources online.",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": true
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "YouTube is an example of a web aggregator.",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pick the most correct option. In Fitts' Law a touch target:",
+                            "answers": [
+                                {
+                                    "answer": "Should be large enough so that users can easily tell them apart and slowly select them",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "Should have minimal spacing between them",
+                                    "correct": false
+                                }
+                                ,
+                                {
+                                    "answer": "Should be placed in areas that are easy to reach by the user",
+                                    "correct": true
+                                }
+                                ,
+                                {
+                                    "answer": "Should be small so that more targets can be fit onto the screen",
+                                    "correct": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "A mental model is how we think a system works",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": true
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pick the most correct option. If every website followed the same convention:",
+                            "answers": [
+                                {
+                                    "answer": "Everything would become boring to look at and use",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "It would lead to a decrease in frameworks",
+                                    "correct": false
+                                }
+                                ,
+                                {
+                                    "answer": "It would allow you to use other sites easier and quicker",
+                                    "correct": true
+                                }
+                                ,
+                                {
+                                    "answer": "It would make it harder for a user to remember how to use any of the sites",
+                                    "correct": false
+                                }
+                            ]
+                        },
+                        {
+                            "question": "Pitt's Law explains how a big object takes more time to click on.",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ]
+                        },
+                        {
+                            "question": "An average adult human's finger pad is:",
+                            "answers": [
+                                {
+                                    "answer": "6 - 10mm",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "10 - 14mm",
+                                    "correct": true
+                                },
+                                {
+                                    "answer": "14 - 18mm",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "18 - 22mm",
                                     "correct": false
                                 }
                             ]
