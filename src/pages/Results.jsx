@@ -4,9 +4,7 @@ import { Container } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Answer from '../components/test/Answer';
 
-import { UpdateChapterQuestion } from '../backend/dataManager.js';
-import modules from '../backend/json/modules.json';
-import questions from '../backend/json/questions.json';
+import { GetAllModules, GetAllQuestions } from '../services/api-requests';
 
 export default function Results() {
     const location = useLocation();
@@ -14,9 +12,20 @@ export default function Results() {
 
     const [module, setModule] = useState(null);
     const [chapter, setChapter] = useState(null);
+    const [grade, setGrade] = useState(null);
 
     const results = location.state;
     const isExam = false;
+
+    var modules = {};
+    GetAllModules().then((response) => {
+        modules = response.data;
+    });
+
+    var questions = {};
+    GetAllQuestions().then((response) => {
+        questions = response.data;
+    });
 
     useEffect(() => {
         // Set the initial state once the data is loaded
@@ -28,16 +37,17 @@ export default function Results() {
         if(questions && results) {
             setChapter(questions.module[results.module].chapters[results.chapter]);
         }
-    }, [results]);
+
+        setGrade(CalculateGrade());
+    }, [results, questions, modules]);
 
     const CalculateGrade = () => {
         var total = 0;
         var correct = 0;
 
-        results.questions.forEach((question) => {
+        results?.questions.forEach((question) => {
             if(question.selectedAnswer === GetCorrectAnswer(chapter?.questions[question.question])) {
                 correct++;
-                UpdateChapterQuestion(results.module, results.chapter, question.question);
             }
             total++;
         });
@@ -77,7 +87,7 @@ export default function Results() {
                             </div>
                             <div className='text-end'>
                                 <h2 className="text-dark">Grade</h2>
-                                <h2 className="text-primary fw-bold">{CalculateGrade()}</h2>
+                                <h2 className="text-primary fw-bold">{grade}</h2>
                             </div>
                         </div>
 

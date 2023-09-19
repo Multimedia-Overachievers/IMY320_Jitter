@@ -4,9 +4,14 @@ import SideBar from '../components/sidebar/SideBar';
 import ModuleStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
 
-import data from '../backend/json/modules.json';
+import { GetAllModules } from '../services/api-requests';
 
 export default function Home() {
+
+    var data = {};
+    GetAllModules().then((response) => {
+        data = response.data;
+    });
 
     const [module, setModule] = useState(null);
 
@@ -15,7 +20,7 @@ export default function Home() {
         if (data && data.data && data.data.length > 0) {
             setModule(data.data[0]);
         }
-    }, []);
+    }, [data]);
 
     return (
         <div className="vh-100">

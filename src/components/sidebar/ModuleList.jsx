@@ -1,7 +1,7 @@
 import React from 'react';
 import Module from './Module';
 
-import questions from '../../backend/json/questions.json';
+import { GetAllQuestions } from '../../services/api-requests';
 
 export default function ModuleList({ modules, setModule }) {
     const setActiveModule = (index) => {
@@ -12,6 +12,11 @@ export default function ModuleList({ modules, setModule }) {
 
         setModule(modules[index]);
     }
+
+    var questions = {};
+    GetAllQuestions().then((response) => {
+        questions = response.data;
+    });
 
     const GetOverallProgress = (module) => {
         var progress = 0;

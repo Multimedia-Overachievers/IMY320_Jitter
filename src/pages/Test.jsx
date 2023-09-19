@@ -8,12 +8,10 @@ import { Button } from 'react-bootstrap';
 import { toast, Toaster } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
 import ConfirmationModal from '../components/ConfirmationModal';
 
 import { shuffle }  from '../utils/functions.js';
-import modules from '../backend/json/modules.json';
-import questions from '../backend/json/questions.json';
+import { GetAllModules, GetAllQuestions } from '../services/api-requests';
 
 export default function Test() {
     const navigate = useNavigate();
@@ -28,28 +26,38 @@ export default function Test() {
     const isExam = false;
 
     useEffect(() => {
-        // Set the initial state once the data is loaded
-        if(modules && moduleCode) {
-            setModule(modules.data[moduleCode]);
-        }
-
-        if(questions && moduleCode && chapterCode) {
-            setChapter(questions.module[moduleCode].chapters[chapterCode]);
-            if(chapter?.questions) {
-                var question = shuffle(chapter?.questions, 6);
-                var list = [];
-
-                question.forEach(element => {
-                    var questionInstance = new QuestionInstance(element);
-                    list.push(questionInstance);
-                });
-
-                list[0].active = true;
-                setQuestionList(list);
+        GetAllModules().then((response) => {
+            var modules = response.data;
+            
+            if(modules && moduleCode) {
+                setModule(modules.data[moduleCode]);
             }
-        }
+        });
+        
+        GetAllQuestions().then((response) => {
+            var questions = response.data;
 
-    }, [moduleCode, chapterCode, chapter]);
+            if(questions && moduleCode && chapterCode) {
+                setChapter(questions.module[moduleCode].chapters[chapterCode]);
+            }
+        });
+    
+    }, [moduleCode, chapterCode]);
+
+    useEffect(() => {
+        if(chapter?.questions) {
+            var question = shuffle(chapter?.questions, 6);
+            var list = [];
+
+            question.forEach(element => {
+                var questionInstance = new QuestionInstance(element);
+                list.push(questionInstance);
+            });
+
+            list[0].active = true;
+            setQuestionList(list);
+        }
+    }, [chapter]);
 
     const MoveToNext = () => {
         if(currentQuestion < questionsList.length - 1) {

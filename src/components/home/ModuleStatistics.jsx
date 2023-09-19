@@ -10,7 +10,8 @@ import { CategoryScale } from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { BarChart } from "./BarChart";
 
-import questions from '../../backend/json/questions.json';
+
+import { GetAllQuestions } from '../../services/api-requests';
 
 Chart.register(CategoryScale);
 Chart.register(ChartDataLabels);
@@ -68,9 +69,14 @@ export default function ModuleStatistics({ module, timeSpent }) {
         return Math.round((progress / chapter.questions?.length) * 100);
     }
 
+    var questions = {};
+    GetAllQuestions().then((response) => {
+        questions = response.data;
+    });
+
     const GetCompletedChapters = () => {
         var completed = 0;
-
+        
         var moduleQuestions = questions?.module[module?.index];
         moduleQuestions?.chapters.forEach(chapter => {
             if(GetProgress(chapter) === 100) {

@@ -10,6 +10,7 @@ function App() {
 			<Route render exact path="/" element={<Home/>} /> 
 			<Route exact path="/test/:moduleCode/:chapterCode" element={<Test/>} />
 			<Route exact path="/result" element={<Results/>} />
+	
 		</Routes>
 	);
 }

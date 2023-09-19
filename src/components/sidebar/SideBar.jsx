@@ -3,9 +3,14 @@ import ModuleList from './ModuleList';
 import OverallStatistics from './OverallStatistics';
 import { formatMinutes } from '../../utils/functions';
 
-import questions from '../../backend/json/questions.json';
+import { GetAllQuestions } from '../../services/api-requests';
 
 export default function SideBar({ modules, setModule }) {
+
+    GetAllQuestions().then((response) => {
+        questions = response.data;
+    });
+    var questions = {};
 
     const GetProgressModule = (module) => {
         var progress = 0;

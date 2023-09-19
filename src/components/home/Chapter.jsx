@@ -4,10 +4,16 @@ import Accordion from 'react-bootstrap/Accordion';
 import { getAverageColor } from '../../utils/functions';
 import { Link } from "react-router-dom";
 
-import questions from '../../backend/json/questions.json';
+import { GetAllQuestions } from '../../services/api-requests';
 
 export default function Chapter({ moduleIndex, index, chapter, description }) {
     var progress = 0;
+
+    
+    var questions = {};
+    GetAllQuestions().then((response) => {
+        questions = response.data;
+    });
 
     const GetProgress = () => {
         var chapter = questions?.module[moduleIndex].chapters[index];
