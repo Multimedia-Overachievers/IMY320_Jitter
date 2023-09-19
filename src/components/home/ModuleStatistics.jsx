@@ -7,11 +7,13 @@ import { getAverageColor } from '../../utils/functions';
 
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { BarChart } from "./BarChart";
 
 import questions from '../../backend/json/questions.json';
 
 Chart.register(CategoryScale);
+Chart.register(ChartDataLabels);
 
 export default function ModuleStatistics({ module, timeSpent }) {
 
@@ -30,29 +32,22 @@ export default function ModuleStatistics({ module, timeSpent }) {
         }
     }
 
-    // Convert the moduleOverview.chapters array into an array of chapter labels
-    const getChapterLabels = () => {
-        const labels = [];
-        for (let i = 0; i < module?.chapters.length; i++) {
-            labels.push(`Ch${i + 1}`);
-        }
+    const [chartData] = useState({
+    labels: module?.chapters.map((_, index) => `Ch${index + 1}`),
+    datasets: [
+                {
+                    label: 'Average Score',
+                    data: module?.chapters.map(chapter => getAverage(chapter.scores)),
+                    fill: false,
+                    backgroundColor: '#6299EB',
+                    borderColor: '#6299EB',
+                    borderRadius: 10,
+                    borderSkipped: false,
+                
+                },
+            ],
+    });
 
-        return labels;
-    }
-
-    // Chartjs data that will be used to display the chart. Specifically, the progress per chapter
-    const data = {
-        labels: getChapterLabels(),
-        datasets: [
-            {
-                label: 'Progress',
-                data: module?.chapters,
-                fill: false,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
-            },
-        ],
-    };
     
     const GetProgress = (chapter) => {
         var progress = 0;
@@ -90,32 +85,30 @@ export default function ModuleStatistics({ module, timeSpent }) {
         return scores;
     }
 
-    const [chartData, setChartData] = useState(data);
-
     return (
         <Row>
             <Col lg={6}>
-                <div className='bg-white rounded shadow m-1 p-3'>
+                <div className='bg-white rounded shadow m-1 mb-4 p-4 h-100'>
                     <div>
                         <p className='text-secondary mb-4'>Overview</p>
                         <div>
                             {
-                                // chartData.labels && <BarChart data={chartData} />
+                                <BarChart chartData={chartData} />
                             }
                         </div>
                     </div>
                 </div>
             </Col>
             <Col lg={6}>
-                <Row>
+                <Row >
                     <Col>
-                        <div className='bg-white rounded shadow m-1 p-3'>
+                        <div className='bg-white rounded shadow m-1 p-4'>
                             <p className='text-secondary mb-4'>Completed chapters</p>
                             <h1 className='text-primary fw-bold text-center'>{GetCompletedChapters()} / {module?.chapters.length}</h1>
                         </div>
                     </Col>
                     <Col>
-                        <div className='bg-white rounded shadow m-1 p-3'>
+                        <div className='bg-white rounded shadow m-1 p-4'>
                             <p className='text-secondary mb-4'>Overall time spent</p>
                             <h1 className='text-primary fw-bold text-center'>{formatMinutes(timeSpent)}</h1>
                         </div>
@@ -123,7 +116,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
                 </Row>
                 <Row>
                     <Col>
-                        <div className='d-flex justify-content-between align-items-center bg-white rounded shadow m-1 mt-4 p-3'>
+                        <div className='d-flex justify-content-between align-items-center bg-white rounded shadow m-1 mt-4 p-4'>
                             <div>
                                 <p className='text-secondary mb-4'>Average score</p>
                                 <h1 className={`
