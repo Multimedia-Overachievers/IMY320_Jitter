@@ -14,6 +14,10 @@ body {
   overflow-y: scroll;
 }
 
+.chart-container{
+  height: 215px;
+}
+
 ::-webkit-scrollbar {
   width: 0.3rem;
 }
@@ -42,14 +46,6 @@ p {
 .chapter-form {
   max-height: 70vh;
   overflow-y: scroll;
-}
-
-.chart-container{
-  height: 215px;
-}
-
-.pointer{
-  cursor: pointer;
 }
 
 .triangle {

@@ -7,20 +7,24 @@ import Chapters from '../components/home/Chapters';
 import { GetAllModules } from '../services/api-requests';
 
 export default function Home() {
-
-    var data = {};
-    GetAllModules().then((response) => {
-        data = response.data;
-    });
-
     const [module, setModule] = useState(null);
+    const [modules, setModules] = useState(null);
+    const [activeModuleIndex, setActiveModuleIndex] = useState(0);
 
     useEffect(() => {
-        // Set the initial state once the data is loaded
-        if (data && data.data && data.data.length > 0) {
-            setModule(data.data[0]);
+        if(!modules){
+            GetAllModules().then((response) => {
+                var modules = response.data;
+                setModules(modules);
+                setModule(modules.data[activeModuleIndex]);
+            });
         }
-    }, [data]);
+    }, []);
+
+    const SetModuleCallback = (index) => {
+        setActiveModuleIndex(index);
+        setModule(modules.data[index]);
+    }
 
     return (
         <div className="vh-100">
@@ -49,7 +53,7 @@ export default function Home() {
 
                 <Col lg={3}>
                     {/* Side bar */}
-                    <SideBar modules={data.data} setModule={setModule} />
+                    <SideBar modules={modules?.data} setModule={SetModuleCallback} />
                 </Col>
             </Row>
         </div>

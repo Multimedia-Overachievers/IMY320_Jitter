@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import ModuleList from './ModuleList';
 import OverallStatistics from './OverallStatistics';
 import { formatMinutes } from '../../utils/functions';
@@ -6,11 +6,13 @@ import { formatMinutes } from '../../utils/functions';
 import { GetAllQuestions } from '../../services/api-requests';
 
 export default function SideBar({ modules, setModule }) {
+    const [questions, setQuestions] = useState(null);
 
-    GetAllQuestions().then((response) => {
-        questions = response.data;
-    });
-    var questions = {};
+    useEffect(() => {
+        GetAllQuestions().then((response) => {
+            setQuestions(response.data);
+        });
+    }, []);
 
     const GetProgressModule = (module) => {
         var progress = 0;
@@ -45,7 +47,6 @@ export default function SideBar({ modules, setModule }) {
         //round to 2 decimal places
         return Math.round((progress / modules?.length) * 10) / 10;
     }
-
 
     return (
         <div className='vh-100 p-5 pb-3 d-flex flex-column justify-content-between' style={{backgroundColor: '#FCFDFE'}}>

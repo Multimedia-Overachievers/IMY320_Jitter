@@ -168,7 +168,7 @@ export default function Test() {
                 </div>
 
                 <Container className='d-flex justify-content-center'>
-                    <div style={{ width: '50rem' }}>
+                    <div style={{ width: '55rem' }}>
                         {/* Test heading with time bar */}
                         <div className="d-flex justify-content-center flex-column text-center">
                             <h2 className="text-primary">{chapter?.name}</h2>

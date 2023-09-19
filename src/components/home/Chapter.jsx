@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { getAverageColor } from '../../utils/functions';
@@ -7,25 +7,29 @@ import { Link } from "react-router-dom";
 import { GetAllQuestions } from '../../services/api-requests';
 
 export default function Chapter({ moduleIndex, index, chapter, description }) {
-    var progress = 0;
-
+    const [progress, setProgress] = useState(null);
+    const [questions, setQuestions] = useState(null);
     
-    var questions = {};
-    GetAllQuestions().then((response) => {
-        questions = response.data;
-    });
+    useEffect(() => {
+        GetAllQuestions().then((response) => {
+            setQuestions(response.data);
+            GetProgress()
+        });
+    }, []);
 
     const GetProgress = () => {
         var chapter = questions?.module[moduleIndex].chapters[index];
-        chapter.questions?.forEach(question => {
+        var tempProgress = 0;
+
+        chapter?.questions.forEach(question => {
             if (question?.finished) {
-                progress++;
+                tempProgress++;
             }
         });
-        progress = Math.round((progress / chapter.questions?.length) * 100);
+
+        setProgress(Math.round((tempProgress / chapter?.questions.length) * 100));
     }
 
-    GetProgress();
 
     return (
 

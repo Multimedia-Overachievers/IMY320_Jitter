@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { formatMinutes, getAverage } from '../../utils/functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,13 +10,14 @@ import { CategoryScale } from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { BarChart } from "./BarChart";
 
-
 import { GetAllQuestions } from '../../services/api-requests';
 
 Chart.register(CategoryScale);
 Chart.register(ChartDataLabels);
 
 export default function ModuleStatistics({ module, timeSpent }) {
+    const [questions, setQuestions] = useState({});
+    const [completed, setCompleted] = useState(0);
 
     /**
      * This function returns a FontAwesomeIcon component based on the average passed in
@@ -35,28 +36,40 @@ export default function ModuleStatistics({ module, timeSpent }) {
 
     const [chartData, setChartData] = useState(null);
 
-    useEffect(() => {
-        if (module) {
-            setChartData(data);
-            console.log(data);
-        }
-    }, [module]);
         
-    const data = {
-        labels: module?.chapters.map((_, index) => `Ch${index + 1}`),
-        datasets: [
-                {
-                    label: 'Average Score',
-                    data: module?.chapters.map(chapter => getAverage(chapter.scores)),
-                    fill: false,
-                    backgroundColor: '#6299EB',
-                    borderColor: '#6299EB',
-                    borderRadius: 10,
-                    borderSkipped: false,
-                
-                },
-            ],
-        };
+    const GetChartData = (activeModule) => {
+        return {
+            labels: activeModule?.chapters.map((_, index) => `Ch${index + 1}`),
+            datasets: [
+                    {
+                        label: 'Average Score',
+                        data: activeModule?.chapters.map(chapter => getAverage(chapter.scores)),
+                        fill: false,
+                        backgroundColor: '#6299EB',
+                        borderColor: '#6299EB',
+                        borderRadius: 10,
+                        borderSkipped: false,
+                    
+                    },
+                ],
+            };
+    }
+
+    useEffect(() => {
+        if(module) setChartData(GetChartData(module));
+    }, [module, questions]);
+
+    useEffect(() => {
+        GetAllQuestions().then((response) => {
+            setQuestions(response.data);
+        });
+    }, []);
+
+    useEffect(() => {
+        if(questions && module) {
+            setCompleted(GetCompletedChapters());
+        }
+    }, [questions, module]);
     
     const GetProgress = (chapter) => {
         var progress = 0;
@@ -69,15 +82,10 @@ export default function ModuleStatistics({ module, timeSpent }) {
         return Math.round((progress / chapter.questions?.length) * 100);
     }
 
-    var questions = {};
-    GetAllQuestions().then((response) => {
-        questions = response.data;
-    });
-
     const GetCompletedChapters = () => {
         var completed = 0;
-        
-        var moduleQuestions = questions?.module[module?.index];
+
+        var moduleQuestions = questions?.module[module.index];
         moduleQuestions?.chapters.forEach(chapter => {
             if(GetProgress(chapter) === 100) {
                 completed++;
@@ -120,7 +128,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
                     <Col>
                         <div className='bg-white rounded shadow m-1 p-4'>
                             <p className='text-secondary mb-4'>Completed chapters</p>
-                            <h1 className='text-primary fw-bold text-center'>{GetCompletedChapters()} / {module?.chapters.length}</h1>
+                            <h1 className='text-primary fw-bold text-center'>{completed} / {module?.chapters.length}</h1>
                         </div>
                     </Col>
                     <Col>

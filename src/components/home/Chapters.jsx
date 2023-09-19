@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Chapter from './Chapter';
-import { FiFilter } from 'react-icons/fi';
+
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { BiLeftArrowAlt } from 'react-icons/bi';

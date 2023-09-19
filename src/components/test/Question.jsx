@@ -16,7 +16,7 @@ export default function Question({ questionInstance, SetCompleteCallback, questi
 
     return (
         <div key={questionIndex}>
-            <h1 className='fs-1 text-dark text-center my-4'>{questionInstance.question.question}</h1>
+            <h2 className='text-dark text-center my-4'>{questionInstance.question.question}</h2>
             <Form>
                 <Form.Group className='chapter-form overflow-hidden'>
                     {

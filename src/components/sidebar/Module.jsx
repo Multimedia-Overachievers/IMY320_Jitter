@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BiLogOut, BiCoffeeTogo, BiImage, BiTerminal } from 'react-icons/bi';
 
 export default function Module({ name, completion, icon, active}) {

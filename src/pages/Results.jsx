@@ -17,15 +17,19 @@ export default function Results() {
     const results = location.state;
     const isExam = false;
 
-    var modules = {};
-    GetAllModules().then((response) => {
-        modules = response.data;
-    });
+    var [modules, setModules] = useState({});
+    var [questions, setQuestions] = useState({});
+    
 
-    var questions = {};
-    GetAllQuestions().then((response) => {
-        questions = response.data;
-    });
+    useEffect(() => {
+        GetAllQuestions().then((response) => {
+            setQuestions(response.data);
+        });
+
+        GetAllModules().then((response) => {
+            setModules(response.data);
+        });
+    }, []);
 
     useEffect(() => {
         // Set the initial state once the data is loaded
@@ -39,7 +43,7 @@ export default function Results() {
         }
 
         setGrade(CalculateGrade());
-    }, [results, questions, modules]);
+    }, [results]);
 
     const CalculateGrade = () => {
         var total = 0;
