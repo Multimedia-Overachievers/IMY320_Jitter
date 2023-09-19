@@ -30,22 +30,18 @@ p {
   color: #4E5662;
 }
 
-.background-image {
-  transform: translateX(-35%);
-}
-
 .accordion-item,
 .accordion-button {
   border-radius: 0.5625rem !important;
 }
 
+.background-image {
+  transform: translateX(-35%);
+}
+
 .chapter-form {
   max-height: 70vh;
   overflow-y: scroll;
-}
-
-.pointer{
-  cursor: pointer;
 }
 
 .triangle {
