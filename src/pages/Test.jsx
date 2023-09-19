@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap';
 import { toast, Toaster } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+
 import ConfirmationModal from '../components/ConfirmationModal';
 
 import { shuffle }  from '../utils/functions.js';
@@ -29,7 +30,7 @@ export default function Test() {
     useEffect(() => {
         // Set the initial state once the data is loaded
         if(modules && moduleCode) {
-            setModule(modules.data[0]);
+            setModule(modules.data[moduleCode]);
         }
 
         if(questions && moduleCode && chapterCode) {
