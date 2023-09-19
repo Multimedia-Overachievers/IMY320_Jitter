@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
-export default function Question({ index, question }) {
+export default function Question({ question, SetCompleteCallback, questionIndex }) {
 
     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
+    useEffect(() => {
+        setSelectedAnswer(null);
+    }, [questionIndex]);
+
+    const SelectAnswer = (index) => {
+        setSelectedAnswer(index);
+        SetCompleteCallback(questionIndex);
+    }
+
     return (
-        <div key={index}>
+        <div key={questionIndex}>
             <h1 className='fs-1 text-dark text-center my-4'>{question.question}</h1>
             <Form>
                 {/* Answers */}
@@ -20,14 +29,14 @@ export default function Question({ index, question }) {
                                             ${selectedAnswer === index ? 'bg-primary' : 'bg-white'} 
                                             ${selectedAnswer === index ? 'text-white' : 'text-dark'}
                                             fs-3 my-2 rounded`}
-                                onClick={() => setSelectedAnswer(index)}
+                                onClick={() => SelectAnswer(index)}
                             >
                                 <Form.Check
                                     type="radio"
                                     name="question-answer"
                                     label={answer.answer}
                                     checked={selectedAnswer === index}
-                                    onChange={() => setSelectedAnswer(index)}
+                                    onChange={() => SelectAnswer(index)}
                                 />
                             </div>
                         ))

@@ -5,10 +5,11 @@ import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
 import { Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import { BiLogOut } from 'react-icons/bi';
+import { toast, Toaster } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
+import { shuffle }  from '../utils/functions.js';
 import modules from '../backend/json/modules.json';
 import questions from '../backend/json/questions.json';
 
@@ -18,38 +19,10 @@ export default function Test() {
     const [module, setModule] = useState(null);
     const [chapter, setChapter] = useState(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [questionsList, setQuestionList] = useState([]);
 
     const { moduleCode, chapterCode } = useParams();
-
     const isExam = false;
-
-    const questionBarData = [
-        {
-            completed: true,
-            active: false,
-        },
-        {
-            completed: true,
-            active: false,
-        },
-        {
-            completed: false,
-            active: true,
-        },
-        {
-            completed: false,
-            active: false,
-        },
-        {
-            completed: false,
-            active: false,
-        },
-        {
-            completed: false,
-            active: false,
-        },
-    ];
-
 
     useEffect(() => {
         // Set the initial state once the data is loaded
@@ -59,24 +32,98 @@ export default function Test() {
 
         if(questions && moduleCode && chapterCode) {
             setChapter(questions.module[moduleCode].chapters[chapterCode]);
+            if(chapter?.questions) {
+                var question = shuffle(chapter?.questions, 6);
+                var list = [];
+
+                question.forEach(element => {
+                    var questionInstance = new QuestionInstance(element);
+                    list.push(questionInstance);
+                });
+
+                list[0].active = true;
+                setQuestionList(list);
+            }
         }
 
     }, [moduleCode, chapterCode, chapter]);
 
     const MoveToNext = () => {
-        if(currentQuestion < chapter?.questions.length - 1) {
+        if(currentQuestion < questionsList.length - 1) {
+            questionsList[currentQuestion].active = false;
             setCurrentQuestion(currentQuestion + 1);
+            questionsList[currentQuestion + 1].active = true;
+            setQuestionList(questionsList);
         }
     }
 
     const MoveToPrev = () => {
         if(currentQuestion > 0) {
+            questionsList[currentQuestion].active = false;
             setCurrentQuestion(currentQuestion - 1);
+            questionsList[currentQuestion - 1].active = true;
+            setQuestionList(questionsList);
+        }
+    }
+
+    const MoveToIndex = (index) => {
+        if(index >= 0 && index < questionsList.length) {
+            questionsList[currentQuestion].active = false;
+            questionsList[index].active = true;
+            setCurrentQuestion(index);
+            setQuestionList(questionsList);
+        }
+    }
+
+    const SetCompleted = (index) => {
+        if(index >= 0 && index < questionsList.length) {
+            questionsList[index].completed = true;
+            setQuestionList(questionsList);
+        }
+    }
+
+    const FinishQuiz = () => {
+        //check that all questions are completed
+        var completed = true;
+        questionsList.forEach(element => {
+            if(!element.completed) {
+                completed = false;
+            }
+        });
+
+        if(completed) {
+        }
+        else{
+            toast.error('Please complete all questions before submitting.', {
+                style: {
+                  padding: '16px',
+                  color: '#4e5662',
+                },
+                iconTheme: {
+                  primary: '#e07b7b',
+                },
+                duration: 3000,
+            });
+        }
+    }
+
+    class QuestionInstance{
+        question;
+        selectedAnswer;
+        completed;
+        active;
+
+        constructor(question) {
+            this.question = question;
+            this.selectedAnswer = null;
+            this.completed = false;
+            this.active =false;
         }
     }
 
     return (
         <div className="bg-light vh-100">
+            <div><Toaster/></div>
             <div className="p-5">
                 {/* <div>{deadline}</div> */}
                 {/* Test header */}
@@ -114,7 +161,7 @@ export default function Test() {
 
                         {/* Question */}
                         {chapter
-                            ? <Question question={chapter?.questions[currentQuestion]}/>
+                            ? <Question question={chapter?.questions[currentQuestion]} questionIndex={currentQuestion} SetCompleteCallback={SetCompleted}/>
                             : <p>No Questions found for chapter</p>
                         }
                         
@@ -122,12 +169,17 @@ export default function Test() {
                         <div className="d-flex justify-content-between align-items-center mt-4">
                             <p className='text-primary m-0 p-0 fs-5 pointer' onClick={() => MoveToPrev()}>previous</p>
                             {/* current question out of total */}
-                            <p className="text-secondary fw-bold m-0 p-0">{currentQuestion+1} / {chapter?.questions.length}</p>
-                            <Button size="lg" className="text-white fw-bold" onClick={() => MoveToNext()}>Next</Button>
+                            <p className="text-secondary fw-bold m-0 p-0">{currentQuestion+1} / 6</p>
+                            {
+                                (currentQuestion !== questionsList.length - 1) ? 
+                                <Button size="lg" className="text-white fw-bold" onClick={() => MoveToNext()}>Next</Button>
+                                :
+                                <Button size="lg" className="text-white fw-bold" onClick={() => FinishQuiz()}>Submit</Button>
+                            }
                         </div>
 
                         {/* Question bar */}
-                        <QuestionBar questionData={questionBarData} />
+                        <QuestionBar questionData={questionsList} SelectEvent={MoveToIndex} />
 
                         {/* Logo */}
                         <div className="d-flex justify-content-center mt-5">

@@ -44,6 +44,14 @@ p {
   overflow-y: scroll;
 }
 
+.chart-container{
+  height: 215px;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
 .triangle {
   position: absolute;
   top: 50%;
