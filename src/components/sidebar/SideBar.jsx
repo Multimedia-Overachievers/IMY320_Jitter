@@ -3,7 +3,44 @@ import ModuleList from './ModuleList';
 import OverallStatistics from './OverallStatistics';
 import { formatMinutes } from '../../utils/functions';
 
+import questions from '../../backend/json/questions.json';
+
 export default function SideBar({ modules, setModule }) {
+
+    const GetProgressModule = (module) => {
+        var progress = 0;
+
+        var moduleQuestions = questions?.module[module?.index];
+        moduleQuestions?.chapters.forEach(chapter => {
+            progress += GetProgressChapter(chapter);
+        });
+
+        return progress / moduleQuestions?.chapters.length;
+    }
+
+    const GetProgressChapter = (chapter) => {
+        var progress = 0;
+
+        chapter.questions.forEach(question => {
+            if(question?.finished) {
+                progress++;
+            }
+        });
+
+        return Math.round((progress / chapter.questions?.length) * 100);
+    }
+
+    const GetOverallProgress = () => {
+        var progress = 0;
+    
+        modules?.forEach(module => {
+            progress += GetProgressModule(module);
+        });
+
+        //round to 2 decimal places
+        return Math.round((progress / modules?.length) * 10) / 10;
+    }
+
 
     return (
         <div className='vh-100 p-5 pb-3 d-flex flex-column justify-content-between' style={{backgroundColor: '#FCFDFE'}}>
@@ -30,7 +67,7 @@ export default function SideBar({ modules, setModule }) {
             <ModuleList modules={modules} setModule={setModule} />
 
             {/* Overall statistics */}
-            <OverallStatistics totalHours={formatMinutes(80)} contentCovered={21} />
+            <OverallStatistics totalHours={formatMinutes(80)} contentCovered={GetOverallProgress()} />
 
             <small className='text-secondary text-center p-0 m-0'>jitter co.</small>
         </div>

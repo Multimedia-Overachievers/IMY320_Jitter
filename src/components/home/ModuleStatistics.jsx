@@ -9,9 +9,11 @@ import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { BarChart } from "./BarChart";
 
+import questions from '../../backend/json/questions.json';
+
 Chart.register(CategoryScale);
 
-export default function ModuleStatistics({ moduleOverview, completedChapters, timeSpent }) {
+export default function ModuleStatistics({ module, timeSpent }) {
 
     /**
      * This function returns a FontAwesomeIcon component based on the average passed in
@@ -31,7 +33,7 @@ export default function ModuleStatistics({ moduleOverview, completedChapters, ti
     // Convert the moduleOverview.chapters array into an array of chapter labels
     const getChapterLabels = () => {
         const labels = [];
-        for (let i = 0; i < moduleOverview?.numChapters; i++) {
+        for (let i = 0; i < module?.chapters.length; i++) {
             labels.push(`Ch${i + 1}`);
         }
 
@@ -44,13 +46,49 @@ export default function ModuleStatistics({ moduleOverview, completedChapters, ti
         datasets: [
             {
                 label: 'Progress',
-                data: moduleOverview?.progress,
+                data: module?.chapters,
                 fill: false,
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgba(255, 99, 132, 0.2)',
             },
         ],
     };
+    
+    const GetProgress = (chapter) => {
+        var progress = 0;
+
+        chapter.questions.forEach(question => {
+            if(question?.finished) {
+                progress++;
+            }
+        });
+        return Math.round((progress / chapter.questions?.length) * 100);
+    }
+
+    const GetCompletedChapters = () => {
+        var completed = 0;
+
+        var moduleQuestions = questions?.module[module?.index];
+        moduleQuestions?.chapters.forEach(chapter => {
+            if(GetProgress(chapter) === 100) {
+                completed++;
+            }
+        });
+
+        return completed;
+    }
+
+    const GetAverageScore = () => {
+        var scores = [];
+
+        module?.chapters.forEach(chapter => {
+            chapter.scores.forEach(score => {
+                scores.push(score);
+            });
+        });
+        
+        return scores;
+    }
 
     const [chartData, setChartData] = useState(data);
 
@@ -62,7 +100,7 @@ export default function ModuleStatistics({ moduleOverview, completedChapters, ti
                         <p className='text-secondary mb-4'>Overview</p>
                         <div>
                             {
-                                // chartData.labels && <BarChart data={chartData} />
+                                chartData.labels && <BarChart data={chartData} />
                             }
                         </div>
                     </div>
@@ -73,7 +111,7 @@ export default function ModuleStatistics({ moduleOverview, completedChapters, ti
                     <Col>
                         <div className='bg-white rounded shadow m-1 p-3'>
                             <p className='text-secondary mb-4'>Completed chapters</p>
-                            <h1 className='text-primary fw-bold text-center'>{completedChapters} / {moduleOverview?.numChapters}</h1>
+                            <h1 className='text-primary fw-bold text-center'>{GetCompletedChapters()} / {module?.chapters.length}</h1>
                         </div>
                     </Col>
                     <Col>
@@ -89,14 +127,14 @@ export default function ModuleStatistics({ moduleOverview, completedChapters, ti
                             <div>
                                 <p className='text-secondary mb-4'>Average score</p>
                                 <h1 className={`
-                                    text-${getAverageColor(getAverage(moduleOverview?.scores))} 
+                                    text-${getAverageColor(getAverage(GetAverageScore()))} 
                                     fw-bold
                                     `}>
-                                        {getAverage(moduleOverview?.scores)}%
+                                        {getAverage(GetAverageScore())}%
                                 </h1>
                             </div>
                             <div>
-                                {getEmotionComponent(getAverage(moduleOverview?.scores))}
+                                {getEmotionComponent(getAverage(GetAverageScore()))}
                             </div>
                         </div>
                     </Col>

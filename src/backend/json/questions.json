@@ -25,7 +25,8 @@
                                     "answer": "The Law of the Few, the Fusion Factor and the Strength of Context",
                                     "correct": false
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "A fad can be described as the direction that some form of behaviour develops in a large population and this behaviour takes long to fade away.",
@@ -38,7 +39,8 @@
                                     "answer": "False",
                                     "correct": true
                                 }
-                            ]
+                            ],
+                            "finished": true
                         },
                         {
                             "question": "Pick the most correct option.",
@@ -62,6 +64,8 @@
                                     "correct": false
                                 }
                             ]
+                            ,
+                            "finished": true
                         },
                         {
                             "question": "Diffusion of Innovation can be described as the process in which an innovation is spread around through different channels in an economic system.",
@@ -74,7 +78,8 @@
                                     "answer": "False",
                                     "correct": true
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "The Technology Adoption Lifecycle:",
@@ -95,7 +100,8 @@
                                     "answer": "Illustrates the progress of a piece of technology through a pattern of overenthusiasm and disillusionment",
                                     "correct": false
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "It is predicted that the Nexus of Forces will drive 90% of growth in the IoT market.",
@@ -108,7 +114,8 @@
                                     "answer": "False",
                                     "correct": true
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "The first phase of the Gartner Hype Cycle is:",
@@ -131,7 +138,8 @@
                                     "answer": "Technology Trigger",
                                     "correct": true
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "Pick the most correct option.",
@@ -154,7 +162,8 @@
                                     "answer": "In the Peak of Inflated Expectations is when a piece of technology begins to become hyped up",
                                     "correct": true
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "An aggregator is a website that accumulates different types of information from various sources online.",
@@ -167,7 +176,8 @@
                                     "answer": "False",
                                     "correct": false
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "YouTube is an example of a web aggregator.",
@@ -180,7 +190,8 @@
                                     "answer": "False",
                                     "correct": true
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "Pick the most correct option. In Fitts' Law a touch target:",
@@ -203,7 +214,8 @@
                                     "answer": "Should be small so that more targets can be fit onto the screen",
                                     "correct": false
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "A mental model is how we think a system works",
@@ -216,7 +228,8 @@
                                     "answer": "False",
                                     "correct": false
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "Pick the most correct option. If every website followed the same convention:",
@@ -239,7 +252,8 @@
                                     "answer": "It would make it harder for a user to remember how to use any of the sites",
                                     "correct": false
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "Pitt's Law explains how a big object takes more time to click on.",
@@ -252,7 +266,8 @@
                                     "answer": "False",
                                     "correct": true
                                 }
-                            ]
+                            ],
+                            "finished": false
                         },
                         {
                             "question": "An average adult human's finger pad is:",
@@ -273,7 +288,308 @@
                                     "answer": "18 - 22mm",
                                     "correct": false
                                 }
-                            ]
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 2",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 3",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 4",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "IMY 310",
+            "chapters": [
+                {
+                    "name": "Chapter 1",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "",
+                                    "correct": true
+                                },
+                                {
+                                    "answer": "",
+                                    "correct": false
+                                }
+                            ],
+                            "finished": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 2",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 3",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 4",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "COS 314",
+            "chapters": [
+                {
+                    "name": "Chapter 1",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "",
+                                    "correct": true
+                                },
+                                {
+                                    "answer": "",
+                                    "correct": false
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 2",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 3",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 4",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "COS 333",
+            "chapters": [
+                {
+                    "name": "Chapter 1",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "",
+                                    "correct": true
+                                },
+                                {
+                                    "answer": "",
+                                    "correct": false
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 2",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 3",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Chapter 4",
+                    "questions": [
+                        {
+                            "question": "",
+                            "answers": [
+                                {
+                                    "answer": "True",
+                                    "correct": false
+                                },
+                                {
+                                    "answer": "False",
+                                    "correct": true
+                                }
+                            ],
+                            "finished": false
                         }
                     ]
                 }

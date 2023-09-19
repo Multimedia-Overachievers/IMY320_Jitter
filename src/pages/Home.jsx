@@ -4,7 +4,6 @@ import SideBar from '../components/sidebar/SideBar';
 import ModuleStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
 
-
 import data from '../backend/json/modules.json';
 
 export default function Home() {
@@ -37,7 +36,7 @@ export default function Home() {
                             <h4 className='text-secondary'>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
                         </div>
                         {/* Statistics section */}
-                        <ModuleStatistics moduleOverview={module?.moduleOverview} completedChapters={1} timeSpent={91} />
+                        <ModuleStatistics module={module} timeSpent={91} />
                         {/* Chapters section */}
                         <Chapters module={module} />
                     </div>

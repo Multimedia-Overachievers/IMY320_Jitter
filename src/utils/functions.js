@@ -10,6 +10,13 @@ export function formatMinutes(minutes) {
     return `${hours}h ${remainingMinutes}m`;
 }
 
+export function formatTimer(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = seconds % 60;
+
+    return `${minutes} minutes ${remainingSeconds} seconds left`;
+}
+
 /**
  * This function takes in an array of numbers and returns the average
  * @param {*} array 
@@ -22,7 +29,7 @@ export function getAverage(array) {
     let sum = array.reduce((a, b) => a + b, 0);
     let avg = sum / array.length;
 
-    return avg;
+    return Math.round(avg * 10) / 10;
 }
 
 /**

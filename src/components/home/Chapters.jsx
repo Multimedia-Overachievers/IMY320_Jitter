@@ -36,7 +36,7 @@ export default function Chapters({ module }) {
 
                 {/* Chapters */}
                 {module?.chapters.map((chapter, index) => (
-                    <Chapter key={index} moduleIndex={module.index} index={index} chapter={chapter.chapter} progress={chapter.progress} description={chapter.description} />
+                    <Chapter key={index} moduleIndex={module.index} index={index} chapter={chapter.chapter} description={chapter.description} />
                 ))}
             </div>
 
