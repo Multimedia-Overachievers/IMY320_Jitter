@@ -2,7 +2,7 @@
 
 This repository contains a React-based website designed to assist students at the University of Pretoria in practicing for their IT module tests and exams. The website allows users to take practice tests on specific chapters within a module, and even combine multiple chapters to create timed exams. It tracks users' progress within a module, providing statistics such as average performance per chapter, completed chapters, and hours spent on each module.
 
-##📋Features
+## 📋Features
 
 - Practice tests on individual chapters within a module.
 - Combine multiple chapters to create timed exams.
@@ -54,5 +54,4 @@ This repository contains a React-based website designed to assist students at th
 | <img src="https://lh5.googleusercontent.com/_MrBwoCFyRyIyUyTylyJj8TCAkVc_JJ_Qnqm2zYqeWyyIrsD9r6vQUzckcLwFatuWTY=w2400" alt="drawing" width="75"/> | Keelan Matthews | u21549967| Team Member | [![image](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white "Github Profile")](https://github.com/Keelan-Matthews) |
 |<img src="https://lh5.googleusercontent.com/AZP3G6vpLzk7UJp3cC1x4yew5Noa_SEBco_O4poBy539ynLZGZYK47L45pz7CHRCUq0=w2400" alt="drawing" width="75"/> | Ross Tordiffe | u21533572 | Team Member | [![image](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white "Github Profile")](https://github.com/Ross-Tordiffe) | 
 |<img src="https://lh3.googleusercontent.com/E5wo06pgBxWS7AIAxVJmqBAiT2R-1XH9fkLN8SXLs-10WiKYyiHORVaTQbFiLLHTcJc=w2400" alt="drawing" width="75"/> | Tayla Orsmond | u21467456| Team Member | [![image](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white "Github Profile")](https://github.com/tayla-orsmond) | 
-|<img src="https://lh3.googleusercontent.com/HpG5pG5kREk_YAhdDDdQLBKge6K1gi2uppiTxSZX9HhJvyzDAgvT02pNjj_1Me2sXqg=w2400" alt="drawing" width="75"/> | Thomas Isebeck | u20446332 | Team Member | [![image](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white "Github Profile")](https://github.com/thomasisebeck) | 
 |<img src="https://lh5.googleusercontent.com/tlFqm3GleSQjggjXUmTMfsHHi6SciKL6o0ecofs1lEZTGplRpB5fFNnWjlPWs2EaLTM=w2400" alt="drawing" width="75" /> | Dhairiya Chhipa | u21437841 | Team Member | [![image](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white "Github Profile")](https://github.com/AureoleAxiome) | 
