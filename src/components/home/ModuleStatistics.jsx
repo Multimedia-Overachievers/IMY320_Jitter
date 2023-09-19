@@ -11,6 +11,39 @@ import { BarChart } from "./BarChart";
 
 import questions from '../../backend/json/questions.json';
 
+export const Data = [
+    {
+      id: 1,
+      year: 2016,
+      userGain: 80000,
+      userLost: 823
+    },
+    {
+      id: 2,
+      year: 2017,
+      userGain: 45677,
+      userLost: 345
+    },
+    {
+      id: 3,
+      year: 2018,
+      userGain: 78888,
+      userLost: 555
+    },
+    {
+      id: 4,
+      year: 2019,
+      userGain: 90000,
+      userLost: 4555
+    },
+    {
+      id: 5,
+      year: 2020,
+      userGain: 4300,
+      userLost: 234
+    }
+  ];
+
 Chart.register(CategoryScale);
 
 export default function ModuleStatistics({ module, timeSpent }) {
@@ -33,9 +66,13 @@ export default function ModuleStatistics({ module, timeSpent }) {
     // Convert the moduleOverview.chapters array into an array of chapter labels
     const getChapterLabels = () => {
         const labels = [];
+        console.log(module?.chapters.length);
+
         for (let i = 0; i < module?.chapters.length; i++) {
             labels.push(`Ch${i + 1}`);
         }
+
+        console.log(labels);
 
         return labels;
     }
@@ -90,7 +127,13 @@ export default function ModuleStatistics({ module, timeSpent }) {
         return scores;
     }
 
-    const [chartData, setChartData] = useState(data);
+    const [chartData, setChartData] = useState(
+        {
+            labels: [],
+            datasets: []
+        }
+    );
+    setChartData();
 
     return (
         <Row>
