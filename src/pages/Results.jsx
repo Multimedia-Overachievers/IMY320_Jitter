@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import { Container } from 'react-bootstrap';
-import { BiLogOut } from 'react-icons/bi';
 import Answer from '../components/test/Answer';
 
 import data from '../backend/json/questions.json';
@@ -32,7 +31,7 @@ export default function Results() {
                 </div>
 
                 {/*  Leave test */}
-                <div className="d-flex align-items-center mt-4">
+                <div className="btn d-flex align-items-center mt-4">
                     <BiLeftArrowAlt className="text-dark me-3" size={30} />
                     <h4 className='text-dark m-0 p-0 fw-bold'>Return home</h4>
                 </div>

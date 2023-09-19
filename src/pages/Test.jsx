@@ -5,9 +5,9 @@ import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
 import { Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import { BiLogOut } from 'react-icons/bi';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 import modules from '../backend/json/modules.json';
 import questions from '../backend/json/questions.json';
@@ -18,6 +18,7 @@ export default function Test() {
     const [module, setModule] = useState(null);
     const [chapter, setChapter] = useState(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [modalShow, setModalShow] = useState(false);
 
     const { moduleCode, chapterCode } = useParams();
 
@@ -88,13 +89,13 @@ export default function Test() {
                 </div>
 
                 {/*  Leave test */}
-                <div className="d-flex align-items-center mt-4">
+                <div className="btn d-flex align-items-center mt-4 pointer" onClick={() => setModalShow(true)}>
                     <BiLeftArrowAlt className="text-dark me-3" size={30} />
-                    <h4 className='text-dark m-0 p-0 fw-bold pointer' onClick={() => navigate(-1)}>Leave Test</h4>
+                    <h4 className='text-dark m-0 p-0 fw-bold'>Leave Test</h4>
                 </div>
 
                 <Container className='d-flex justify-content-center'>
-                    <div style={{ width: '43.0625rem' }}>
+                    <div style={{ width: '50rem' }}>
                         {/* Test heading with time bar */}
                         <div className="d-flex justify-content-center flex-column text-center">
                             <h2 className="text-primary">{chapter?.name}</h2>
@@ -136,6 +137,16 @@ export default function Test() {
                     </div>
                 </Container>
             </div>
+
+            {/* Confirmation modal */}
+            <ConfirmationModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                title="Leave Test"
+                body="Are you sure you want to leave the test? Your progress will be lost"
+                confirmText="Leave"
+                confirmAction={() => navigate(-1)}
+            />
         </div>
     )
 }

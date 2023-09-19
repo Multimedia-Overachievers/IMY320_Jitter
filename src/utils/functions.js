@@ -39,7 +39,7 @@ export function getAverage(array) {
  */
 export function getAverageColor(average) {
     if (average < 50) {
-        return 'danger'
+        return 'info'
     } else if (average < 70) {
         return 'warning'
     } else {
