@@ -27,6 +27,15 @@ export const BarChart = ({ chartData }) => {
               }
             }
           },
+          maintainAspectRatio: false,
+          responsive: true,
+
+          layout: {
+            padding: {
+              top: 20,
+            },
+            
+          },      
           scales:{
             y: {
               display: false,
@@ -35,8 +44,8 @@ export const BarChart = ({ chartData }) => {
                 display: false,
                 drawBorder: false
               },
-              max: 100,
               min: 0,
+              offset: true,
             },
             x: {
               display: true,

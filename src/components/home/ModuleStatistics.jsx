@@ -65,17 +65,18 @@ export default function ModuleStatistics({ module, timeSpent }) {
         }
     }
 
-    const [chartData, setChartData] = useState({
+    const [chartData] = useState({
     labels: module?.chapters.map((_, index) => `Ch${index + 1}`),
     datasets: [
                 {
                     label: 'Average Score',
-                    data: [20, 31, 21, 40],
+                    data: [20, 33, 23, 42],
                     fill: false,
                     backgroundColor: '#6299EB',
                     borderColor: '#6299EB',
                     borderRadius: 10,
                     borderSkipped: false,
+                
                 },
             ],
     });
@@ -120,7 +121,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
     return (
         <Row>
             <Col lg={6}>
-                <div className='bg-white rounded shadow m-1 p-3'>
+                <div className='bg-white rounded shadow m-1 mb-4 p-4 h-100'>
                     <div>
                         <p className='text-secondary mb-4'>Overview</p>
                         <div>
@@ -132,15 +133,15 @@ export default function ModuleStatistics({ module, timeSpent }) {
                 </div>
             </Col>
             <Col lg={6}>
-                <Row>
+                <Row >
                     <Col>
-                        <div className='bg-white rounded shadow m-1 p-3'>
+                        <div className='bg-white rounded shadow m-1 p-4'>
                             <p className='text-secondary mb-4'>Completed chapters</p>
                             <h1 className='text-primary fw-bold text-center'>{GetCompletedChapters()} / {module?.chapters.length}</h1>
                         </div>
                     </Col>
                     <Col>
-                        <div className='bg-white rounded shadow m-1 p-3'>
+                        <div className='bg-white rounded shadow m-1 p-4'>
                             <p className='text-secondary mb-4'>Overall time spent</p>
                             <h1 className='text-primary fw-bold text-center'>{formatMinutes(timeSpent)}</h1>
                         </div>
@@ -148,7 +149,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
                 </Row>
                 <Row>
                     <Col>
-                        <div className='d-flex justify-content-between align-items-center bg-white rounded shadow m-1 mt-4 p-3'>
+                        <div className='d-flex justify-content-between align-items-center bg-white rounded shadow m-1 mt-4 p-4'>
                             <div>
                                 <p className='text-secondary mb-4'>Average score</p>
                                 <h1 className={`
