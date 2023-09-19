@@ -7,6 +7,7 @@ import { getAverageColor } from '../../utils/functions';
 
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { BarChart } from "./BarChart";
 
 import questions from '../../backend/json/questions.json';
@@ -45,6 +46,7 @@ export const Data = [
   ];
 
 Chart.register(CategoryScale);
+Chart.register(ChartDataLabels);
 
 export default function ModuleStatistics({ module, timeSpent }) {
 
@@ -63,33 +65,21 @@ export default function ModuleStatistics({ module, timeSpent }) {
         }
     }
 
-    // Convert the moduleOverview.chapters array into an array of chapter labels
-    const getChapterLabels = () => {
-        const labels = [];
-        console.log(module?.chapters.length);
+    const [chartData, setChartData] = useState({
+    labels: module?.chapters.map((_, index) => `Ch${index + 1}`),
+    datasets: [
+                {
+                    label: 'Average Score',
+                    data: [20, 31, 21, 40],
+                    fill: false,
+                    backgroundColor: '#6299EB',
+                    borderColor: '#6299EB',
+                    borderRadius: 10,
+                    borderSkipped: false,
+                },
+            ],
+    });
 
-        for (let i = 0; i < module?.chapters.length; i++) {
-            labels.push(`Ch${i + 1}`);
-        }
-
-        console.log(labels);
-
-        return labels;
-    }
-
-    // Chartjs data that will be used to display the chart. Specifically, the progress per chapter
-    const data = {
-        labels: getChapterLabels(),
-        datasets: [
-            {
-                label: 'Progress',
-                data: module?.chapters,
-                fill: false,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
-            },
-        ],
-    };
     
     const GetProgress = (chapter) => {
         var progress = 0;
@@ -127,14 +117,6 @@ export default function ModuleStatistics({ module, timeSpent }) {
         return scores;
     }
 
-    const [chartData, setChartData] = useState(
-        {
-            labels: [],
-            datasets: []
-        }
-    );
-    setChartData();
-
     return (
         <Row>
             <Col lg={6}>
@@ -143,7 +125,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
                         <p className='text-secondary mb-4'>Overview</p>
                         <div>
                             {
-                                // chartData.labels && <BarChart data={chartData} />
+                                <BarChart chartData={chartData} />
                             }
                         </div>
                     </div>
