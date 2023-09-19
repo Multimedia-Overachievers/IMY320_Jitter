@@ -8,22 +8,22 @@
             "active": true,
             "chapters":  [
                     {
-                        "chapter": "Chapter 1",
-                        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.",
+                        "chapter": "Theme 1 - Trends",
+                        "description": "This chapter delves into distinguishing between trends and fads, analyzing the statics of trends, understanding the diffusion of innovation, illustrating the Rogers Bell Curve's role in innovation adoption, identifying tipping points, and discussing the three agents of change that influence societal shifts.",
                         "scores": [69, 75, 100]
                     },
                     {
-                        "chapter": "Chapter 2",
+                        "chapter": "Theme 2 - UX",
                         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.",
                         "scores": [70, 88, 90]
                     },
                     {
-                        "chapter": "Chapter 3",
+                        "chapter": "Theme 3 - Web Trends",
                         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.",
                         "scores": [ 92, 98]
                     },
                     {
-                        "chapter": "Chapter 4",
+                        "chapter": "Theme 4 - Mobile Trends",
                         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl. Donec euismod, nisl eget aliquam ultricies, nunc nisl ultricies nunc, quis aliquet nisl nunc eu nisl.",
                         "scores": [55, 100, 74]
                     }
