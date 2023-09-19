@@ -7,7 +7,7 @@ import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
 import Button from 'react-bootstrap/Button';
 
-export default function Chapters({ chapters }) {
+export default function Chapters({ module }) {
 
     const [modalShow, setModalShow] = useState(false);
 
@@ -35,8 +35,8 @@ export default function Chapters({ chapters }) {
                 </div>
 
                 {/* Chapters */}
-                {chapters?.map((chapter, index) => (
-                    <Chapter key={index} index={index} chapter={chapter.chapter} progress={chapter.progress} description={chapter.description} />
+                {module?.chapters.map((chapter, index) => (
+                    <Chapter key={index} moduleIndex={module.index} index={index} chapter={chapter.chapter} progress={chapter.progress} description={chapter.description} />
                 ))}
             </div>
 
@@ -49,7 +49,7 @@ export default function Chapters({ chapters }) {
                     // REDIRECT HERE!!
                     console.log('Send me to /exam/{module} or whatever');
                 }}
-                chapters={chapters}
+                chapters={module?.chapters}
             />
         </>
     )

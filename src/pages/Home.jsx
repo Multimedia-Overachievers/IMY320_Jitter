@@ -4,6 +4,7 @@ import SideBar from '../components/sidebar/SideBar';
 import ModuleStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
 
+
 import data from '../backend/json/modules.json';
 
 export default function Home() {
@@ -20,12 +21,12 @@ export default function Home() {
     return (
         <div className="vh-100">
             <Row>
-                <Col lg={9} className='bg-light scrollable vh-100'>
+                <Col lg={9} className='scrollable scrollable vh-100'>
                     {/* Background image */}
-                    <div className='position-absolute w-100 h-100 d-flex align-items-center background-image'>
-                        <img src="/images/home-background.svg" alt="" />
+                    <div className='bg-light position-absolute w-100 h-100 d-flex align-items-center justify-content-center' style={{zIndex: -1}}>
+                        <img className='background-image' src="/images/home-background.svg" alt="" />
                     </div>
-                    <div className="p-5 m-4">
+                    <div className="p-5 m-4 " style={{zIndex: 2}}>
                         {/* Home page header */}
                         <div className='d-flex justify-content-between'>
                             <div>
@@ -38,13 +39,13 @@ export default function Home() {
                         {/* Statistics section */}
                         <ModuleStatistics moduleOverview={module?.moduleOverview} completedChapters={1} timeSpent={91} />
                         {/* Chapters section */}
-                        <Chapters chapters={module?.chapters} />
+                        <Chapters module={module} />
                     </div>
                 </Col>
 
                 <Col lg={3}>
                     {/* Side bar */}
-                    <SideBar />
+                    <SideBar modules={data.data} setModule={setModule} />
                 </Col>
             </Row>
         </div>

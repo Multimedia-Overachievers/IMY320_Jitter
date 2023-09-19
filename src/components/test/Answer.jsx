@@ -3,7 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 
 export default function Answer({ questions }) {
     return (
-        questions.map((question, index) => (
+        questions?.map((question, index) => (
             <div key={index} className='p-4 rounded shadow mt-3 bg-white'>
                 <h3 className='text-dark'>Q1. {question.question}</h3>
                 <hr className='my-4 bg-secondary' />

@@ -1,8 +1,18 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import { getAverageColor } from '../../utils/functions';
+import Link from "react-router-dom";
+import DataManager from '../../backend/dataManager';
 
-export default function Chapter({ index, chapter, progress, description }) {
+export default function Chapter({ moduleIndex, index, chapter, progress, description }) {
+    const StartQuiz = (e) => {
+        e.stopPropagation();
+        console.log(`Start quiz for chapter ${index}`);
+
+        console.log(`test/${moduleIndex}/${index}`);
+        //DataManager.UpdateChapterProgress('IMY 320', index, 25);
+    }
+
     return (
         <Accordion flush className='shadow m-1 my-4'>
             <Accordion.Item eventKey={index}>
@@ -25,8 +35,9 @@ export default function Chapter({ index, chapter, progress, description }) {
                         <div
                             className="btn btn-primary btn-sm d-flex justify-content-center align-items-center"
                             style={{ height: '40px' }}
-                            onClick={() => console.log('Send me to /quiz/{chapter} or whatever')}
+                            onClick={StartQuiz}
                         >
+                            {/* <Link to={`test/${moduleIndex}/${index}`}>Take quiz</Link> */}
                             <p className='text-white fw-bold p-0 mb-1'>Take quiz</p>
                         </div>
                     </div>

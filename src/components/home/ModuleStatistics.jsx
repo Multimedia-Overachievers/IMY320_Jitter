@@ -61,7 +61,9 @@ export default function ModuleStatistics({ moduleOverview, completedChapters, ti
                     <div>
                         <p className='text-secondary mb-4'>Overview</p>
                         <div>
-                            {/* <BarChart data={chartData} /> I CANT GET THIS TO WORK LOL */} 
+                            {
+                                // chartData.labels && <BarChart data={chartData} />
+                            }
                         </div>
                     </div>
                 </div>

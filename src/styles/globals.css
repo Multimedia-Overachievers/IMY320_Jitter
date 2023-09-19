@@ -31,7 +31,7 @@ p {
 }
 
 .background-image {
-  transform: translateX(20%);
+  transform: translateX(-35%);
 }
 
 .accordion-item,
