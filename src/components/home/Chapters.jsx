@@ -26,12 +26,6 @@ export default function Chapters({ module }) {
                             <p className='text-white fw-bold p-0 mb-1'>Take exam</p>
                         </div>
                     </div>
-
-                    {/* Implement sort functionality here */}
-                    <div className='d-flex align-items-center'>
-                        <p className='text-secondary m-0 p-0 me-2'>sort</p>
-                        <FiFilter className='text-secondary' />
-                    </div>
                 </div>
 
                 {/* Chapters */}
