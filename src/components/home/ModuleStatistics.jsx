@@ -143,7 +143,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
                         <p className='text-secondary mb-4'>Overview</p>
                         <div>
                             {
-                                chartData.labels && <BarChart data={chartData} />
+                                // chartData.labels && <BarChart data={chartData} />
                             }
                         </div>
                     </div>
