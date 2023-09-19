@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
-export default function Question({ question, SetCompleteCallback, questionIndex }) {
+export default function Question({ questionInstance, SetCompleteCallback, questionIndex}) {
 
     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
     useEffect(() => {
-        setSelectedAnswer(null);
-    }, [questionIndex]);
+        setSelectedAnswer(questionInstance.selectedAnswer);
+    }, [questionIndex])
 
     const SelectAnswer = (index) => {
         setSelectedAnswer(index);
-        SetCompleteCallback(questionIndex);
+        SetCompleteCallback(questionIndex, index);
     }
 
     return (
         <div key={questionIndex}>
-            <h1 className='fs-1 text-dark text-center my-4'>{question.question}</h1>
+            <h1 className='fs-1 text-dark text-center my-4'>{questionInstance.question.question}</h1>
             <Form>
-                {/* Answers */}
                 <Form.Group className='chapter-form overflow-hidden'>
                     {
-                        // Be sure to style the selected option when it works @Ross
-                        question.answers?.map((answer, index) => (
+                        questionInstance.question.answers?.map((answer, index) => (
                             <div 
                                 key={index} 
                                 className={`shadow p-3 

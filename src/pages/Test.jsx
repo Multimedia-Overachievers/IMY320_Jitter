@@ -77,12 +77,14 @@ export default function Test() {
         }
     }
 
-    const SetCompleted = (index) => {
-        if(index >= 0 && index < questionsList.length) {
-            questionsList[index].completed = true;
+    const SetCompleted = (questionIndex, answer) => {
+        if(questionIndex >= 0 && questionIndex < questionsList.length) {
+            questionsList[questionIndex].completed = true;
+            questionsList[questionIndex].selectedAnswer = answer;
             setQuestionList(questionsList);
         }
     }
+
 
     const FinishQuiz = () => {
         //check that all questions are completed
@@ -94,6 +96,7 @@ export default function Test() {
         });
 
         if(completed) {
+            navigate('/result', { state: CreateTestResult() });
         }
         else{
             toast.error('Please complete all questions before submitting.', {
@@ -106,6 +109,19 @@ export default function Test() {
                 },
                 duration: 3000,
             });
+        }
+    }
+
+    const CreateTestResult = () => {
+        return {
+            module: module.index,
+            chapter: chapter.id,
+            questions: questionsList.map((question) => {
+                return {
+                    question: question.question.id,
+                    selectedAnswer: question.selectedAnswer,
+                }
+            })
         }
     }
 
@@ -127,7 +143,6 @@ export default function Test() {
         <div className="bg-light vh-100">
             <div><Toaster/></div>
             <div className="p-5">
-                {/* <div>{deadline}</div> */}
                 {/* Test header */}
                 <div className='d-flex justify-content-between'>
                     <div>
@@ -135,6 +150,7 @@ export default function Test() {
                         <h1 className='text-primary fw-bold display-4'>{module?.name}</h1>
                     </div>
                 </div>
+
 
                 {/*  Leave test */}
                 <div className="btn d-flex align-items-center mt-4 pointer" onClick={() => setModalShow(true)}>
@@ -162,8 +178,8 @@ export default function Test() {
                         </div>
 
                         {/* Question */}
-                        {chapter
-                            ? <Question question={chapter?.questions[currentQuestion]} questionIndex={currentQuestion} SetCompleteCallback={SetCompleted}/>
+                        {questionsList && questionsList.length > 0 && questionsList[currentQuestion]
+                            ? <Question questionIndex={currentQuestion} SetCompleteCallback={SetCompleted} questionInstance={questionsList[currentQuestion]}/>
                             : <p>No Questions found for chapter</p>
                         }
                         
