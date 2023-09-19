@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { formatMinutes, getAverage } from '../../utils/functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,9 +32,18 @@ export default function ModuleStatistics({ module, timeSpent }) {
         }
     }
 
-    const [chartData] = useState({
-    labels: module?.chapters.map((_, index) => `Ch${index + 1}`),
-    datasets: [
+    const [chartData, setChartData] = useState(null);
+
+    useEffect(() => {
+        if (module) {
+            setChartData(data);
+            console.log(data);
+        }
+    }, [module]);
+        
+    const data = {
+        labels: module?.chapters.map((_, index) => `Ch${index + 1}`),
+        datasets: [
                 {
                     label: 'Average Score',
                     data: module?.chapters.map(chapter => getAverage(chapter.scores)),
@@ -46,8 +55,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
                 
                 },
             ],
-    });
-
+        };
     
     const GetProgress = (chapter) => {
         var progress = 0;
@@ -93,7 +101,9 @@ export default function ModuleStatistics({ module, timeSpent }) {
                         <p className='text-secondary mb-4'>Overview</p>
                         <div>
                             {
-                                <BarChart chartData={chartData} />
+                                !chartData ? 
+                                <p>Loading...</p> 
+                                : <BarChart chartData={chartData} />
                             }
                         </div>
                     </div>
