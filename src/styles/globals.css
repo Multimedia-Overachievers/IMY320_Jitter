@@ -44,10 +44,6 @@ p {
   overflow-y: scroll;
 }
 
-.chart-container{
-  height: 215px;
-}
-
 .triangle {
   position: absolute;
   top: 50%;
@@ -104,4 +100,9 @@ p {
   border: none !important;
   outline: none !important;
   background-color: transparent !important;
+}
+
+.accordion-body, p {
+  line-height: 1.5rem !important;
+  letter-spacing: 0.015rem !important;
 }/*# sourceMappingURL=globals.css.map */

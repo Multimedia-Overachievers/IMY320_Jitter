@@ -98,7 +98,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
             <Col lg={6}>
                 <div className='bg-white rounded shadow m-1 mb-4 p-4 h-100'>
                     <div>
-                        <p className='text-secondary mb-4'>Overview</p>
+                        <p className='text-secondary mb-4'>Average per chapter</p>
                         <div>
                             {
                                 !chartData ? 
@@ -119,7 +119,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
                     </Col>
                     <Col>
                         <div className='bg-white rounded shadow m-1 p-4'>
-                            <p className='text-secondary mb-4'>Overall time spent</p>
+                            <p className='text-secondary mb-4'>Time spent on module</p>
                             <h1 className='text-primary fw-bold text-center'>{formatMinutes(timeSpent)}</h1>
                         </div>
                     </Col>

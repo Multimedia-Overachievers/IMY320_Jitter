@@ -107,3 +107,9 @@ p {
 	outline: none !important;
 	background-color: transparent !important;
 }
+
+// Better typography
+.accordion-body, p {
+	line-height: 1.5rem !important;
+	letter-spacing: 0.015rem !important;
+}

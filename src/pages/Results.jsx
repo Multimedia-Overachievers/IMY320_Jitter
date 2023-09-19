@@ -29,12 +29,6 @@ export default function Results() {
                         <h4 className='text-secondary'>{isExam ? "Exam" : "Practice Test"}</h4>
                         <h1 className='text-primary fw-bold display-4'>{module?.name}</h1>
                     </div>
-
-                    {/* Log out */}
-                    <div className='d-flex justify-content-center text-secondary align-items-center p-4 shadow rounded' style={{ height: '70px' }}>
-                        <p className='m-0 p-0 text-secondary'>Log out</p>
-                        <BiLogOut className='ms-2' size='1.3em' style={{ rotate: '180deg' }} />
-                    </div>
                 </div>
 
                 {/*  Leave test */}

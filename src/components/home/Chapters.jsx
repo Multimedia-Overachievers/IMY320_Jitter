@@ -20,10 +20,10 @@ export default function Chapters({ module }) {
                         {/* Take exam */}
                         <div
                             className="btn btn-primary btn-sm d-flex justify-content-center align-items-center"
-                            style={{ height: '40px' }}
+                            style={{ height: '40px', width: '100px' }}
                             onClick={() => setModalShow(true)}
                         >
-                            <p className='text-white fw-bold p-0 mb-1'>Take exam</p>
+                            <p className='text-white fw-bold p-0 mb-1 text-decoration-none'>Take exam</p>
                         </div>
                     </div>
                 </div>
