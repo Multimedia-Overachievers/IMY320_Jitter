@@ -65,7 +65,7 @@ export default function Test() {
 
             list[0].active = true;
             setQuestionList(list);
-            startTimer(120);
+            startTimer(600);
         }
     }, [chapter]);
 
@@ -174,27 +174,27 @@ export default function Test() {
         
         const endTime = new Date().getTime() + seconds * 1000;
 
+        console.log("seconds", seconds);
+
         const interval = setInterval(() => {
             const now = new Date().getTime();
             const distance = endTime - now;
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
+            const secondsLeft = Math.floor((distance % (1000 * seconds)) / 1000);
+
             if (distance < 0) {
                 clearInterval(interval);
-                setTimeSpent(seconds);
+                setTimeSpent(secondsLeft);
                 setTimer('00:00');
                 setTimerWarning(true);
-                // FinishQuiz(true);
+                FinishQuiz(true);
             } else {
-                const time = formatTimer(seconds)
-                setTimer(time); 
-                setTimeSpent(seconds);
-                updateBar(seconds);
+                updateBar(secondsLeft)
+                setTimeSpent(timeSpent => timeSpent + 1);
+                setTimer(formatTimer(secondsLeft));
             }
         }, 1000);
         
     }
-
     const updateBar = (seconds) => {
         var percentage = (seconds / 600) * 100;
         setBarPercentage(percentage);
