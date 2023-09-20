@@ -14,8 +14,8 @@ import { fadeIn, slideInLeft, slideInBottom, transition } from '../styles/framer
 
 import { formatTimer } from '../utils/functions.js';
 
-import { shuffle } from '../utils/functions.js';
-import { GetAllModules, GetAllQuestions } from '../services/api-requests';
+import { shuffle, GetModuleCode } from '../utils/functions.js';
+import { GetAllModules, GetQuestions } from '../services/api-requests';
 
 export default function Test() {
     const navigate = useNavigate();
@@ -43,11 +43,11 @@ export default function Test() {
             }
         });
 
-        GetAllQuestions().then((response) => {
+        GetQuestions(GetModuleCode(moduleCode)).then((response) => {
             var questions = response.data;
 
             if (questions && moduleCode && chapterCode) {
-                setChapter(questions.module[moduleCode].chapters[chapterCode]);
+                setChapter(questions.chapters[chapterCode]);
             }
         });
 
