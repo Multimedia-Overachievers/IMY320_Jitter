@@ -6,6 +6,8 @@ import Form from 'react-bootstrap/Form';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
 import Button from 'react-bootstrap/Button';
+import { motion } from 'framer-motion';
+import { slideInLeft, slideInRight, transition } from '../../styles/framerMotions';
 
 export default function Chapters({ module }) {
 
@@ -15,7 +17,13 @@ export default function Chapters({ module }) {
         <>
             <div className='mt-5'>
                 <div className="d-flex justify-content-between">
-                    <div className="d-flex align-items-center">
+                    <motion.div
+                        className="d-flex align-items-center"
+                        variants={slideInLeft}
+                        initial='hidden'
+                        animate='visible'
+                        transition={{ ...transition, delay: 0.2 }}
+                    >
                         <h1 className='text-primary me-5'>Chapters</h1>
                         {/* Take exam */}
                         <div
@@ -25,13 +33,15 @@ export default function Chapters({ module }) {
                         >
                             <p className='text-white fw-bold p-0 mb-1 text-decoration-none'>Take exam</p>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
 
-                {/* Chapters */}
-                {module?.chapters.map((chapter, index) => (
-                    <Chapter key={index} moduleIndex={module.index} index={index} chapter={chapter.chapter} description={chapter.description} />
-                ))}
+                <div>
+                    {/* Chapters */}
+                    {module?.chapters.map((chapter, index) => (
+                        <Chapter key={index} moduleIndex={module.index} index={index} chapter={chapter.chapter} description={chapter.description} />
+                    ))}
+                </div>
             </div>
 
             {/* Modal */}
