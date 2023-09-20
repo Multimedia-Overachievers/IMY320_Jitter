@@ -1,7 +1,9 @@
 import React from 'react';
-import { BiLogOut, BiCoffeeTogo, BiImage, BiTerminal } from 'react-icons/bi';
+import { BiCoffeeTogo, BiImage, BiTerminal } from 'react-icons/bi';
+import { motion } from 'framer-motion';
+import { slideInRight, transition } from '../../styles/framerMotions';
 
-export default function Module({ name, completion, icon, active}) {
+export default function Module({ index, name, completion, icon, active}) {
     /**
      * This function returns a FontAwesomeIcon component based on the icon name passed in
      * @param {string} iconName 
@@ -21,7 +23,14 @@ export default function Module({ name, completion, icon, active}) {
         }
 
     return (
-        <div role="button" className={`d-flex p-4 shadow rounded mb-3 align-items-center ${active && 'bg-primary'}`}>
+        <motion.div 
+            role="button" 
+            className={`d-flex p-4 shadow rounded mb-3 align-items-center ${active && 'bg-primary'}`}
+            variants={slideInRight}
+            initial='hidden'
+            animate='visible'
+            transition={{...transition, delay: 0.7 + (0.1 * index)}}
+        >
             <div className={active ? 'text-white' : 'text-primary'}>
                 {getIconComponent(icon)}
             </div>
@@ -30,6 +39,6 @@ export default function Module({ name, completion, icon, active}) {
                 <small className={`d-block ${active ? 'text-white' : 'text-secondary'}`}>Completion</small>
                 <small className={active ? 'text-white' : 'text-secondary'}>{completion}%</small>
             </div>
-        </div>
+        </motion.div>
     )
 }

@@ -13,6 +13,16 @@ const slideInRight = {
     visible: { x: 0, opacity: 1 },
 };
 
+const slideInTop = {
+    hidden: { y: -100, opacity: 0 },
+    visible: { y: 0, opacity: 1 },
+};
+
+const slideInBottom = {
+    hidden: { y: 100, opacity: 0 },
+    visible: { y: 0, opacity: 1 },
+};
+
 const fadeIn = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -22,5 +32,7 @@ export {
     slideInLeft,
     slideInRight,
     fadeIn,
+    slideInTop,
+    slideInBottom,
     transition
 };

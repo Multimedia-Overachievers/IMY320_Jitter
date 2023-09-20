@@ -1,18 +1,40 @@
-import React from 'react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { slideInBottom, fadeIn, transition } from '../../styles/framerMotions';
 
 export default function OverallStatistics({ totalHours, contentCovered }) {
     return (
         <div>
-            <h3 className='text-dark'>Statistics</h3>
+            <motion.h3 
+                className='text-dark'
+                variants={fadeIn}
+                initial='hidden'
+                animate='visible'
+                transition={{...transition, delay: 0.3}}
+            >
+                Statistics
+            </motion.h3>
             <div className="d-flex justify-content-between">
-                <div className='rounded shadow p-3 w-50 me-4'>
+                <motion.div 
+                    className='rounded shadow p-3 w-50 me-4'
+                    variants={slideInBottom}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{...transition, delay: 0.8}}
+                >
                     <p className='m-0 p-0 text-secondary mb-2'>Total hours</p>
                     <h2 className='m-0 p-0 text-primary fw-bold'>{totalHours}</h2>
-                </div>
-                <div className='rounded shadow p-3 w-50'>
+                </motion.div>
+                <motion.div 
+                    className='rounded shadow p-3 w-50'
+                    variants={slideInBottom}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{...transition, delay: 0.9}}
+                >
                     <p className='m-0 p-0 text-secondary mb-2'>Content covered</p>
                     <h2 className='m-0 p-0 text-primary fw-bold'>{contentCovered}%</h2>
-                </div>
+                </motion.div>
             </div>
         </div>
     )
