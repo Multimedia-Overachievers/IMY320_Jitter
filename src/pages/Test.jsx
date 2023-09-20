@@ -65,7 +65,7 @@ export default function Test() {
 
             list[0].active = true;
             setQuestionList(list);
-            startTimer(3);
+            startTimer(120);
         }
     }, [chapter]);
 
@@ -267,8 +267,7 @@ export default function Test() {
                                 transition={{ ...transition, delay: 0.5 }}
                             >
                                 <MdOutlineTimer className={timerWarning ? "text-danger me-2" : "text-primary me-2"} size={30} />
-
-                                {/* MAKE THIS TIME DYNAMIC */}
+                                
                                 <p className='text-dark m-0 p-0 '>{timer} left</p>
                             </motion.div>
 
