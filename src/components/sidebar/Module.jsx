@@ -2,8 +2,7 @@ import React from 'react';
 import { BiLogOut, BiCoffeeTogo, BiImage, BiTerminal } from 'react-icons/bi';
 
 export default function Module({ name, completion, icon, active}) {
-
-        /**
+    /**
      * This function returns a FontAwesomeIcon component based on the icon name passed in
      * @param {string} iconName 
      * @returns FontAwesomeIcon Component
@@ -22,7 +21,7 @@ export default function Module({ name, completion, icon, active}) {
         }
 
     return (
-        <div className={`d-flex p-4 shadow rounded mb-3 align-items-center ${active && 'bg-primary'}`}>
+        <div role="button" className={`d-flex p-4 shadow rounded mb-3 align-items-center ${active && 'bg-primary'}`}>
             <div className={active ? 'text-white' : 'text-primary'}>
                 {getIconComponent(icon)}
             </div>

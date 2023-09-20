@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function QuestionBar({ questionData, SelectEvent, CompletedEvent }) {
+export default function QuestionBar({ questionData, SelectEvent }) {
     return (
         <>
             <div className='d-flex justify-content-between w-100 mt-5'>

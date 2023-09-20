@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import ConfirmationModal from '../components/ConfirmationModal';
 
+import { formatTimer } from '../utils/functions.js';
+
 import { shuffle }  from '../utils/functions.js';
 import { GetAllModules, GetAllQuestions } from '../services/api-requests';
 
@@ -21,6 +23,11 @@ export default function Test() {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [modalShow, setModalShow] = useState(false);
     const [questionsList, setQuestionList] = useState([]);
+
+    const [timer, setTimer] = useState('');
+    const [timeSpent, setTimeSpent] = useState(0);
+    const [timerWarning, setTimerWarning] = useState(false);
+    const [barPercentage, setBarPercentage] = useState(100);
 
     const { moduleCode, chapterCode } = useParams();
     const isExam = false;
@@ -56,82 +63,130 @@ export default function Test() {
 
             list[0].active = true;
             setQuestionList(list);
+            startTimer(8);
         }
     }, [chapter]);
 
+
     const MoveToNext = () => {
         if(currentQuestion < questionsList.length - 1) {
-            questionsList[currentQuestion].active = false;
+            var newList = [...questionsList];
+            newList[currentQuestion].active = false;
             setCurrentQuestion(currentQuestion + 1);
-            questionsList[currentQuestion + 1].active = true;
-            setQuestionList(questionsList);
+            newList[currentQuestion + 1].active = true;
+            setQuestionList(newList);
         }
     }
 
     const MoveToPrev = () => {
         if(currentQuestion > 0) {
-            questionsList[currentQuestion].active = false;
+            var newList = [...questionsList];
+            newList[currentQuestion].active = false;
             setCurrentQuestion(currentQuestion - 1);
-            questionsList[currentQuestion - 1].active = true;
-            setQuestionList(questionsList);
+            newList[currentQuestion - 1].active = true;
+            setQuestionList(newList);
         }
     }
 
     const MoveToIndex = (index) => {
         if(index >= 0 && index < questionsList.length) {
-            questionsList[currentQuestion].active = false;
-            questionsList[index].active = true;
+            var newList = [...questionsList];
+            newList[currentQuestion].active = false;
+            newList[index].active = true;
             setCurrentQuestion(index);
-            setQuestionList(questionsList);
+            setQuestionList(newList);
         }
     }
 
     const SetCompleted = (questionIndex, answer) => {
         if(questionIndex >= 0 && questionIndex < questionsList.length) {
-            questionsList[questionIndex].completed = true;
-            questionsList[questionIndex].selectedAnswer = answer;
-            setQuestionList(questionsList);
+            var newList = [...questionsList];
+            newList[questionIndex].completed = true;
+            newList[questionIndex].selectedAnswer = answer;
+            setQuestionList(newList);
         }
     }
 
-
-    const FinishQuiz = () => {
+    const FinishQuiz = (force) => {
         //check that all questions are completed
-        var completed = true;
-        questionsList.forEach(element => {
-            if(!element.completed) {
-                completed = false;
-            }
-        });
+        if(!force) {
+            var completed = true;
+            questionsList.forEach(element => {
+                if(!element.completed) {
+                    completed = false;
+                }
+            });
 
-        if(completed) {
-            navigate('/result', { state: CreateTestResult() });
+            if(completed) {
+                navigate('/result', { state: CreateTestResult() });
+            }
+            else{
+                toast.error('Please complete all questions before submitting.', {
+                    style: {
+                    padding: '16px',
+                    color: '#4e5662',
+                    },
+                    iconTheme: {
+                    primary: '#e07b7b',
+                    },
+                    duration: 3000,
+                });
+            }
         }
         else{
-            toast.error('Please complete all questions before submitting.', {
-                style: {
-                  padding: '16px',
-                  color: '#4e5662',
-                },
-                iconTheme: {
-                  primary: '#e07b7b',
-                },
-                duration: 3000,
-            });
+            navigate('/result', { state: CreateTestResult() });
         }
     }
 
     const CreateTestResult = () => {
+        console.log("questionsList", questionsList);
+
         return {
             module: module.index,
             chapter: chapter.id,
             questions: questionsList.map((question) => {
+                if(question.selectedAnswer === null) question.selectedAnswer = -1;
+
                 return {
                     question: question.question.id,
                     selectedAnswer: question.selectedAnswer,
                 }
-            })
+            }),
+            time: timeSpent,
         }
+    }
+
+    const startTimer = (seconds) => {
+        var time = formatTimer(seconds);
+
+        if(timer !== '') {
+            clearInterval(timer);
+        }
+
+        setTimer(time); 
+
+        var interval = setInterval(() => {
+            var time = formatTimer(seconds);
+
+            setTimer(time);
+            updateBar(seconds);
+            setTimeSpent(timeSpent => timeSpent + 1);
+            
+            seconds--;
+            if(seconds < 60 && !timerWarning) {
+                setTimerWarning(true);  
+            }
+
+            if(seconds < 0) {
+                clearInterval(interval);
+                FinishQuiz(true);
+            }
+        }, 1000);
+    }
+
+    const updateBar = (seconds) => {
+        var percentage = (seconds / 600) * 100;
+        setBarPercentage(percentage);
     }
 
     class QuestionInstance{
@@ -144,7 +199,7 @@ export default function Test() {
             this.question = question;
             this.selectedAnswer = null;
             this.completed = false;
-            this.active =false;
+            this.active = false;
         }
     }
 
@@ -160,7 +215,6 @@ export default function Test() {
                     </div>
                 </div>
 
-
                 {/*  Leave test */}
                 <div className="btn d-flex align-items-center mt-4 pointer" onClick={() => setModalShow(true)}>
                     <BiLeftArrowAlt className="text-dark me-3" size={30} />
@@ -174,15 +228,15 @@ export default function Test() {
                             <h2 className="text-primary">{chapter?.name}</h2>
 
                             <div className='d-flex align-items-center justify-content-center'>
-                                <MdOutlineTimer className="text-primary me-2" size={30} />
+                                <MdOutlineTimer className={timerWarning ? "text-danger me-2" : "text-primary me-2"} size={30} />
 
                                 {/* MAKE THIS TIME DYNAMIC */}
-                                <p className='text-dark m-0 p-0 '>6 minutes 24 seconds left</p>
+                                <p className='text-dark m-0 p-0 '>{timer} left</p>
                             </div>
 
                             {/*  Progress bar */}
                             <div className="progress mt-3" style={{ height: '5px' }}>
-                                <div className="progress-bar bg-primary" role="progressbar" style={{ width: '25%' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <progress className={!timerWarning ? "progress-bar" : "progress-bar progress-warning"} value={barPercentage} max={100} style={{ width: '100%'}}></progress>
                             </div>
                         </div>
 
@@ -201,7 +255,7 @@ export default function Test() {
                                 (currentQuestion !== questionsList.length - 1) ? 
                                 <Button size="lg" className="text-white fw-bold" onClick={() => MoveToNext()}>Next</Button>
                                 :
-                                <Button size="lg" className="text-white fw-bold" onClick={() => FinishQuiz()}>Submit</Button>
+                                <Button size="lg" className="text-white fw-bold" onClick={() => FinishQuiz(false)}>Submit</Button>
                             }
                         </div>
 

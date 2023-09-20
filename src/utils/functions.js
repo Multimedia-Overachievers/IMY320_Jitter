@@ -1,20 +1,17 @@
-/**
- * This function takes in time in minutes and returns it in the format 1h 30m
- * @param {integer} minutes 
- * @returns 
- */
-export function formatMinutes(minutes) {
-    let hours = Math.floor(minutes / 60);
-    let remainingMinutes = minutes % 60;
 
-    return `${hours}h ${remainingMinutes}m`;
+export function formatSeconds(seconds) {
+    let hours = Math.floor(seconds / 3600);
+    let minutes = Math.floor(seconds / 60);
+
+    return `${hours}h ${minutes}m`;
 }
 
 export function formatTimer(seconds) {
+    let hours = Math.floor(seconds / 3600);
     let minutes = Math.floor(seconds / 60);
     let remainingSeconds = seconds % 60;
 
-    return `${minutes} minutes ${remainingSeconds} seconds left`;
+    return `${hours > 0 ? hours + 'h ' : ''}${minutes > 0 ? minutes + 'm ' : ''}${remainingSeconds}s`;
 }
 
 /**

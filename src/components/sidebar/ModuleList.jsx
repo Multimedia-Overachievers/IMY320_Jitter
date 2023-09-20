@@ -9,7 +9,8 @@ export default function ModuleList({ modules, setModule }) {
         modules.forEach((module, i) => {
             module.active = i === index;
         });
-
+        
+        console.log("modlue in question", modules[index]);
         setModule(modules[index]);
     }
 

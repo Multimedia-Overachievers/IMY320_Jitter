@@ -26,10 +26,18 @@ export default function Home() {
         setModule(modules.data[index]);
     }
 
+    // useEffect(() => {
+    //     if(modules){
+    //         setModule(modules.data[activeModuleIndex]);
+    //     }
+    //     console.log(activeModuleIndex);
+    // }, [module]);
+
+
     return (
         <div className="vh-100">
             <Row>
-                <Col lg={9} className='scrollable scrollable vh-100'>
+                <Col lg={9} className='scrollable vh-100'>
                     {/* Background image */}
                     <div className='bg-light position-absolute w-100 h-100 d-flex align-items-center justify-content-center' style={{zIndex: -1}}>
                         <img className='background-image' src="/images/home-background.svg" alt="" />
@@ -45,7 +53,7 @@ export default function Home() {
                             <h4 className='text-secondary'>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
                         </div>
                         {/* Statistics section */}
-                        <ModuleStatistics module={module} timeSpent={91} />
+                        <ModuleStatistics module={module} />
                         {/* Chapters section */}
                         <Chapters module={module} />
                     </div>

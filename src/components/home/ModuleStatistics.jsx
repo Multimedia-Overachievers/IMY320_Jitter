@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { formatMinutes, getAverage } from '../../utils/functions';
+import { formatSeconds, getAverage } from '../../utils/functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceLaughBeam, faFaceMeh, faFaceSurprise } from '@fortawesome/free-solid-svg-icons';
 import { getAverageColor } from '../../utils/functions';
@@ -15,7 +15,7 @@ import { GetAllQuestions } from '../../services/api-requests';
 Chart.register(CategoryScale);
 Chart.register(ChartDataLabels);
 
-export default function ModuleStatistics({ module, timeSpent }) {
+export default function ModuleStatistics({ module }) {
     const [questions, setQuestions] = useState({});
     const [completed, setCompleted] = useState(0);
 
@@ -25,7 +25,10 @@ export default function ModuleStatistics({ module, timeSpent }) {
      * @returns FontAwesomeIcon Component
      */
     const getEmotionComponent = (average) => {
-        if (average < 50) {
+        if(average === 0){
+            return <FontAwesomeIcon icon={faFaceMeh} className='text-secondary' size="5x"/>
+        } 
+        else if (average < 50) {
             return <FontAwesomeIcon icon={faFaceSurprise} className='text-danger' size="5x" />
         } else if (average < 70) {
             return <FontAwesomeIcon icon={faFaceMeh} className='text-warning' size="5x" />
@@ -35,7 +38,6 @@ export default function ModuleStatistics({ module, timeSpent }) {
     }
 
     const [chartData, setChartData] = useState(null);
-
         
     const GetChartData = (activeModule) => {
         return {
@@ -134,7 +136,7 @@ export default function ModuleStatistics({ module, timeSpent }) {
                     <Col>
                         <div className='bg-white rounded shadow m-1 p-4'>
                             <p className='text-secondary mb-4'>Time spent on module</p>
-                            <h1 className='text-primary fw-bold text-center'>{formatMinutes(timeSpent)}</h1>
+                            <h1 className='text-primary fw-bold text-center'>{formatSeconds(module?.timeSpent)}</h1>
                         </div>
                     </Col>
                 </Row>

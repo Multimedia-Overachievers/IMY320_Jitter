@@ -18,6 +18,26 @@ body {
   height: 215px;
 }
 
+.progress-bar[value]::-webkit-progress-value 
+{
+  background-color: #6299eb;
+}
+
+.progress-warning[value]::-webkit-progress-value 
+{
+  background-color: #e07b7b !important;
+}
+
+progress[value]::-webkit-progress-bar
+{
+  background-color: #ffffff;
+}
+
+.results{
+  height: 75vh;
+  overflow-y: scroll;
+}
+
 ::-webkit-scrollbar {
   width: 0.3rem;
 }

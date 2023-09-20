@@ -23,6 +23,9 @@ export const BarChart = ({ chartData }) => {
               align: "end",
               offset: -2,
               formatter: function(value) {
+                if(value === 0) {
+                  return "";
+                }
                 return value + "%";
               }
             }

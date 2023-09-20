@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Answer from '../components/test/Answer';
 
+import { UpdateChapterQuestion, AddQuizScore } from '../services/api-requests';
 import { GetAllModules, GetAllQuestions } from '../services/api-requests';
 
 export default function Results() {
@@ -13,50 +14,76 @@ export default function Results() {
     const [module, setModule] = useState(null);
     const [chapter, setChapter] = useState(null);
     const [grade, setGrade] = useState(null);
+    const [results, setResults] = useState(null);
 
-    const results = location.state;
+    var [scoreAdded, setAdded] = useState(false);
+    
     const isExam = false;
 
-    var [modules, setModules] = useState({});
-    var [questions, setQuestions] = useState({});
-    
+    var [modules, setModules] = useState(null);
+    var [questions, setQuestions] = useState(null);
 
     useEffect(() => {
-        GetAllQuestions().then((response) => {
-            setQuestions(response.data);
-        });
-
-        GetAllModules().then((response) => {
-            setModules(response.data);
-        });
+        setResults(location.state);
+        console.log(location.state);
     }, []);
-
+    
     useEffect(() => {
-        // Set the initial state once the data is loaded
-        if (questions && questions.module && questions.module.length > 0) {
-            // do this dynamically
-            setModule(modules.data[results.module]);
+        if(!modules){
+            GetAllModules().then((response) => {
+                setModules(response.data);
+            });
         }
 
-        if(questions && results) {
-            setChapter(questions.module[results.module].chapters[results.chapter]);
+        if(!questions){
+            GetAllQuestions().then((response) => {
+                setQuestions(response.data);
+            });
         }
-
-        setGrade(CalculateGrade());
     }, [results]);
 
+    useEffect(() => {
+        if(questions && modules) {
+            // Set the initial state once the data is loaded
+            if (questions && questions.module && questions.module.length > 0) {
+                // do this dynamically
+                setModule(modules?.data[results.module]);
+            }
+
+            if(questions && results) {
+                
+                setChapter(questions.module[results.module].chapters[results.chapter]);
+            }
+
+            setGrade(CalculateGrade());
+        }
+    }, [questions, modules]);
+
     const CalculateGrade = () => {
+        if(!results || !chapter) return;
+
         var total = 0;
         var correct = 0;
+        var correctAnswers = [];
 
-        results?.questions.forEach((question) => {
-            if(question.selectedAnswer === GetCorrectAnswer(chapter?.questions[question.question])) {
+        results?.questions.forEach(async (question)  => {
+            var questionInstance = chapter?.questions[question.question];
+            
+            if(question.selectedAnswer === GetCorrectAnswer(questionInstance)) {
                 correct++;
+                correctAnswers.push(question.question);
             }
             total++;
         });
 
-        return ((correct / total) * 100).toFixed(1) + "%";
+        if(correctAnswers.length > 0) UpdateChapterQuestion(results.module, results.chapter, correctAnswers);
+
+        var score = ((correct / total) * 100).toFixed(1);
+        if(!scoreAdded) {
+            AddQuizScore(results.module, results.chapter, score, results.time);
+            setAdded(true);
+        }
+        return score + "%";
     }
 
     const GetCorrectAnswer = (question) => {
@@ -81,7 +108,7 @@ export default function Results() {
                 </div>
 
                 {/* Make only this scrollable */}
-                <Container className='d-flex justify-content-center'>
+                <Container className='d-flex justify-content-center results'>
                     <div style={{ width: '43.0625rem' }}>
 
                         <div className="bg-white d-flex p-4 justify-content-between shadow rounded">
@@ -96,7 +123,7 @@ export default function Results() {
                         </div>
 
                         {/* Answers */}
-                        <Answer questions={module?.chapters[0].questions} />
+                        <Answer questions={questions?.module[results?.module]?.chapters[results?.chapter]?.questions} results={results} />
 
                         {/* Logo */}
                         <div className="d-flex justify-content-center mt-5">
