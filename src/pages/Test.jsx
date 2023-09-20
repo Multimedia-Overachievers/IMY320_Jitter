@@ -30,7 +30,7 @@ export default function Test() {
     const [timeSpent, setTimeSpent] = useState(0);
     const [timerWarning, setTimerWarning] = useState(false);
     const [barPercentage, setBarPercentage] = useState(100);
-
+    
     const { moduleCode, chapterCode } = useParams();
     const isExam = false;
 
@@ -69,7 +69,14 @@ export default function Test() {
         }
     }, [chapter]);
 
-
+    // Display model if the user tries to go back to the previous page
+    useEffect(() => {
+        window.history.pushState(null, null, window.location.pathname);
+        window.addEventListener('popstate', onBackButtonEvent);
+        return () => {
+            window.removeEventListener('popstate', onBackButtonEvent);
+        };
+    }, []);
     const MoveToNext = () => {
         if (currentQuestion < questionsList.length - 1) {
             var newList = [...questionsList];
@@ -139,6 +146,11 @@ export default function Test() {
             navigate('/result', { state: CreateTestResult() });
         }
     }
+    
+    const onBackButtonEvent = (e) => {
+        e.preventDefault();
+        setModalShow(true);
+    }
 
     const CreateTestResult = () => {
         console.log("questionsList", questionsList);
@@ -159,31 +171,28 @@ export default function Test() {
     }
 
     const startTimer = (seconds) => {
-        var time = formatTimer(seconds);
+        
+        const endTime = new Date().getTime() + seconds * 1000;
 
-        if (timer !== '') {
-            clearInterval(timer);
-        }
-
-        setTimer(time);
-
-        var interval = setInterval(() => {
-            var time = formatTimer(seconds);
-
-            setTimer(time);
-            updateBar(seconds);
-            setTimeSpent(timeSpent => timeSpent + 1);
-
-            seconds--;
-            if (seconds < 60 && !timerWarning) {
-                setTimerWarning(true);
-            }
-
-            if (seconds < 0) {
+        const interval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            if (distance < 0) {
                 clearInterval(interval);
-                FinishQuiz(true);
+                setTimeSpent(seconds);
+                setTimer('00:00');
+                setTimerWarning(true);
+                // FinishQuiz(true);
+            } else {
+                const time = formatTimer(seconds)
+                setTimer(time); 
+                setTimeSpent(seconds);
+                updateBar(seconds);
             }
         }, 1000);
+        
     }
 
     const updateBar = (seconds) => {
