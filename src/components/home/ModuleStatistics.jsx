@@ -9,6 +9,8 @@ import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { BarChart } from "./BarChart";
+import { motion } from 'framer-motion';
+import { slideInLeft, slideInRight, transition } from '../../styles/framerMotions';
 
 import { GetAllQuestions } from '../../services/api-requests';
 
@@ -112,7 +114,13 @@ export default function ModuleStatistics({ module }) {
     return (
         <Row>
             <Col lg={6}>
-                <div className='bg-white rounded shadow m-1 mb-4 p-4 h-100'>
+                <motion.div 
+                    className='bg-white rounded shadow m-1 mb-4 p-4 h-100'
+                    variants={slideInLeft}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{...transition, delay: 0.6}}
+                >
                     <div>
                         <p className='text-secondary mb-4'>Average per chapter</p>
                         <div>
@@ -123,26 +131,44 @@ export default function ModuleStatistics({ module }) {
                             }
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </Col>
             <Col lg={6}>
                 <Row >
                     <Col>
-                        <div className='bg-white rounded shadow m-1 p-4'>
+                        <motion.div 
+                            className='bg-white rounded shadow m-1 p-4'
+                            variants={slideInRight}
+                            initial='hidden'
+                            animate='visible'
+                            transition={{...transition, delay: 0.7}}
+                        >
                             <p className='text-secondary mb-4'>Completed chapters</p>
                             <h1 className='text-primary fw-bold text-center'>{completed} / {module?.chapters.length}</h1>
-                        </div>
+                        </motion.div>
                     </Col>
                     <Col>
-                        <div className='bg-white rounded shadow m-1 p-4'>
+                        <motion.div 
+                            className='bg-white rounded shadow m-1 p-4'
+                            variants={slideInRight}
+                            initial='hidden'
+                            animate='visible'
+                            transition={{...transition, delay: 0.8}}
+                        >
                             <p className='text-secondary mb-4'>Time spent on module</p>
                             <h1 className='text-primary fw-bold text-center'>{formatSeconds(module?.timeSpent)}</h1>
-                        </div>
+                        </motion.div>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <div className='d-flex justify-content-between align-items-center bg-white rounded shadow m-1 mt-4 p-4'>
+                        <motion.div 
+                            className='d-flex justify-content-between align-items-center bg-white rounded shadow m-1 mt-4 p-4'
+                            variants={slideInRight}
+                            initial='hidden'
+                            animate='visible'
+                            transition={{...transition, delay: 0.9}}
+                        >
                             <div>
                                 <p className='text-secondary mb-4'>Average score</p>
                                 <h1 className={`
@@ -155,7 +181,7 @@ export default function ModuleStatistics({ module }) {
                             <div>
                                 {getEmotionComponent(getAverage(GetAverageScore()))}
                             </div>
-                        </div>
+                        </motion.div>
                     </Col>
                 </Row>
             </Col>

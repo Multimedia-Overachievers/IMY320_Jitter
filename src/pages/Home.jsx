@@ -3,6 +3,8 @@ import { Row, Col } from 'react-bootstrap';
 import SideBar from '../components/sidebar/SideBar';
 import ModuleStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
+import { motion } from 'framer-motion';
+import { slideInLeft, transition } from '../styles/framerMotions';
 
 import { GetAllModules } from '../services/api-requests';
 
@@ -46,8 +48,24 @@ export default function Home() {
                         {/* Home page header */}
                         <div className='d-flex justify-content-between'>
                             <div>
-                                <h4 className='text-secondary'>Dashboard</h4>
-                                <h1 className='text-primary fw-bold display-4'>{module?.name}</h1>
+                                <motion.h4 
+                                    className='text-secondary'
+                                    variants={slideInLeft}
+                                    initial='hidden'
+                                    animate='visible'
+                                    transition={{...transition, delay: 0.2}}
+                                >
+                                    Dashboard
+                                </motion.h4>
+                                <motion.h1 
+                                    className='text-primary fw-bold display-4'
+                                    variants={slideInLeft}
+                                    initial='hidden'
+                                    animate='visible'
+                                    transition={{...transition, delay: 0.5}}
+                                >
+                                    {module?.name}
+                                </motion.h1>
                             </div>
                             {/*  Calculate and display the current date */}
                             <h4 className='text-secondary'>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
