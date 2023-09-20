@@ -9,10 +9,12 @@ import { toast, Toaster } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import ConfirmationModal from '../components/ConfirmationModal';
+import { motion } from 'framer-motion';
+import { fadeIn, slideInLeft, slideInBottom, transition } from '../styles/framerMotions';
 
 import { formatTimer } from '../utils/functions.js';
 
-import { shuffle }  from '../utils/functions.js';
+import { shuffle } from '../utils/functions.js';
 import { GetAllModules, GetAllQuestions } from '../services/api-requests';
 
 export default function Test() {
@@ -35,24 +37,24 @@ export default function Test() {
     useEffect(() => {
         GetAllModules().then((response) => {
             var modules = response.data;
-            
-            if(modules && moduleCode) {
+
+            if (modules && moduleCode) {
                 setModule(modules.data[moduleCode]);
             }
         });
-        
+
         GetAllQuestions().then((response) => {
             var questions = response.data;
 
-            if(questions && moduleCode && chapterCode) {
+            if (questions && moduleCode && chapterCode) {
                 setChapter(questions.module[moduleCode].chapters[chapterCode]);
             }
         });
-    
+
     }, [moduleCode, chapterCode]);
 
     useEffect(() => {
-        if(chapter?.questions) {
+        if (chapter?.questions) {
             var question = shuffle(chapter?.questions, 6);
             var list = [];
 
@@ -69,7 +71,7 @@ export default function Test() {
 
 
     const MoveToNext = () => {
-        if(currentQuestion < questionsList.length - 1) {
+        if (currentQuestion < questionsList.length - 1) {
             var newList = [...questionsList];
             newList[currentQuestion].active = false;
             setCurrentQuestion(currentQuestion + 1);
@@ -79,7 +81,7 @@ export default function Test() {
     }
 
     const MoveToPrev = () => {
-        if(currentQuestion > 0) {
+        if (currentQuestion > 0) {
             var newList = [...questionsList];
             newList[currentQuestion].active = false;
             setCurrentQuestion(currentQuestion - 1);
@@ -89,7 +91,7 @@ export default function Test() {
     }
 
     const MoveToIndex = (index) => {
-        if(index >= 0 && index < questionsList.length) {
+        if (index >= 0 && index < questionsList.length) {
             var newList = [...questionsList];
             newList[currentQuestion].active = false;
             newList[index].active = true;
@@ -99,7 +101,7 @@ export default function Test() {
     }
 
     const SetCompleted = (questionIndex, answer) => {
-        if(questionIndex >= 0 && questionIndex < questionsList.length) {
+        if (questionIndex >= 0 && questionIndex < questionsList.length) {
             var newList = [...questionsList];
             newList[questionIndex].completed = true;
             newList[questionIndex].selectedAnswer = answer;
@@ -109,31 +111,31 @@ export default function Test() {
 
     const FinishQuiz = (force) => {
         //check that all questions are completed
-        if(!force) {
+        if (!force) {
             var completed = true;
             questionsList.forEach(element => {
-                if(!element.completed) {
+                if (!element.completed) {
                     completed = false;
                 }
             });
 
-            if(completed) {
+            if (completed) {
                 navigate('/result', { state: CreateTestResult() });
             }
-            else{
+            else {
                 toast.error('Please complete all questions before submitting.', {
                     style: {
-                    padding: '16px',
-                    color: '#4e5662',
+                        padding: '16px',
+                        color: '#4e5662',
                     },
                     iconTheme: {
-                    primary: '#e07b7b',
+                        primary: '#e07b7b',
                     },
                     duration: 3000,
                 });
             }
         }
-        else{
+        else {
             navigate('/result', { state: CreateTestResult() });
         }
     }
@@ -145,7 +147,7 @@ export default function Test() {
             module: module.index,
             chapter: chapter.id,
             questions: questionsList.map((question) => {
-                if(question.selectedAnswer === null) question.selectedAnswer = -1;
+                if (question.selectedAnswer === null) question.selectedAnswer = -1;
 
                 return {
                     question: question.question.id,
@@ -159,11 +161,11 @@ export default function Test() {
     const startTimer = (seconds) => {
         var time = formatTimer(seconds);
 
-        if(timer !== '') {
+        if (timer !== '') {
             clearInterval(timer);
         }
 
-        setTimer(time); 
+        setTimer(time);
 
         var interval = setInterval(() => {
             var time = formatTimer(seconds);
@@ -171,13 +173,13 @@ export default function Test() {
             setTimer(time);
             updateBar(seconds);
             setTimeSpent(timeSpent => timeSpent + 1);
-            
+
             seconds--;
-            if(seconds < 60 && !timerWarning) {
-                setTimerWarning(true);  
+            if (seconds < 60 && !timerWarning) {
+                setTimerWarning(true);
             }
 
-            if(seconds < 0) {
+            if (seconds < 0) {
                 clearInterval(interval);
                 FinishQuiz(true);
             }
@@ -189,7 +191,7 @@ export default function Test() {
         setBarPercentage(percentage);
     }
 
-    class QuestionInstance{
+    class QuestionInstance {
         question;
         selectedAnswer;
         completed;
@@ -205,67 +207,139 @@ export default function Test() {
 
     return (
         <div className="bg-light vh-100">
-            <div><Toaster/></div>
+            <div><Toaster /></div>
             <div className="p-5">
                 {/* Test header */}
                 <div className='d-flex justify-content-between'>
                     <div>
-                        <h4 className='text-secondary'>{isExam ? "Exam" : "Practice Test"}</h4>
-                        <h1 className='text-primary fw-bold display-4'>{module?.name}</h1>
+                        <motion.h4
+                            className='text-secondary'
+                            variants={slideInLeft}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{ ...transition, delay: 0.2 }}
+                        >
+                            {isExam ? "Exam" : "Practice Test"}
+                        </motion.h4>
+                        <motion.h1
+                            className='text-primary fw-bold display-4'
+                            variants={slideInLeft}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{ ...transition, delay: 0.5 }}
+                        >
+                            {module?.name}
+                        </motion.h1>
                     </div>
                 </div>
 
                 {/*  Leave test */}
-                <div className="btn d-flex align-items-center mt-4 pointer" onClick={() => setModalShow(true)}>
+                <motion.div
+                    className="btn d-flex align-items-center mt-4 pointer" onClick={() => setModalShow(true)}
+                    variants={slideInLeft}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{...transition, delay: 0.7 }}
+                >
                     <BiLeftArrowAlt className="text-dark me-3" size={30} />
                     <h4 className='text-dark m-0 p-0 fw-bold'>Leave Test</h4>
-                </div>
+                </motion.div>
 
                 <Container className='d-flex justify-content-center'>
                     <div style={{ width: '55rem' }}>
                         {/* Test heading with time bar */}
                         <div className="d-flex justify-content-center flex-column text-center">
-                            <h2 className="text-primary">{chapter?.name}</h2>
+                            <motion.h2
+                                className="text-primary"
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{ ...transition, delay: 0.3 }}
+                            >
+                                {chapter?.name}
+                            </motion.h2>
 
-                            <div className='d-flex align-items-center justify-content-center'>
+                            <motion.div
+                                className='d-flex align-items-center justify-content-center'
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{ ...transition, delay: 0.5 }}
+                            >
                                 <MdOutlineTimer className={timerWarning ? "text-danger me-2" : "text-primary me-2"} size={30} />
 
                                 {/* MAKE THIS TIME DYNAMIC */}
                                 <p className='text-dark m-0 p-0 '>{timer} left</p>
-                            </div>
+                            </motion.div>
 
                             {/*  Progress bar */}
-                            <div className="progress mt-3" style={{ height: '5px' }}>
-                                <progress className={!timerWarning ? "progress-bar" : "progress-bar progress-warning"} value={barPercentage} max={100} style={{ width: '100%'}}></progress>
-                            </div>
+                            <motion.div
+                                className="progress mt-3" style={{ height: '5px' }}
+                                variants={fadeIn}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{ ...transition, delay: 0.7 }}
+                            >
+                                <progress className={!timerWarning ? "progress-bar" : "progress-bar progress-warning"} value={barPercentage} max={100} style={{ width: '100%' }}></progress>
+                            </motion.div>
                         </div>
 
                         {/* Question */}
                         {questionsList && questionsList.length > 0 && questionsList[currentQuestion]
-                            ? <Question questionIndex={currentQuestion} SetCompleteCallback={SetCompleted} questionInstance={questionsList[currentQuestion]}/>
+                            ? <Question questionIndex={currentQuestion} SetCompleteCallback={SetCompleted} questionInstance={questionsList[currentQuestion]} />
                             : <p>No Questions found for chapter</p>
                         }
-                        
+
                         {/* Next question button */}
                         <div className="d-flex justify-content-between align-items-center mt-4">
-                            <p className='text-primary m-0 p-0 fs-5 pointer' onClick={() => MoveToPrev()}>previous</p>
+                            <motion.p
+                                className='text-primary m-0 p-0 fs-5 pointer'
+                                onClick={() => MoveToPrev()}
+                                variants={slideInBottom}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{ ...transition, delay: 1 }}
+                            >
+                                previous
+                            </motion.p>
                             {/* current question out of total */}
-                            <p className="text-secondary fw-bold m-0 p-0">{currentQuestion+1} / 6</p>
-                            {
-                                (currentQuestion !== questionsList.length - 1) ? 
-                                <Button size="lg" className="text-white fw-bold" onClick={() => MoveToNext()}>Next</Button>
-                                :
-                                <Button size="lg" className="text-white fw-bold" onClick={() => FinishQuiz(false)}>Submit</Button>
-                            }
+                            <motion.p
+                                className="text-secondary fw-bold m-0 p-0"
+                                variants={slideInBottom}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{ ...transition, delay: 1.3 }}
+                            >
+                                {currentQuestion + 1} / 6
+                            </motion.p>
+                            <motion.div
+                                variants={slideInBottom}
+                                initial="hidden"
+                                animate="visible"
+                                transition={{ ...transition, delay: 1.5 }}
+                            >
+                                {
+                                    (currentQuestion !== questionsList.length - 1) ?
+                                        <Button size="lg" className="text-white fw-bold" onClick={() => MoveToNext()}>Next</Button>
+                                        :
+                                        <Button size="lg" className="text-white fw-bold" onClick={() => FinishQuiz(false)}>Submit</Button>
+                                }
+                            </motion.div>
                         </div>
 
                         {/* Question bar */}
                         <QuestionBar questionData={questionsList} SelectEvent={MoveToIndex} />
 
                         {/* Logo */}
-                        <div className="d-flex justify-content-center mt-5">
+                        <motion.div 
+                            className="d-flex justify-content-center mt-5"
+                            variants={fadeIn}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{ ...transition, delay: 1 }}
+                        >
                             <img src="/images/logo.svg" alt="logo" style={{ width: '4rem' }} />
-                        </div>
+                        </motion.div>
                     </div>
                 </Container>
             </div>
