@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import { motion } from 'framer-motion';
+import { slideInLeft, transition } from '../../styles/framerMotions';
 
 export default function Answer({ questions, results }) {
     const [questionsList, setQuestions] = useState(null);
@@ -35,7 +37,14 @@ export default function Answer({ questions, results }) {
 
     return (
         questionsList?.map((questionInstance, index) => (
-            <div key={index} className='p-4 rounded shadow mt-3 bg-white'>
+            <motion.div 
+                key={index} 
+                className='p-4 rounded shadow mt-3 bg-white'
+                variants={slideInLeft}
+                initial='hidden'
+                animate='visible'
+                transition={{...transition, delay: 0.5 + index * 0.1}}
+            >
                 <h3 className='text-dark'>Q{index+1}. {questionInstance.question.question}</h3>
                 <hr className='my-4 bg-secondary' />
 
@@ -83,7 +92,7 @@ export default function Answer({ questions, results }) {
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
-            </div>
+            </motion.div>
         ))
     )
 }

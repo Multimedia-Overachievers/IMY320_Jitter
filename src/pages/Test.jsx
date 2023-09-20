@@ -65,7 +65,7 @@ export default function Test() {
 
             list[0].active = true;
             setQuestionList(list);
-            startTimer(800);
+            startTimer(3);
         }
     }, [chapter]);
 

@@ -3,6 +3,8 @@ import { BiLeftArrowAlt } from 'react-icons/bi';
 import { Container } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Answer from '../components/test/Answer';
+import { motion } from 'framer-motion';
+import { slideInLeft, fadeIn, transition } from '../styles/framerMotions';
 
 import { UpdateChapterQuestion, AddQuizScore } from '../services/api-requests';
 import { GetAllModules, GetAllQuestions } from '../services/api-requests';
@@ -96,22 +98,50 @@ export default function Results() {
                 {/* Test header */}
                 <div className='d-flex justify-content-between'>
                     <div>
-                        <h4 className='text-secondary'>{isExam ? "Exam" : "Practice Test"}</h4>
-                        <h1 className='text-primary fw-bold display-4'>{module?.name}</h1>
+                        <motion.h4 
+                            className='text-secondary'
+                            variants={slideInLeft}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{...transition, delay: 0.2}}
+                        >
+                            {isExam ? "Exam" : "Practice Test"}
+                        </motion.h4>
+                        <motion.h1 
+                            className='text-primary fw-bold display-4'
+                            variants={slideInLeft}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{...transition, delay: 0.5}}
+                        >
+                            {module?.name}
+                        </motion.h1>
                     </div>
                 </div>
 
                 {/*  Leave test */}
-                <div className="btn d-flex align-items-center mt-4">
+                <motion.div 
+                    className="btn d-flex align-items-center mt-4"
+                    variants={slideInLeft}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{...transition, delay: 0.7}}
+                >
                     <BiLeftArrowAlt className="text-dark me-3" size={30} />
                     <h4 className='text-dark m-0 p-0 fw-bold' onClick={() => navigate("/")}>Return home</h4>
-                </div>
+                </motion.div>
 
                 {/* Make only this scrollable */}
                 <Container className='d-flex justify-content-center results'>
                     <div style={{ width: '43.0625rem' }}>
 
-                        <div className="bg-white d-flex p-4 justify-content-between shadow rounded">
+                        <motion.div 
+                            className="bg-white d-flex p-4 justify-content-between shadow rounded"
+                            variants={slideInLeft}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{...transition, delay: 0.6}}
+                        >
                             <div>
                                 <h2 className='text-dark'>Results</h2>
                                 <h2 className='text-primary'>{chapter?.name}</h2>
@@ -120,15 +150,21 @@ export default function Results() {
                                 <h2 className="text-dark">Grade</h2>
                                 <h2 className="text-primary fw-bold">{grade}</h2>
                             </div>
-                        </div>
+                        </motion.div>
 
                         {/* Answers */}
                         <Answer questions={questions?.module[results?.module]?.chapters[results?.chapter]?.questions} results={results} />
 
                         {/* Logo */}
-                        <div className="d-flex justify-content-center mt-5">
+                        <motion.div 
+                            className="d-flex justify-content-center mt-5"
+                            variants={fadeIn}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{...transition, delay: 3}}
+                        >
                             <img src="/images/logo.svg" alt="logo" style={{ width: '4rem' }} />
-                        </div>
+                        </motion.div>
                     </div>
                 </Container>
             </div>
