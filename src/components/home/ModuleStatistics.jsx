@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Spinner } from 'react-bootstrap';
 import { formatSeconds, getAverage } from '../../utils/functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFaceLaughBeam, faFaceMeh, faFaceSurprise } from '@fortawesome/free-solid-svg-icons';
@@ -40,27 +40,27 @@ export default function ModuleStatistics({ module }) {
     }
 
     const [chartData, setChartData] = useState(null);
-        
+
     const GetChartData = (activeModule) => {
         return {
             labels: activeModule?.chapters.map((_, index) => `Ch${index + 1}`),
             datasets: [
-                    {
-                        label: 'Average Score',
-                        data: activeModule?.chapters.map(chapter => getAverage(chapter.scores)),
-                        fill: false,
-                        backgroundColor: '#6299EB',
-                        borderColor: '#6299EB',
-                        borderRadius: 10,
-                        borderSkipped: false,
-                    
-                    },
-                ],
-            };
+                {
+                    label: 'Average Score',
+                    data: activeModule?.chapters.map(chapter => getAverage(chapter.scores)),
+                    fill: false,
+                    backgroundColor: '#6299EB',
+                    borderColor: '#6299EB',
+                    borderRadius: 10,
+                    borderSkipped: false,
+
+                },
+            ],
+        };
     }
 
     useEffect(() => {
-        if(module) setChartData(GetChartData(module));
+        if (module) setChartData(GetChartData(module));
     }, [module, questions]);
 
     useEffect(() => {
@@ -70,16 +70,16 @@ export default function ModuleStatistics({ module }) {
     }, []);
 
     useEffect(() => {
-        if(questions && module) {
+        if (questions && module) {
             setCompleted(GetCompletedChapters());
         }
     }, [questions, module]);
-    
+
     const GetProgress = (chapter) => {
         var progress = 0;
 
         chapter.questions.forEach(question => {
-            if(question?.finished) {
+            if (question?.finished) {
                 progress++;
             }
         });
@@ -88,15 +88,15 @@ export default function ModuleStatistics({ module }) {
 
     const GetCompletedChapters = () => {
         var completed = 0;
-        
-        if(!questions.module) {
+
+        if (!questions.module) {
             console.log('THERE WERE NO QUESTIONS');
             return completed;
         }
 
         var moduleQuestions = questions?.module[module.index];
         moduleQuestions?.chapters.forEach(chapter => {
-            if(GetProgress(chapter) === 100) {
+            if (GetProgress(chapter) === 100) {
                 completed++;
             }
         });
@@ -112,27 +112,29 @@ export default function ModuleStatistics({ module }) {
                 scores.push(score);
             });
         });
-        
+
         return scores;
     }
 
     return (
         <Row>
             <Col lg={6}>
-                <motion.div 
+                <motion.div
                     className='bg-white rounded shadow m-1 mb-4 p-4 h-100'
                     variants={slideInLeft}
                     initial='hidden'
                     animate='visible'
-                    transition={{...transition, delay: 0.6}}
+                    transition={{ ...transition, delay: 0.6 }}
                 >
-                    <div>
+                    <div className='h-100'>
                         <p className='text-secondary mb-4'>Average per chapter</p>
-                        <div>
+                        <div className='h-100'>
                             {
-                                !chartData ? 
-                                <p>Loading...</p> 
-                                : <BarChart chartData={chartData} />
+                                !chartData ?
+                                    <span className='d-flex justify-content-center align-items-center h-75'>
+                                        <Spinner animation="border" variant="primary" />
+                                    </span>
+                                    : <BarChart chartData={chartData} />
                             }
                         </div>
                     </div>
@@ -141,47 +143,68 @@ export default function ModuleStatistics({ module }) {
             <Col lg={6}>
                 <Row >
                     <Col>
-                        <motion.div 
+                        <motion.div
                             className='bg-white rounded shadow m-1 p-4'
                             variants={slideInRight}
                             initial='hidden'
                             animate='visible'
-                            transition={{...transition, delay: 0.7}}
+                            transition={{ ...transition, delay: 0.7 }}
                         >
                             <p className='text-secondary mb-4'>Completed chapters</p>
-                            <h1 className='text-primary fw-bold text-center'>{completed} / {module?.chapters.length}</h1>
+                            {
+                                !module ?
+                                    <span className='d-flex justify-content-center align-items-center h-100 mb-4'>
+                                        <Spinner animation="border" variant="primary" />
+                                    </span>
+                                    :
+                                    <h1 className='text-primary fw-bold text-center'>{completed} / {module?.chapters.length}</h1>
+                            }
                         </motion.div>
                     </Col>
                     <Col>
-                        <motion.div 
+                        <motion.div
                             className='bg-white rounded shadow m-1 p-4'
                             variants={slideInRight}
                             initial='hidden'
                             animate='visible'
-                            transition={{...transition, delay: 0.8}}
+                            transition={{ ...transition, delay: 0.8 }}
                         >
                             <p className='text-secondary mb-4'>Time spent on module</p>
-                            <h1 className='text-primary fw-bold text-center'>{formatSeconds(module?.timeSpent)}</h1>
+                            {
+                                !module ?
+                                    <span className='d-flex justify-content-center align-items-center h-100 mb-4'>
+                                        <Spinner animation="border" variant="primary" />
+                                    </span>
+                                    :
+                                    <h1 className='text-primary fw-bold text-center'>{formatSeconds(module?.timeSpent)}</h1>
+                            }
                         </motion.div>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <motion.div 
+                        <motion.div
                             className='d-flex justify-content-between align-items-center bg-white rounded shadow m-1 mt-4 p-4'
                             variants={slideInRight}
                             initial='hidden'
                             animate='visible'
-                            transition={{...transition, delay: 0.9}}
+                            transition={{ ...transition, delay: 0.9 }}
                         >
                             <div>
                                 <p className='text-secondary mb-4'>Average score</p>
-                                <h1 className={`
+                                {
+                                    !module ?
+                                        <span className='d-flex justify-content-center align-items-center h-100 mb-4'>
+                                            <Spinner animation="border" variant="primary" />
+                                        </span>
+                                        :
+                                        <h1 className={`
                                     text-${getAverageColor(getAverage(GetAverageScore()))} 
                                     fw-bold
                                     `}>
-                                        {getAverage(GetAverageScore())}%
-                                </h1>
+                                            {getAverage(GetAverageScore())}%
+                                        </h1>
+                                }
                             </div>
                             <div>
                                 {getEmotionComponent(getAverage(GetAverageScore()))}
