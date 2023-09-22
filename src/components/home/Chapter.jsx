@@ -65,7 +65,7 @@ export default function Chapter({ moduleIndex, index, chapter, description }) {
                             </Col>
                             <Col xs={3} className='d-flex justify-content-end'>
                                 {/* Take test */}
-                                <Link to={`test/${moduleIndex}/${index}`} state={{duration: 600}} className='text-white fw-bold p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Take quiz</Link>
+                                <Link to={`test/${moduleIndex}/${index}`} state={{duration: 600, exam: false}} className='text-white fw-bold p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Take quiz</Link>
                             </Col>
                         </Row>
                     </Accordion.Header>
