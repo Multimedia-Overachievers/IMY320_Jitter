@@ -4,6 +4,7 @@ import SideBar from '../components/sidebar/SideBar';
 import ModuleStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
 import { motion } from 'framer-motion';
+
 import { slideInRight, slideInLeft, transition } from '../styles/framerMotions';
 
 import { GetAllModules, SetActiveModule, GetActiveModule } from '../services/api-requests';

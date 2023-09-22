@@ -9,14 +9,29 @@ import { MdOutlineTimer } from 'react-icons/md';
 import { PiWarningFill } from 'react-icons/pi';
 import { Button, Spinner } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+import { toast, Toaster } from 'react-hot-toast';
 import { slideInLeft, transition } from '../../styles/framerMotions';
 
 export default function Chapters({ module }) {
     const [modalShow, setModalShow] = useState(false);
 
+    const ShowModuleError = () => {
+        toast.error('Please select at least one chapter', {
+            style: {
+                padding: '16px',
+                color: '#4e5662',
+            },
+            iconTheme: {
+                primary: '#e07b7b',
+            },
+            duration: 3000,
+        });
+    }
+
     return (
         <>
             <div className='mt-5 h-100'>
+                <div><Toaster/></div>
                 <div className="d-flex justify-content-between">
                     <motion.div
                         className="d-flex align-items-center"
@@ -58,6 +73,10 @@ export default function Chapters({ module }) {
                     setModalShow(false);
                 }}
                 chapters={module?.chapters}
+                moduleindex={module?.index}
+                errorCallback={() => {
+                    ShowModuleError()
+                }}
             />
         </>
     )
@@ -68,33 +87,35 @@ function ExamChaptersModal(props) {
 
     const [chapters, setChapters] = useState([]);
     const [timeLimit, setTimeLimit] = useState(false);
-    const [selectedAnswers, setSelectedAnswers] = useState([]);
 
     const startExam = () => {
-        navigate('/result', {
-            state: {
-                duration: timeLimit ? chapters.length * 900 : -1,
-                exam: true,
-                chapters: chapters
-            }
-        });
+        if(chapters.length === 0) {
+            props.errorCallback();
+            return;
+        }
+
+        navigate('/test/'+props.moduleindex+'/5', { state: {
+            duration: timeLimit ? chapters.length * 900 : -1,
+            exam: true,
+            chapters: chapters
+        }});
 
         props.onHide();
     }
 
     const ToggleChapter = (chapter, index) => {
-        const updatedSelectedAnswers = [...selectedAnswers];
-        const isSelected = updatedSelectedAnswers.includes(index);
+        var tempChapters = [...chapters];
+        const isSelected = tempChapters.includes(index);
 
         if (isSelected) {
             // If already selected, remove it
-            updatedSelectedAnswers.splice(updatedSelectedAnswers.indexOf(index), 1);
+            tempChapters.splice(tempChapters.indexOf(index), 1);
         } else {
             // If not selected, add it
-            updatedSelectedAnswers.push(index);
+            tempChapters.push(index);
         }
 
-        setSelectedAnswers(updatedSelectedAnswers);
+        setChapters(tempChapters);
     }
 
     //<Link to={`test/${moduleIndex}/${index}`} state={{duration: 600}} className='text-white fw-bold p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Take quiz</Link>
@@ -119,13 +140,13 @@ function ExamChaptersModal(props) {
                             props.chapters?.map((chapter, index) => (
                                 <div
                                     key={index}
-                                    className={`shadow p-3 bg-${selectedAnswers.includes(index) ? 'primary' : 'white'} text-${selectedAnswers.includes(index) ? 'white' : 'dark'} fs-2 my-4 rounded`}
+                                    className={`shadow p-3 bg-${chapters.includes(index) ? 'primary' : 'white'} text-${chapters.includes(index) ? 'white' : 'dark'} fs-2 my-4 rounded`}
                                     onClick={() => ToggleChapter(chapter, index)}
                                 >
                                     <Form.Check
                                         type="checkbox"
                                         label={chapter.chapter}
-                                        checked={selectedAnswers.includes(index)}
+                                        checked={chapters.includes(index)}
                                         onChange={() => ToggleChapter(chapter, index)}
                                     />
                                 </div>
