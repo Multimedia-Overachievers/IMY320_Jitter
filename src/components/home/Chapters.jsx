@@ -16,7 +16,7 @@ export default function Chapters({ module }) {
     const [modalShow, setModalShow] = useState(false);
 
     const ShowModuleError = () => {
-        toast.error('Please select at least one module', {
+        toast.error('Please select at least one chapter', {
             style: {
                 padding: '16px',
                 color: '#4e5662',
