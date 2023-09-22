@@ -351,7 +351,7 @@ export default function Test() {
                 title="Leave Test"
                 body="Are you sure you want to leave the test? Your progress will be lost"
                 confirmText="Leave"
-                confirmAction={() => navigate(-1)}
+                confirmaction={() => navigate(-1)}
             />
         </div>
     )

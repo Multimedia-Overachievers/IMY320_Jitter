@@ -18,7 +18,7 @@ export default function ConfirmationModal(props) {
                         <Button variant="outline" onClick={props.onHide}>
                             Cancel
                         </Button>
-                        <Button variant="danger" className='text-white' onClick={props.confirmAction}>{props.confirmText}</Button>
+                        <Button variant="danger" className='text-white' onClick={props.confirmaction}>{props.confirmText}</Button>
                     </div>
                 </Modal.Body>
             </Modal>
