@@ -4,7 +4,7 @@ import SideBar from '../components/sidebar/SideBar';
 import ModuleStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
 import { motion } from 'framer-motion';
-import { slideInLeft, transition } from '../styles/framerMotions';
+import { slideInRight, slideInLeft, transition } from '../styles/framerMotions';
 
 import { GetAllModules } from '../services/api-requests';
 
@@ -68,7 +68,15 @@ export default function Home() {
                                 </motion.h1>
                             </div>
                             {/*  Calculate and display the current date */}
-                            <h4 className='text-secondary'>{new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}</h4>
+                            <motion.h4 
+                                className='text-secondary'
+                                variants={slideInRight}
+                                initial='hidden'
+                                animate='visible'
+                                transition={{...transition, delay: 0.5}}
+                            >
+                                {new Date().toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' })}
+                            </motion.h4>
                         </div>
                         {/* Statistics section */}
                         <ModuleStatistics module={module} />
