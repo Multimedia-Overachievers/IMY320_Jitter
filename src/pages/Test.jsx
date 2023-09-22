@@ -32,6 +32,8 @@ export default function Test() {
     const [timer, setTimer] = useState(null);
 
     const [testDuration, setDuration] = useState(999);
+    const [amountOfQuestions, setAmountOfQuestions] = useState(0);
+
     const [timeSpent, setTimeSpent] = useState(0);
     const [timerWarning, setTimerWarning] = useState(false);
     const [barPercentage, setBarPercentage] = useState(100);
@@ -49,19 +51,33 @@ export default function Test() {
         });
 
         if(parseInt(chapterCode) === 5){
+            setAmountOfQuestions(location.state.chapters.length * 6);
             setIsExam(true);
-            console.log(location.state);
-            // GetQuestions(GetModuleCode(moduleCode)).then((response) => {
-            //     var questions = response.data;
-    
-            //     if (questions && moduleCode && chapterCode) {
-            //         setChapter(questions.chapters[chapterCode]);
-            //     }
-            // });
+            
+            GetQuestions(GetModuleCode(moduleCode)).then((response) => {
+                var allChapters = response.data.chapters;
 
-            setChapter(null);
+                var chapterList = [];
+                location.state.chapters.forEach(chapterIndex => {
+                    chapterList.push(allChapters[chapterIndex]);
+                });
+
+                var mergedChapter = {
+                    id: 5,
+                    name: "Exam",
+                    questions: []
+                };
+
+                chapterList.forEach(chapter => {
+                    mergedChapter.questions = mergedChapter.questions.concat(chapter.questions);
+                });
+
+                console.log(mergedChapter);
+                setChapter(mergedChapter);
+            });
         }
         else{
+            setAmountOfQuestions(6);
             setIsExam(false);
             GetQuestions(GetModuleCode(moduleCode)).then((response) => {
                 var questions = response.data;
@@ -75,7 +91,7 @@ export default function Test() {
 
     useEffect(() => {
         if (chapter?.questions) {
-            var question = shuffle(chapter?.questions, 6);
+            var question = shuffle(chapter?.questions, amountOfQuestions);
             var list = [];
 
             question.forEach(element => {
@@ -87,13 +103,11 @@ export default function Test() {
             setQuestionList(list);
 
             if(location.state?.duration !== -1){
-                console.log("Timed");
                 setTimed(true);
                 var interval = startTimer(testDuration);
                 return () => clearInterval(interval);
             }
             else{
-                console.log("Not timed");
                 setTimed(false);
             }
         }
@@ -307,7 +321,6 @@ export default function Test() {
                                 {chapter?.name}
                             </motion.h2>
 
-
                             {
                                 isTimed ?
                                 <div>
@@ -365,7 +378,7 @@ export default function Test() {
                                 animate="visible"
                                 transition={{ ...transition, delay: 1.3 }}
                             >
-                                {currentQuestion + 1} / 6
+                                {currentQuestion + 1} / {amountOfQuestions}
                             </motion.p>
                             <motion.div
                                 variants={slideInBottom}
