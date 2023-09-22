@@ -102,8 +102,9 @@ export default function Results() {
         });
 
         var score = ((correct / total) * 100).toFixed(1);
-        console.log(isExam);
+
         if (!hasUpdated && !isExam) {
+            console.log("updating");
             AddQuizScore(results.module, results.chapter, score, results.time);
             if (correctAnswers.length > 0 ) {
                 UpdateChapterQuestion(results.module, results.chapter, correctAnswers);
@@ -185,7 +186,6 @@ export default function Results() {
                         </motion.div>
 
                         {/* Answers */}
-                        {console.log(chapter)}
                         <Answer questions={chapter?.questions} results={results} />
 
                         {/* Logo */}

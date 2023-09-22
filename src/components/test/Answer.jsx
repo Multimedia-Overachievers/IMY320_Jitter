@@ -13,8 +13,7 @@ export default function Answer({ questions, results }) {
         chapterList.forEach(chapter => {
             chapter?.questions.forEach(resultQuestion => {
                 questions?.forEach(question => {
-                    console.log(resultQuestion);
-                    console.log(question);
+
                     if (resultQuestion.question === question.id && parseInt(resultQuestion.chapter) === parseInt(question.chapter)) {
                         tempList.push({
                             question: question,
@@ -27,7 +26,6 @@ export default function Answer({ questions, results }) {
             });
         });
 
-        console.log(tempList);
 
         setQuestions(tempList);
     }, [questions]);
@@ -35,8 +33,7 @@ export default function Answer({ questions, results }) {
     const GetChapters = () => {
         var chapters = [{questions: []}, {questions: []}, {questions: []}, {questions: []}];
 
-        results?.questions.forEach(question => {
-            console.log(question);
+        results?.questions.forEach(question => {        
             chapters[question.chapter].questions.push(question);
         });
 
