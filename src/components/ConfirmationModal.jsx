@@ -1,8 +1,10 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function ConfirmationModal(props) {
+    const navigate = useNavigate();
 
     return (
         <>
@@ -18,7 +20,7 @@ export default function ConfirmationModal(props) {
                         <Button variant="outline" onClick={props.onHide}>
                             Cancel
                         </Button>
-                        <Button variant="danger" className='text-white' onClick={props.confirmaction}>{props.confirmText}</Button>
+                        <Button variant="danger" className='text-white' onClick={() => navigate("/")}>{props.confirmtext}</Button>
                     </div>
                 </Modal.Body>
             </Modal>

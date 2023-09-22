@@ -289,7 +289,7 @@ export default function Test() {
                                 animate="visible"
                                 transition={{ ...transition, delay: 0.7 }}
                             >
-                                <progress className={!timerWarning ? "progress-bar" : "progress-bar progress-warning"} value={barPercentage} max={100} style={{ width: '100%' }}></progress>
+                                <progress className={!timerWarning ? "progress-bar primary" : "progress-bar progress-warning"} value={barPercentage} max={100} style={{ width: '100%' }}></progress>
                             </motion.div>
                         </div>
 
@@ -359,8 +359,7 @@ export default function Test() {
                 onHide={() => setModalShow(false)}
                 title="Leave Test"
                 body="Are you sure you want to leave the test? Your progress will be lost"
-                confirmText="Leave"
-                confirmaction={() => navigate(-1)}
+                confirmtext="Leave"
             />
         </div>
     )
