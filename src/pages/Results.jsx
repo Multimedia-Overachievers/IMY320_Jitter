@@ -6,8 +6,9 @@ import Answer from '../components/test/Answer';
 import { motion } from 'framer-motion';
 import { slideInLeft, fadeIn, transition } from '../styles/framerMotions';
 
-import { UpdateChapterQuestion, AddQuizScore } from '../services/api-requests';
-import { GetAllModules, GetAllQuestions } from '../services/api-requests';
+import { GetModuleCode } from '../utils/functions.js';
+import { UpdateChapterQuestion, AddQuizScore, GetAllModules, GetQuestions } from '../services/api-requests';
+
 
 export default function Results() {
     const location = useLocation();
@@ -15,6 +16,7 @@ export default function Results() {
 
     const [module, setModule] = useState(null);
     const [chapter, setChapter] = useState(null);
+
     const [grade, setGrade] = useState(null);
     const [results, setResults] = useState(null);
 
@@ -27,39 +29,31 @@ export default function Results() {
 
     useEffect(() => {
         setResults(location.state);
-        console.log(location.state);
     }, []);
     
     useEffect(() => {
-        if(!modules){
-            GetAllModules().then((response) => {
-                setModules(response.data);
-            });
-        }
-
-        if(!questions){
-            GetAllQuestions().then((response) => {
-                setQuestions(response.data);
-            });
-        }
+        GetAllModules().then((response) => {
+            setModules(response.data);
+        });
+ 
+        GetQuestions(GetModuleCode(results?.module)).then((response) => {
+            setQuestions(response.data);
+        });
     }, [results]);
 
     useEffect(() => {
-        if(questions && modules) {
-            // Set the initial state once the data is loaded
-            if (questions && questions.module && questions.module.length > 0) {
-                // do this dynamically
-                setModule(modules?.data[results.module]);
-            }
+        if (questions && questions.module && questions.module.length > 0) {
+            setModule(modules?.data[results.module]);
+        }
 
-            if(questions && results) {
-                
-                setChapter(questions.module[results.module].chapters[results.chapter]);
-            }
-
-            setGrade(CalculateGrade());
+        if(questions && results) {
+            setChapter(questions.chapters[results.chapter]);
         }
     }, [questions, modules]);
+
+    useEffect(() => {
+        setGrade(CalculateGrade());
+    }, [chapter]);
 
     const CalculateGrade = () => {
         if(!results || !chapter) return;
@@ -153,7 +147,7 @@ export default function Results() {
                         </motion.div>
 
                         {/* Answers */}
-                        <Answer questions={questions?.module[results?.module]?.chapters[results?.chapter]?.questions} results={results} />
+                        <Answer questions={questions?.chapters[results.chapter]?.questions} results={results} />
 
                         {/* Logo */}
                         <motion.div 

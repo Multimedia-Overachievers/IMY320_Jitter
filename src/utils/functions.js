@@ -22,9 +22,9 @@ export function GetModuleCode(moduleIndex) {
         case 1:
             return 'imy310';
         case 2:
-            return 'cos333';
-        case 3:
             return 'cos314';
+        case 3:
+            return 'cos333';
     }
 }
 
