@@ -68,20 +68,16 @@ export default function Test() {
 
             list[0].active = true;
             setQuestionList(list);
+            var interval = startTimer(testDuration);
+            return () => clearInterval(interval);
         }
     }, [chapter]);
 
     useEffect(() => {
         setDuration(location.state?.duration);
-        var interval = startTimer(testDuration);
-
-        return () => clearInterval(interval);
     }, [questionsList]);
 
     useEffect(() => {
-        console.log("timeSpent", timeSpent);
-
-    
         window.history.pushState(null, null, window.location.pathname);
         window.addEventListener('popstate', onBackButtonEvent);
         return () => {
@@ -139,7 +135,7 @@ export default function Test() {
             });
 
             if (completed) {
-                navigate('/result', { state: CreateTestResult() });
+                SubmitResults();
             }
             else {
                 toast.error('Please complete all questions before submitting.', {
@@ -155,8 +151,13 @@ export default function Test() {
             }
         }
         else {
-            navigate('/result', { state: CreateTestResult() });
+            SubmitResults();
         }
+    }
+
+    const SubmitResults = () => {
+        localStorage.setItem('hasUpdated', JSON.stringify({ hasUpdated: false }));
+        navigate('/result', { state: CreateTestResult() });
     }
     
     const onBackButtonEvent = (e) => {
@@ -186,8 +187,6 @@ export default function Test() {
         //clear any existing timers if they exist
        
         const interval = setInterval(() => {
-            console.log("interval");
-
             const now = new Date().getTime();
             const distance = endTime - now;
             const secondsLeft = Math.floor((distance % (1000 * seconds)) / 1000);

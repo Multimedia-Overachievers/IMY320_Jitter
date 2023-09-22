@@ -19,8 +19,6 @@ export default function Results() {
 
     const [grade, setGrade] = useState(null);
     const [results, setResults] = useState(null);
-
-    var [scoreAdded, setAdded] = useState(false);
     
     const isExam = false;
 
@@ -61,6 +59,8 @@ export default function Results() {
         var total = 0;
         var correct = 0;
         var correctAnswers = [];
+        var hasUpdated = JSON.parse(localStorage.getItem('hasUpdated'))?.hasUpdated;
+        console.log(hasUpdated);
 
         results?.questions.forEach(async (question)  => {
             var questionInstance = chapter?.questions[question.question];
@@ -72,14 +72,16 @@ export default function Results() {
             total++;
         });
 
-        if(correctAnswers.length > 0) UpdateChapterQuestion(results.module, results.chapter, correctAnswers);
-
         var score = ((correct / total) * 100).toFixed(1);
-        if(!scoreAdded) {
+        if(!hasUpdated) {
             AddQuizScore(results.module, results.chapter, score, results.time);
-            setAdded(true);
+            if(correctAnswers.length > 0 && !hasUpdated) {
+                UpdateChapterQuestion(results.module, results.chapter, correctAnswers);
+            }
+            localStorage.setItem('hasUpdated', JSON.stringify({ hasUpdated: true }));
         }
         return score + "%";
+    
     }
 
     const GetCorrectAnswer = (question) => {

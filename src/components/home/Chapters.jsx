@@ -10,7 +10,6 @@ import { motion } from 'framer-motion';
 import { slideInLeft, slideInRight, transition } from '../../styles/framerMotions';
 
 export default function Chapters({ module }) {
-
     const [modalShow, setModalShow] = useState(false);
 
     return (
