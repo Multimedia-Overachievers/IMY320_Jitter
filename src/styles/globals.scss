@@ -27,13 +27,13 @@ body {
 	width: 0.3rem;
 }
 
-::-webkit-scrollbar-track {
-	background: #ffffff;
-}
-
-// ::-webkit-scrollbar-thumb {
-// 	background: #dbdbdb;
+// ::-webkit-scrollbar-track {
+// 	background: #ffffff;
 // }
+
+::-webkit-scrollbar-thumb {
+	background: #dbdbdb;
+}
 
 p {
 	color: #4E5662;

@@ -24,8 +24,8 @@ body {
   width: 0.3rem;
 }
 
-::-webkit-scrollbar-track {
-  background: #ffffff;
+::-webkit-scrollbar-thumb {
+  background: #dbdbdb;
 }
 
 p {
