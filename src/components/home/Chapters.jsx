@@ -65,6 +65,21 @@ export default function Chapters({ module }) {
 }
 
 function ExamChaptersModal(props) {
+    const [chapters, setChapters] = useState(null);
+    const [timeLimit, setTimeLimit] = useState(null);
+
+    const startExam = () => {
+        console.log('Start exam');
+        //get time limit
+        //get chapters
+
+        console.log(timeLimit);
+        var chapters = [];
+        
+    }
+
+    //<Link to={`test/${moduleIndex}/${index}`} state={{duration: 600}} className='text-white fw-bold p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Take quiz</Link>
+
     return (
         <Modal
             {...props}
@@ -93,12 +108,12 @@ function ExamChaptersModal(props) {
                     {/* Time limit check box */}
                     <Form.Group className='d-flex align-items-center fs-3 mt-4'>
                         <MdOutlineTimer className='text-primary me-3' size={30} />
-                        <Form.Check type="checkbox" label="Time limit" reverse />
+                        <Form.Check type="checkbox" label="Time limit" reverse onChange={(e) => setTimeLimit(e.target.checked)} />
                     </Form.Group>
                 </Form>
 
                 <div className="d-flex justify-content-end">
-                    <Button size="lg" className='mt-5 text-white' onClick={props.onHide}>Start exam</Button>
+                    <Button size="lg" className='mt-5 text-white' onClick={startExam}>Start exam</Button>
                 </div>
             </Modal.Body>
         </Modal>
