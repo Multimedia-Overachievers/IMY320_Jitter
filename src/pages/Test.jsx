@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import ConfirmationModal from '../components/ConfirmationModal';
 import { motion } from 'framer-motion';
 import { fadeIn, slideInLeft, slideInBottom, transition } from '../styles/framerMotions';
+import { ProgressBar } from 'react-bootstrap';
 
 import { formatTimer } from '../utils/functions.js';
 
@@ -283,14 +284,15 @@ export default function Test() {
 
                             {/*  Progress bar */}
                             <motion.div
-                                className="progress mt-3" style={{ height: '5px' }}
+                                className="progress-bar mt-3" style={{ height: '5px' }}
                                 variants={fadeIn}
                                 initial="hidden"
                                 animate="visible"
                                 transition={{ ...transition, delay: 0.7 }}
                             >
-                                <progress className={!timerWarning ? "progress-bar primary" : "progress-bar progress-warning"} value={barPercentage} max={100} style={{ width: '100%' }}></progress>
-                            </motion.div>
+                                <ProgressBar max={100} min={0} now={barPercentage} className={!timerWarning ? "primary bg-white" : "progress-warning bg-white"} style={{ width: '100%' }} />
+                                {/* <progress className={!timerWarning ? "primary" : "progress-warning"} value={barPercentage} max={100} style={{ width: '100%' }}></progress>*/}
+                            </motion.div> 
                         </div>
 
                         {/* Question */}

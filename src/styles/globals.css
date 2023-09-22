@@ -18,30 +18,6 @@ body {
   height: 215px;
 }
 
-progress
-{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  background-color: #ffffff !important;
-}
-
-.progress-bar[value]::-webkit-progress-value, .progress-bar[value]::-moz-progress-bar
-{
-  background-color: #6299eb;
-}
-
-.progress-warning[value]::-webkit-progress-value, .progress-warning[value]::-moz-progress-bar
-{
-  background-color: #e07b7b !important;
-}
-
-progress[value]::-webkit-progress-bar
-{
-  background-color: #ffffff !important; 
-}
-
 .results{
   height: 75vh;
   overflow-y: scroll;
