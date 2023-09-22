@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
+import { PiWarningFill } from 'react-icons/pi';
 import { Button, Spinner } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { toast, Toaster } from 'react-hot-toast';
@@ -86,6 +87,7 @@ function ExamChaptersModal(props) {
 
     const [chapters, setChapters] = useState([]);
     const [timeLimit, setTimeLimit] = useState(false);
+    const [selectedAnswers, setSelectedAnswers] = useState([]);
 
     const startExam = () => {
         if(chapters.length === 0) {
@@ -102,15 +104,19 @@ function ExamChaptersModal(props) {
         props.onHide();
     }
 
-    const ToggleChapter = (chapter) => {
-        var tempChapters = [...chapters];
-        //check if chapter is already in array
-        if (tempChapters.includes(chapter)) {
-            tempChapters.splice(tempChapters.indexOf(chapter), 1);
+    const ToggleChapter = (chapter, index) => {
+        const updatedSelectedAnswers = [...selectedAnswers];
+        const isSelected = updatedSelectedAnswers.includes(index);
+
+        if (isSelected) {
+            // If already selected, remove it
+            updatedSelectedAnswers.splice(updatedSelectedAnswers.indexOf(index), 1);
         } else {
-            tempChapters.push(chapter);
+            // If not selected, add it
+            updatedSelectedAnswers.push(index);
         }
-        setChapters(tempChapters);
+
+        setSelectedAnswers(updatedSelectedAnswers);
     }
 
     //<Link to={`test/${moduleIndex}/${index}`} state={{duration: 600}} className='text-white fw-bold p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Take quiz</Link>
@@ -133,8 +139,17 @@ function ExamChaptersModal(props) {
                     <Form.Group className='chapter-form'>
                         {
                             props.chapters?.map((chapter, index) => (
-                                <div key={index} className='shadow p-3 bg-white text-dark fs-2 my-4 rounded'>
-                                    <Form.Check type="checkbox" label={chapter.chapter} onChange={() => ToggleChapter(chapter)} />
+                                <div
+                                    key={index}
+                                    className={`shadow p-3 bg-${selectedAnswers.includes(index) ? 'primary' : 'white'} text-${selectedAnswers.includes(index) ? 'white' : 'dark'} fs-2 my-4 rounded`}
+                                    onClick={() => ToggleChapter(chapter, index)}
+                                >
+                                    <Form.Check
+                                        type="checkbox"
+                                        label={chapter.chapter}
+                                        checked={selectedAnswers.includes(index)}
+                                        onChange={() => ToggleChapter(chapter, index)}
+                                    />
                                 </div>
                             ))
                         }
@@ -147,8 +162,13 @@ function ExamChaptersModal(props) {
                     </Form.Group>
                 </Form>
 
+                {/* Disclaimer */}
+                <div className="d-flex justify-content-center mt-4">
+                    <PiWarningFill className='me-1 mt-1 text-secondary' size={20} />
+                    <p className='text-secondary'>This will not contribute towards your module stats</p>
+                </div>
                 <div className="d-flex justify-content-end">
-                    <Button size="lg" className='mt-5 text-white' onClick={startExam}>Start exam</Button>
+                    <Button size="lg" className='mt-4 text-white' onClick={startExam}>Start exam</Button>
                 </div>
             </Modal.Body>
         </Modal>
