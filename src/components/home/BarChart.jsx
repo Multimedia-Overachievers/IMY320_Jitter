@@ -16,7 +16,7 @@ export const BarChart = ({ chartData }) => {
             datalabels: {
               color: "#B3BAC5",
               font: {
-                family: "Montserrat",
+                family: "Poppins",
                 size: 20,
               },
               anchor: "end",
@@ -65,7 +65,7 @@ export const BarChart = ({ chartData }) => {
               
               ticks: {
                 font: {
-                  family: "Montserrat",
+                  family: "Poppins",
                   size: 16,
                   //bold
                   weight: "bold",
