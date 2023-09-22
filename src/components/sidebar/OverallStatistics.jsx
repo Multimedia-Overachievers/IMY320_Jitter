@@ -15,7 +15,7 @@ export default function OverallStatistics({ totalHours, contentCovered }) {
             >
                 Statistics
             </motion.h3>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between mb-3">
                 <motion.div
                     className='rounded shadow p-3 w-50 me-4'
                     variants={slideInBottom}
