@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
+import { PiWarningFill } from 'react-icons/pi';
 import { Button, Spinner } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { slideInLeft, transition } from '../../styles/framerMotions';
@@ -139,8 +140,13 @@ function ExamChaptersModal(props) {
                     </Form.Group>
                 </Form>
 
+                {/* Disclaimer */}
+                <div className="d-flex justify-content-center mt-4">
+                    <PiWarningFill className='me-1 mt-1 text-secondary' size={20} />
+                    <p className='text-secondary'>This will not contribute towards your module stats</p>
+                </div>
                 <div className="d-flex justify-content-end">
-                    <Button size="lg" className='mt-5 text-white' onClick={startExam}>Start exam</Button>
+                    <Button size="lg" className='mt-4 text-white' onClick={startExam}>Start exam</Button>
                 </div>
             </Modal.Body>
         </Modal>
