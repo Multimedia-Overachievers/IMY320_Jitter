@@ -7,7 +7,7 @@ import { Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { toast, Toaster } from 'react-hot-toast';
 import { useParams } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ConfirmationModal from '../components/ConfirmationModal';
 import { motion } from 'framer-motion';
 import { fadeIn, slideInLeft, slideInBottom, transition } from '../styles/framerMotions';
@@ -19,15 +19,17 @@ import { shuffle, GetModuleCode } from '../utils/functions.js';
 import { GetAllModules, GetQuestions } from '../services/api-requests';
 
 export default function Test() {
+    const location = useLocation();
     const navigate = useNavigate();
 
     const [module, setModule] = useState(null);
     const [chapter, setChapter] = useState(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [modalShow, setModalShow] = useState(false);
-    const [questionsList, setQuestionList] = useState([]);
+    const [questionsList, setQuestionList] = useState(null);
 
-    const [timer, setTimer] = useState('');
+    const [testDuration, setDuration] = useState(999);
+    const [timer, setTimer] = useState(null);
     const [timeSpent, setTimeSpent] = useState(0);
     const [timerWarning, setTimerWarning] = useState(false);
     const [barPercentage, setBarPercentage] = useState(100);
@@ -66,18 +68,27 @@ export default function Test() {
 
             list[0].active = true;
             setQuestionList(list);
-            startTimer(600);
         }
     }, [chapter]);
 
-    // Display model if the user tries to go back to the previous page
     useEffect(() => {
+        setDuration(location.state?.duration);
+        var interval = startTimer(testDuration);
+
+        return () => clearInterval(interval);
+    }, [questionsList]);
+
+    useEffect(() => {
+        console.log("timeSpent", timeSpent);
+
+    
         window.history.pushState(null, null, window.location.pathname);
         window.addEventListener('popstate', onBackButtonEvent);
         return () => {
             window.removeEventListener('popstate', onBackButtonEvent);
         };
     }, []);
+
     const MoveToNext = () => {
         if (currentQuestion < questionsList.length - 1) {
             var newList = [...questionsList];
@@ -154,12 +165,10 @@ export default function Test() {
     }
 
     const CreateTestResult = () => {
-        console.log("questionsList", questionsList);
-
         return {
             module: module.index,
             chapter: chapter.id,
-            questions: questionsList.map((question) => {
+            questions: questionsList?.map((question) => {
                 if (question.selectedAnswer === null) question.selectedAnswer = -1;
 
                 return {
@@ -172,32 +181,35 @@ export default function Test() {
     }
 
     const startTimer = (seconds) => {
-        
         const endTime = new Date().getTime() + seconds * 1000;
 
-        console.log("seconds", seconds);
-
+        //clear any existing timers if they exist
+       
         const interval = setInterval(() => {
+            console.log("interval");
+
             const now = new Date().getTime();
             const distance = endTime - now;
             const secondsLeft = Math.floor((distance % (1000 * seconds)) / 1000);
 
-            if (distance < 0) {
-                clearInterval(interval);
-                setTimeSpent(secondsLeft);
-                setTimer('00:00');
+            updateBar(secondsLeft);
+            setTimeSpent(timeSpent => timeSpent + 1);
+            setTimer(formatTimer(secondsLeft));
+
+            if(secondsLeft < 60) {
                 setTimerWarning(true);
+            }
+
+            if (distance <= 0){
+                clearInterval(interval);
                 FinishQuiz(true);
-            } else {
-                updateBar(secondsLeft)
-                setTimeSpent(timeSpent => timeSpent + 1);
-                setTimer(formatTimer(secondsLeft));
             }
         }, 1000);
         
+        return interval;
     }
     const updateBar = (seconds) => {
-        var percentage = (seconds / 600) * 100;
+        var percentage = (seconds / testDuration) * 100;
         setBarPercentage(percentage);
     }
 
@@ -219,6 +231,8 @@ export default function Test() {
         <div className="bg-light vh-100">
             <div><Toaster /></div>
             <div className="p-5">
+                <div>{timeSpent}</div>
+
                 {/* Test header */}
                 <div className='d-flex justify-content-between'>
                     <div>
@@ -290,13 +304,13 @@ export default function Test() {
                                 animate="visible"
                                 transition={{ ...transition, delay: 0.7 }}
                             >
-                                <ProgressBar max={100} min={0} now={barPercentage} className={!timerWarning ? "primary bg-white" : "progress-warning bg-white"} style={{ width: '100%' }} />
-                                {/* <progress className={!timerWarning ? "primary" : "progress-warning"} value={barPercentage} max={100} style={{ width: '100%' }}></progress>*/}
+                                <ProgressBar max={100} min={0} now={barPercentage} variant={!timerWarning ? "" : "danger"} className="bg-white" style={{ width: '100%' }} />
+                                
                             </motion.div> 
                         </div>
 
                         {/* Question */}
-                        {questionsList && questionsList.length > 0 && questionsList[currentQuestion]
+                        {questionsList && questionsList?.length > 0 && questionsList[currentQuestion]
                             ? <Question questionIndex={currentQuestion} SetCompleteCallback={SetCompleted} questionInstance={questionsList[currentQuestion]} />
                             : <p>No Questions found for chapter</p>
                         }
@@ -330,7 +344,7 @@ export default function Test() {
                                 transition={{ ...transition, delay: 1.5 }}
                             >
                                 {
-                                    (currentQuestion !== questionsList.length - 1) ?
+                                    (currentQuestion !== questionsList?.length - 1) ?
                                         <Button size="lg" className="text-white fw-bold" onClick={() => MoveToNext()}>Next</Button>
                                         :
                                         <Button size="lg" className="text-white fw-bold" onClick={() => FinishQuiz(false)}>Submit</Button>

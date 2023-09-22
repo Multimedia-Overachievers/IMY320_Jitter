@@ -15,7 +15,8 @@ export default function Answer({ questions, results }) {
                     tempList.push({
                         question: question,
                         selectedAnswer: resultQuestion.selectedAnswer,
-                        correct: IsAnswerCorrect(question, resultQuestion.selectedAnswer)
+                        correct: IsAnswerCorrect(question, resultQuestion.selectedAnswer),
+                        NotAnswered: resultQuestion.selectedAnswer === -1 ? true : false
                     });
                 }
             });
