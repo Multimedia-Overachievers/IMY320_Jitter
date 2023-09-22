@@ -44,7 +44,8 @@ p {
 	background-color: white !important;
 }
 
-.accordion-body, .accordion-collapse {
+.accordion-body,
+.accordion-collapse {
 	background-color: #F2F5F9 !important;
 	border-radius: 0 0 0.5625rem 0.5625rem !important;
 }
@@ -112,15 +113,29 @@ p {
 }
 
 // Fixing accordion styling
-.accordion-button:focus, .accordion, .item, .accordion-header {
-    box-shadow: none !important;
-    border: none !important;
+.accordion-button:focus,
+.accordion,
+.item,
+.accordion-header {
+	box-shadow: none !important;
+	border: none !important;
 	outline: none !important;
 	background-color: transparent !important;
 }
 
 // Better typography
-.accordion-body, p {
+.accordion-body,
+p {
 	line-height: 1.5rem !important;
 	letter-spacing: 0.01rem !important;
+}
+
+// Francois doesn't know how to do this
+.chart-container {
+	height: 215px;
+}
+
+.results {
+	height: 75vh;
+	overflow-y: scroll;
 }

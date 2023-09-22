@@ -50,7 +50,8 @@ p {
   background-color: white !important;
 }
 
-.accordion-body, .accordion-collapse {
+.accordion-body,
+.accordion-collapse {
   background-color: #F2F5F9 !important;
   border-radius: 0 0 0.5625rem 0.5625rem !important;
 }
@@ -115,14 +116,27 @@ p {
   background-color: #e07b7b;
 }
 
-.accordion-button:focus, .accordion, .item, .accordion-header {
+.accordion-button:focus,
+.accordion,
+.item,
+.accordion-header {
   box-shadow: none !important;
   border: none !important;
   outline: none !important;
   background-color: transparent !important;
 }
 
-.accordion-body, p {
+.accordion-body,
+p {
   line-height: 1.5rem !important;
   letter-spacing: 0.01rem !important;
+}
+
+.chart-container {
+  height: 215px;
+}
+
+.results {
+  height: 75vh;
+  overflow-y: scroll;
 }/*# sourceMappingURL=globals.css.map */
