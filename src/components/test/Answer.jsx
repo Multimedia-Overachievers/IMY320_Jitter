@@ -36,6 +36,14 @@ export default function Answer({ questions, results }) {
         return question?.answers.findIndex((answer) => answer.correct === true );
     }
 
+    const GetResult = (question) => {
+        if(question.NotAnswered) return <p className="text-danger m-0 p-0">Not Answered</p>
+        else{
+            if(question.correct) return <p className="text-success m-0 p-0">Correct</p>
+            else return <p className="text-danger m-0 p-0">Incorrect</p>
+        }
+    }
+
     return (
         questionsList?.map((questionInstance, index) => (
             <motion.div 
@@ -80,10 +88,7 @@ export default function Answer({ questions, results }) {
                         <Accordion.Header>
                             <div className='d-flex justify-content-between align-items-center w-100'>
                                 {
-                                    questionInstance.correct ?
-                                    <p className="text-success m-0 p-0">Correct</p>
-                                    :
-                                    <p className="text-danger m-0 p-0">Incorrect</p>
+                                    GetResult(questionInstance)
                                 }
                                 <p className="text-secondary m-0 p-0 me-4">view explanation</p>
                             </div>
