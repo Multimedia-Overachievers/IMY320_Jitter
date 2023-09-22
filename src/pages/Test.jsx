@@ -231,8 +231,6 @@ export default function Test() {
         <div className="bg-light vh-100">
             <div><Toaster /></div>
             <div className="p-5">
-                <div>{timeSpent}</div>
-
                 {/* Test header */}
                 <div className='d-flex justify-content-between'>
                     <div>
