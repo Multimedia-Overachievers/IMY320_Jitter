@@ -46,7 +46,7 @@ export default function Home() {
                             <div className='bg-light position-absolute w-100 h-100 d-flex align-items-center justify-content-center' style={{ zIndex: -1 }}>
                                 <img className='background-image' src="/images/home-background.svg" alt="" />
                             </div>
-                            <div className="p-5 m-4 " style={{ zIndex: 2 }}>
+                            <div className="p-5 m-4" style={{ zIndex: 2 }}>
                                 {/* Home page header */}
                                 <div className='d-flex justify-content-between'>
                                     <div>

@@ -5,16 +5,16 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
-import Button from 'react-bootstrap/Button';
+import { Button, Spinner } from 'react-bootstrap';
 import { motion } from 'framer-motion';
-import { slideInLeft, slideInRight, transition } from '../../styles/framerMotions';
+import { slideInLeft, transition } from '../../styles/framerMotions';
 
 export default function Chapters({ module }) {
     const [modalShow, setModalShow] = useState(false);
 
     return (
         <>
-            <div className='mt-5'>
+            <div className='mt-5 h-100'>
                 <div className="d-flex justify-content-between">
                     <motion.div
                         className="d-flex align-items-center"
@@ -36,10 +36,16 @@ export default function Chapters({ module }) {
                 </div>
 
                 <div>
-                    {/* Chapters */}
-                    {module?.chapters.map((chapter, index) => (
-                        <Chapter key={index} moduleIndex={module.index} index={index} chapter={chapter.chapter} description={chapter.description} />
-                    ))}
+                    {
+                        !module ?
+                            <span className='d-flex justify-content-center align-items-center mt-5 pt-5'>
+                                <Spinner animation="border" variant="primary" />
+                            </span>
+                            :
+                            module.chapters.map((chapter, index) => (
+                                <Chapter key={index} moduleIndex={module.index} index={index} chapter={chapter.chapter} description={chapter.description} />
+                            ))
+                    }
                 </div>
             </div>
 
