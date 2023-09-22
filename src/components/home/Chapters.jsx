@@ -67,26 +67,33 @@ function ExamChaptersModal(props) {
 
     const [chapters, setChapters] = useState([]);
     const [timeLimit, setTimeLimit] = useState(false);
+    const [selectedAnswers, setSelectedAnswers] = useState([]);
 
     const startExam = () => {
-        navigate('/result', { state: {
-            duration: timeLimit ? chapters.length * 900 : -1,
-            exam: true,
-            chapters: chapters
-        }});
+        navigate('/result', {
+            state: {
+                duration: timeLimit ? chapters.length * 900 : -1,
+                exam: true,
+                chapters: chapters
+            }
+        });
 
         props.onHide();
     }
 
-    const ToggleChapter = (chapter) => {
-        var tempChapters = [...chapters];
-        //check if chapter is already in array
-        if (tempChapters.includes(chapter)) {
-            tempChapters.splice(tempChapters.indexOf(chapter), 1);
+    const ToggleChapter = (chapter, index) => {
+        const updatedSelectedAnswers = [...selectedAnswers];
+        const isSelected = updatedSelectedAnswers.includes(index);
+
+        if (isSelected) {
+            // If already selected, remove it
+            updatedSelectedAnswers.splice(updatedSelectedAnswers.indexOf(index), 1);
         } else {
-            tempChapters.push(chapter);
+            // If not selected, add it
+            updatedSelectedAnswers.push(index);
         }
-        setChapters(tempChapters);
+
+        setSelectedAnswers(updatedSelectedAnswers);
     }
 
     //<Link to={`test/${moduleIndex}/${index}`} state={{duration: 600}} className='text-white fw-bold p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Take quiz</Link>
@@ -109,8 +116,17 @@ function ExamChaptersModal(props) {
                     <Form.Group className='chapter-form'>
                         {
                             props.chapters?.map((chapter, index) => (
-                                <div key={index} className='shadow p-3 bg-white text-dark fs-2 my-4 rounded'>
-                                    <Form.Check type="checkbox" label={chapter.chapter} onChange={() => ToggleChapter(chapter)} />
+                                <div
+                                    key={index}
+                                    className={`shadow p-3 bg-${selectedAnswers.includes(index) ? 'primary' : 'white'} text-${selectedAnswers.includes(index) ? 'white' : 'dark'} fs-2 my-4 rounded`}
+                                    onClick={() => ToggleChapter(chapter, index)}
+                                >
+                                    <Form.Check
+                                        type="checkbox"
+                                        label={chapter.chapter}
+                                        checked={selectedAnswers.includes(index)}
+                                        onChange={() => ToggleChapter(chapter, index)}
+                                    />
                                 </div>
                             ))
                         }
