@@ -14,6 +14,16 @@ export const GetQuestions = (moduleCode) => {
     });
 }
 
+export const SetActiveModule = (moduleIndex) => {
+    return http.post("/set-active-module", {
+        moduleIndex: moduleIndex
+    });
+}
+
+export const GetActiveModule = () => {
+    return http.get("/get-active-module");
+}
+
 export const UpdateChapterQuestion = (moduleIndex, chapterIndex, questionIndex) => {
     return http.post('http://localhost:5000/update-chapter-question', {
         moduleIndex: moduleIndex,

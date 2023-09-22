@@ -32,6 +32,15 @@ p {
   color: #4E5662;
 }
 
+.chart-container {
+  height: 215px;
+}
+
+.results{
+  height: 75vh;
+  overflow-y: scroll;
+}
+
 .accordion-item,
 .accordion-button {
   border-radius: 0.5625rem 0.5625rem 0 0 !important;

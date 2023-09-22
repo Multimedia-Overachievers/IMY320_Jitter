@@ -14,28 +14,27 @@ export default function Chapter({ moduleIndex, index, chapter, description }) {
     const [questions, setQuestions] = useState(null);
 
     useEffect(() => {
-        if (!questions) {
-            GetQuestions(GetModuleCode(moduleIndex)).then((response) => {
-                setQuestions(response.data);
-            })
-        }
-    }, []);
+        GetQuestions(GetModuleCode(moduleIndex)).then((response) => {
+            setQuestions(response.data);
+        })
+
+    }, [moduleIndex]);
 
     useEffect(() => {
         GetProgress();
     }, [questions]);
 
     const GetProgress = () => {
-        var chapter = questions?.chapters[index];
+        var chapterInstance = questions?.chapters[index];
         var tempProgress = 0;
 
-        chapter?.questions.forEach(question => {
+        chapterInstance?.questions.forEach(question => {
             if (question?.finished) {
                 tempProgress++;
             }
         });
 
-        setProgress(Math.round((tempProgress / chapter?.questions.length) * 100));
+        setProgress(Math.round((tempProgress / chapterInstance?.questions.length) * 100));
     }
 
     return (

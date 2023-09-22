@@ -25,12 +25,12 @@ export default function ModuleList({ modules, setModule }) {
 
     const GetOverallProgress = (module) => {
         var progress = 0;
-
         var moduleQuestions = questions?.module[module?.index];
+
         moduleQuestions?.chapters.forEach(chapter => {
             progress += GetProgress(chapter);
         });
-
+    
         return progress / moduleQuestions?.chapters.length;
     }
 
@@ -60,6 +60,7 @@ export default function ModuleList({ modules, setModule }) {
             </motion.h3>
 
             {/* Modules */}
+            
             {modules?.map((module, index) => (
                 <div onClick={() => setActiveModule(index)} key={index}>
                     <Module index={index} name={module.name} completion={GetOverallProgress(module)} icon={module.icon} active={module.active} />

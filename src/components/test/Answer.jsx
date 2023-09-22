@@ -6,8 +6,9 @@ import { slideInLeft, transition } from '../../styles/framerMotions';
 export default function Answer({ questions, results }) {
     const [questionsList, setQuestions] = useState(null);
 
-  
     useEffect(() => {
+        //if its not a string
+
         var tempList = [];
         results?.questions.forEach(resultQuestion => {
             questions?.forEach(question => {

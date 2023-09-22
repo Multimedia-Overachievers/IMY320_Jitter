@@ -17,6 +17,11 @@ body {
 	overflow-y: scroll;
 }
 
+.pointer {
+	cursor: pointer;
+}
+
+
 // Styles for scrollbars
 ::-webkit-scrollbar {
 	width: 0.3rem;

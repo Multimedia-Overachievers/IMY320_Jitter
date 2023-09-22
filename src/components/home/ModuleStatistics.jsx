@@ -27,7 +27,10 @@ export default function ModuleStatistics({ module }) {
      * @returns FontAwesomeIcon Component
      */
     const getEmotionComponent = (average) => {
-        if (average < 50) {
+        if(average === 0) {
+            return <FontAwesomeIcon icon={faFaceMeh} className='text-secondary' size="5x" />
+        }
+        else if (average < 50) {
             return <FontAwesomeIcon icon={faFaceSurprise} className='text-secondary' size="5x" />
         } else if (average < 70) {
             return <FontAwesomeIcon icon={faFaceMeh} className='text-warning' size="5x" />

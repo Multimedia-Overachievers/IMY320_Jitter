@@ -6,35 +6,33 @@ import Chapters from '../components/home/Chapters';
 import { motion } from 'framer-motion';
 import { slideInRight, slideInLeft, transition } from '../styles/framerMotions';
 
-import { GetAllModules } from '../services/api-requests';
+import { GetAllModules, SetActiveModule, GetActiveModule } from '../services/api-requests';
 
 export default function Home() {
     const [module, setModule] = useState(null);
     const [modules, setModules] = useState(null);
-    const [activeModuleIndex, setActiveModuleIndex] = useState(0);
 
     useEffect(() => {
         if (!modules) {
             GetAllModules().then((response) => {
                 var modules = response.data;
                 setModules(modules);
-                setModule(modules.data[activeModuleIndex]);
             });
         }
     }, []);
 
+    useEffect(() => {
+        GetActiveModule().then((response) => {
+            var activeModule = parseInt(response.data);
+            setModule(modules?.data[activeModule]);
+        });
+    }, [modules]);
+
     const SetModuleCallback = (index) => {
-        setActiveModuleIndex(index);
+    
         setModule(modules.data[index]);
+        SetActiveModule(index);
     }
-
-    // useEffect(() => {
-    //     if(modules){
-    //         setModule(modules.data[activeModuleIndex]);
-    //     }
-    //     console.log(activeModuleIndex);
-    // }, [module]);
-
 
     return (
         <div className="vh-100">
