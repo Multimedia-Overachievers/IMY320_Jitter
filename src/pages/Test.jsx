@@ -28,14 +28,16 @@ export default function Test() {
     const [modalShow, setModalShow] = useState(false);
     const [questionsList, setQuestionList] = useState(null);
 
-    const [testDuration, setDuration] = useState(999);
+    const [isTimed, setTimed] = useState(false);
     const [timer, setTimer] = useState(null);
+
+    const [testDuration, setDuration] = useState(999);
     const [timeSpent, setTimeSpent] = useState(0);
     const [timerWarning, setTimerWarning] = useState(false);
     const [barPercentage, setBarPercentage] = useState(100);
     
+    const [isExam, setIsExam] = useState(false);
     const { moduleCode, chapterCode } = useParams();
-    const isExam = false;
 
     useEffect(() => {
         GetAllModules().then((response) => {
@@ -46,14 +48,31 @@ export default function Test() {
             }
         });
 
-        GetQuestions(GetModuleCode(moduleCode)).then((response) => {
-            var questions = response.data;
+        if(parseInt(chapterCode) === 5){
+            console.log("Exam");
+            setIsExam(true);
+            console.log(location.state);
+            // GetQuestions(GetModuleCode(moduleCode)).then((response) => {
+            //     var questions = response.data;
+    
+            //     if (questions && moduleCode && chapterCode) {
+            //         setChapter(questions.chapters[chapterCode]);
+            //     }
+            // });
 
-            if (questions && moduleCode && chapterCode) {
-                setChapter(questions.chapters[chapterCode]);
-            }
-        });
-
+            setChapter({
+            });
+        }
+        else{
+            setIsExam(false);
+            GetQuestions(GetModuleCode(moduleCode)).then((response) => {
+                var questions = response.data;
+    
+                if (questions && moduleCode && chapterCode) {
+                    setChapter(questions.chapters[chapterCode]);
+                }
+            });
+        }
     }, [moduleCode, chapterCode]);
 
     useEffect(() => {
@@ -68,8 +87,15 @@ export default function Test() {
 
             list[0].active = true;
             setQuestionList(list);
-            var interval = startTimer(testDuration);
-            return () => clearInterval(interval);
+
+            if(location.state?.duration !== -1){
+                setTimed(true);
+                var interval = startTimer(testDuration);
+                return () => clearInterval(interval);
+            }
+            else{
+                setTimed(false);
+            }
         }
     }, [chapter]);
 
@@ -281,29 +307,36 @@ export default function Test() {
                                 {chapter?.name}
                             </motion.h2>
 
-                            <motion.div
-                                className='d-flex align-items-center justify-content-center'
-                                variants={fadeIn}
-                                initial="hidden"
-                                animate="visible"
-                                transition={{ ...transition, delay: 0.5 }}
-                            >
-                                <MdOutlineTimer className={timerWarning ? "text-danger me-2" : "text-primary me-2"} size={30} />
-                                
-                                <p className='text-dark m-0 p-0 '>{timer} left</p>
-                            </motion.div>
 
-                            {/*  Progress bar */}
-                            <motion.div
-                                className="progress-bar mt-3" style={{ height: '5px' }}
-                                variants={fadeIn}
-                                initial="hidden"
-                                animate="visible"
-                                transition={{ ...transition, delay: 0.7 }}
-                            >
-                                <ProgressBar max={100} min={0} now={barPercentage} variant={!timerWarning ? "" : "danger"} className="bg-white" style={{ width: '100%' }} />
-                                
-                            </motion.div> 
+                            {
+                                isTimed ?
+                                <div>
+                                    <motion.div
+                                        className='d-flex align-items-center justify-content-center'
+                                        variants={fadeIn}
+                                        initial="hidden"
+                                        animate="visible"
+                                        transition={{ ...transition, delay: 0.5 }}
+                                    >
+                                        <MdOutlineTimer className={timerWarning ? "text-danger me-2" : "text-primary me-2"} size={30} />
+                                        
+                                        <p className='text-dark m-0 p-0 '>{timer} left</p>
+                                    </motion.div>
+
+                                    {/*  Progress bar */}
+                                    <motion.div
+                                        className="progress-bar mt-3" style={{ height: '5px' }}
+                                        variants={fadeIn}
+                                        initial="hidden"
+                                        animate="visible"
+                                        transition={{ ...transition, delay: 0.7 }}
+                                    >
+                                        <ProgressBar max={100} min={0} now={barPercentage} variant={!timerWarning ? "" : "danger"} className="bg-white" style={{ width: '100%' }} />
+                                        
+                                    </motion.div> 
+                                </div>
+                                : <></>
+                            }
                         </div>
 
                         {/* Question */}

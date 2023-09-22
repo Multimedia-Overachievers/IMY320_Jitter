@@ -8,14 +8,29 @@ import { BiLeftArrowAlt } from 'react-icons/bi';
 import { MdOutlineTimer } from 'react-icons/md';
 import { Button, Spinner } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+import { toast, Toaster } from 'react-hot-toast';
 import { slideInLeft, transition } from '../../styles/framerMotions';
 
 export default function Chapters({ module }) {
     const [modalShow, setModalShow] = useState(false);
 
+    const ShowModuleError = () => {
+        toast.error('Please select at least one module', {
+            style: {
+                padding: '16px',
+                color: '#4e5662',
+            },
+            iconTheme: {
+                primary: '#e07b7b',
+            },
+            duration: 3000,
+        });
+    }
+
     return (
         <>
             <div className='mt-5 h-100'>
+                <div><Toaster/></div>
                 <div className="d-flex justify-content-between">
                     <motion.div
                         className="d-flex align-items-center"
@@ -57,6 +72,10 @@ export default function Chapters({ module }) {
                     setModalShow(false);
                 }}
                 chapters={module?.chapters}
+                moduleindex={module?.index}
+                errorCallback={() => {
+                    ShowModuleError()
+                }}
             />
         </>
     )
@@ -69,7 +88,12 @@ function ExamChaptersModal(props) {
     const [timeLimit, setTimeLimit] = useState(false);
 
     const startExam = () => {
-        navigate('/result', { state: {
+        if(chapters.length === 0) {
+            props.errorCallback();
+            return;
+        }
+
+        navigate('/test/'+props.moduleindex+'/5', { state: {
             duration: timeLimit ? chapters.length * 900 : -1,
             exam: true,
             chapters: chapters
