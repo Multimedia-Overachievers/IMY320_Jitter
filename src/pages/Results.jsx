@@ -10,21 +10,19 @@ import { Helmet } from 'react-helmet';
 import { GetModuleCode } from '../utils/functions.js';
 import { UpdateChapterQuestion, AddQuizScore, GetAllModules, GetQuestions } from '../services/api-requests';
 
-
 export default function Results() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [module, setModule] = useState(null);
     const [chapter, setChapter] = useState(null);
 
     const [grade, setGrade] = useState(null);
     const [results, setResults] = useState(null);
-
-    const isExam = false;
+    const [isExam, setIsExam] = useState(false);
 
     var [modules, setModules] = useState(null);
     var [questions, setQuestions] = useState(null);
+
 
     useEffect(() => {
         setResults(location.state);
@@ -41,14 +39,38 @@ export default function Results() {
     }, [results]);
 
     useEffect(() => {
-        if (questions && questions.module && questions.module.length > 0) {
-            setModule(modules?.data[results.module]);
-        }
+        if (questions && results){
+            if(results.exam) {
+                setChapter(MergedChapter(questions.chapters));
+                setIsExam(true);
+            }
+            else {
+                questions.chapters[results.chapter].questions.forEach(question => {
+                    question.chapter = results.chapter;
+                });
 
-        if (questions && results) {
-            setChapter(questions.chapters[results.chapter]);
+                setChapter(questions.chapters[results.chapter]);
+                setIsExam(false);
+            }
         }
     }, [questions, modules]);
+
+    const MergedChapter = (chaptersArray) => {
+        var mergedChapter = {
+            id: 5,
+            name: "Exam",
+            questions: []
+        };
+
+        chaptersArray.forEach(chapter => {
+            chapter.questions.forEach(question => {
+                question.chapter = chapter.id;
+            });
+
+            mergedChapter.questions = mergedChapter.questions.concat(chapter.questions);
+        });
+        return mergedChapter;
+    }
 
     useEffect(() => {
         setGrade(CalculateGrade());
@@ -61,10 +83,16 @@ export default function Results() {
         var correct = 0;
         var correctAnswers = [];
         var hasUpdated = JSON.parse(localStorage.getItem('hasUpdated'))?.hasUpdated;
-        console.log(hasUpdated);
 
         results?.questions.forEach(async (question) => {
-            var questionInstance = chapter?.questions[question.question];
+            var questionInstance 
+            if(results.exam) {
+                //we have some duplicate indexes in the exam questions so check that result question chapter is the same as the question chapter
+                questionInstance = chapter?.questions.find(q => q.chapter === question.chapter && q.id === question.question);    
+            }
+            else{
+                questionInstance = chapter?.questions[question.question];
+            }
 
             if (question.selectedAnswer === GetCorrectAnswer(questionInstance)) {
                 correct++;
@@ -74,9 +102,10 @@ export default function Results() {
         });
 
         var score = ((correct / total) * 100).toFixed(1);
-        if (!hasUpdated) {
+        console.log(isExam);
+        if (!hasUpdated && !isExam) {
             AddQuizScore(results.module, results.chapter, score, results.time);
-            if (correctAnswers.length > 0 && !hasUpdated) {
+            if (correctAnswers.length > 0 ) {
                 UpdateChapterQuestion(results.module, results.chapter, correctAnswers);
             }
             localStorage.setItem('hasUpdated', JSON.stringify({ hasUpdated: true }));
@@ -117,7 +146,7 @@ export default function Results() {
                             animate="visible"
                             transition={{ ...transition, delay: 0.5 }}
                         >
-                            {module?.name}
+                            {modules?.data[results.module].name}
                         </motion.h1>
                     </div>
                 </div>
@@ -156,7 +185,8 @@ export default function Results() {
                         </motion.div>
 
                         {/* Answers */}
-                        <Answer questions={questions?.chapters[results.chapter]?.questions} results={results} />
+                        {console.log(chapter)}
+                        <Answer questions={chapter?.questions} results={results} />
 
                         {/* Logo */}
                         <motion.div

@@ -68,21 +68,19 @@ export default function Chapters({ module }) {
 
             {/* Modal */}
             <ExamChaptersModal
+                errorCallback={ShowModuleError}
                 show={modalShow}
                 onHide={() => {
                     setModalShow(false);
                 }}
                 chapters={module?.chapters}
                 moduleindex={module?.index}
-                errorCallback={() => {
-                    ShowModuleError()
-                }}
             />
         </>
     )
 }
 
-function ExamChaptersModal(props) {
+function ExamChaptersModal({ errorCallback, ...props }) {
     const navigate = useNavigate();
 
     const [chapters, setChapters] = useState([]);
@@ -90,7 +88,7 @@ function ExamChaptersModal(props) {
 
     const startExam = () => {
         if(chapters.length === 0) {
-            props.errorCallback();
+            errorCallback();
             return;
         }
 
