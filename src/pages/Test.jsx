@@ -244,7 +244,8 @@ export default function Test() {
 
                 {/*  Leave test */}
                 <motion.div
-                    className="btn d-flex align-items-center mt-4 pointer" onClick={() => setModalShow(true)}
+                    className="btn d-flex align-items-center mt-4 pointer justify-content-start" onClick={() => setModalShow(true)}
+                    style={{ width: '180px' }}
                     variants={slideInLeft}
                     initial="hidden"
                     animate="visible"
