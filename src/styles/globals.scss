@@ -37,7 +37,16 @@ p {
 // Rounded corners for react bootstrap accordion
 .accordion-item,
 .accordion-button {
-	border-radius: 0.5625rem !important;
+	border-radius: 0.5625rem 0.5625rem 0 0 !important;
+}
+
+.accordion-header button {
+	background-color: white !important;
+}
+
+.accordion-body, .accordion-collapse {
+	background-color: #F2F5F9 !important;
+	border-radius: 0 0 0.5625rem 0.5625rem !important;
 }
 
 .background-image {
@@ -113,5 +122,5 @@ p {
 // Better typography
 .accordion-body, p {
 	line-height: 1.5rem !important;
-	letter-spacing: 0.015rem !important;
+	letter-spacing: 0.01rem !important;
 }

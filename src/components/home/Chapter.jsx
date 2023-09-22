@@ -49,10 +49,10 @@ export default function Chapter({ moduleIndex, index, chapter, description }) {
                 <Accordion.Item eventKey={index}>
                     <Accordion.Header className='rounded'>
                         <Row className="w-100 m-3">
-                            <Col className='d-flex align-items-center'>
+                            <Col xs={5} className='d-flex align-items-center'>
                                 <h2 className='p-0 m-0 text-info'>{chapter}</h2>
                             </Col>
-                            <Col className='d-flex align-items-center'>
+                            <Col xs={4} className='d-flex align-items-center'>
                                 {/* Progress bar */}
                                 <div className="d-flex align-items-center">
                                     {/* Progress percentage */}
@@ -64,7 +64,7 @@ export default function Chapter({ moduleIndex, index, chapter, description }) {
                                     </div>
                                 </div>
                             </Col>
-                            <Col className='d-flex justify-content-end'>
+                            <Col xs={3} className='d-flex justify-content-end'>
                                 {/* Take test */}
                                 <Link to={`test/${moduleIndex}/${index}`} state={{duration: 5}} className='text-white fw-bold p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Take quiz</Link>
                             </Col>
