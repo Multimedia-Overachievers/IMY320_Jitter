@@ -16,6 +16,10 @@ body {
   overflow-y: scroll;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   width: 0.3rem;
 }
@@ -24,21 +28,8 @@ body {
   background: #ffffff;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #dbdbdb;
-}
-
 p {
   color: #4E5662;
-}
-
-.chart-container {
-  height: 215px;
-}
-
-.results{
-  height: 75vh;
-  overflow-y: scroll;
 }
 
 .accordion-item,
