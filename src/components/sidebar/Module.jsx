@@ -1,5 +1,7 @@
 import React from 'react';
-import { BiCoffeeTogo, BiImage, BiTerminal } from 'react-icons/bi';
+import { BiCoffeeTogo, BiImage, BiTerminal, BiBrain } from 'react-icons/bi';
+import { CgWebsite } from 'react-icons/cg';
+import { LuFigma } from 'react-icons/lu';
 import { motion } from 'framer-motion';
 import { slideInRight, transition } from '../../styles/framerMotions';
 
@@ -15,8 +17,12 @@ export default function Module({ index, name, completion, icon, active}) {
                     return <BiCoffeeTogo size="70" />
                 case 'Terminal':
                     return <BiTerminal size="70" />
-                case 'Image':
-                    return <BiImage size="70" />
+                case 'Figma':
+                    return <LuFigma size="70" />
+                case 'Brain':
+                    return <BiBrain size="70" />
+                case 'Website':
+                    return <CgWebsite size="70" />
                 default:
                     return <BiCoffeeTogo size="70" />
             }

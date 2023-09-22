@@ -16,6 +16,15 @@ body {
   overflow-y: scroll;
 }
 
+.chart-container {
+  height: 215px;
+}
+
+.results{
+  height: 75vh;
+  overflow-y: scroll;
+}
+
 ::-webkit-scrollbar {
   width: 0.3rem;
 }

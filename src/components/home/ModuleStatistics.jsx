@@ -18,7 +18,7 @@ Chart.register(CategoryScale);
 Chart.register(ChartDataLabels);
 
 export default function ModuleStatistics({ module }) {
-    const [questions, setQuestions] = useState({});
+    const [questions, setQuestions] = useState(null);
     const [completed, setCompleted] = useState(0);
 
     /**
@@ -27,11 +27,8 @@ export default function ModuleStatistics({ module }) {
      * @returns FontAwesomeIcon Component
      */
     const getEmotionComponent = (average) => {
-        if(average === 0){
-            return <FontAwesomeIcon icon={faFaceMeh} className='text-secondary' size="5x"/>
-        } 
-        else if (average < 50) {
-            return <FontAwesomeIcon icon={faFaceSurprise} className='text-danger' size="5x" />
+        if (average < 50) {
+            return <FontAwesomeIcon icon={faFaceSurprise} className='text-secondary' size="5x" />
         } else if (average < 70) {
             return <FontAwesomeIcon icon={faFaceMeh} className='text-warning' size="5x" />
         } else {
