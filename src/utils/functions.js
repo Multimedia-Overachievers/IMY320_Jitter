@@ -14,6 +14,20 @@ export function formatTimer(seconds) {
     return `${hours > 0 ? hours + 'h ' : ''}${minutes > 0 ? minutes + 'm ' : ''}${remainingSeconds}s`;
 }
 
+export function GetModuleCode(moduleIndex) {
+    // eslint-disable-next-line default-case
+    switch (parseInt(moduleIndex)) {
+        case 0:
+            return 'imy320';
+        case 1:
+            return 'imy310';
+        case 2:
+            return 'cos333';
+        case 3:
+            return 'cos314';
+    }
+}
+
 /**
  * This function takes in an array of numbers and returns the average
  * @param {*} array 

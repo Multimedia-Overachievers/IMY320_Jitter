@@ -14,7 +14,7 @@ This repository contains a React-based website designed to assist students at th
 - React: A JavaScript library for building user interfaces.
 - React-Router: A library for handling routing in a React application.
 - Chart.js: A JavaScript charting library for creating interactive charts.
-- Local JSON Storage: A pseudo backend achieved by storing information in locally stored JSON files.
+- Node: A nodejs backend server that we have hosted.
 
 ## 💻Usage
 
@@ -43,7 +43,6 @@ This repository contains a React-based website designed to assist students at th
 ## 📝Notes
 
 - This project aims to test usability and does not require user authentication. There is a default user provided for demonstration purposes.
-- The pseudo backend stores information in locally stored JSON files, simulating a backend server.
 - Chart.js is used to create visualizations for the statistics section of the website.
 
 ## 🫂Team Members

@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { slideInLeft, transition } from '../../styles/framerMotions';
 
-import { GetAllQuestions } from '../../services/api-requests';
+import { GetModuleCode } from '../../utils/functions';
+import { GetQuestions } from '../../services/api-requests';
 
 export default function Chapter({ moduleIndex, index, chapter, description }) {
     const [progress, setProgress] = useState(null);
@@ -14,7 +15,7 @@ export default function Chapter({ moduleIndex, index, chapter, description }) {
 
     useEffect(() => {
         if (!questions) {
-            GetAllQuestions().then((response) => {
+            GetQuestions(GetModuleCode(moduleIndex)).then((response) => {
                 setQuestions(response.data);
             })
         }
@@ -25,8 +26,7 @@ export default function Chapter({ moduleIndex, index, chapter, description }) {
     }, [questions]);
 
     const GetProgress = () => {
-        console.log(questions);
-        var chapter = questions?.module[moduleIndex].chapters[index];
+        var chapter = questions?.chapters[index];
         var tempProgress = 0;
 
         chapter?.questions.forEach(question => {
@@ -66,12 +66,7 @@ export default function Chapter({ moduleIndex, index, chapter, description }) {
                             </Col>
                             <Col className='d-flex justify-content-end'>
                                 {/* Take test */}
-                                <div
-                                    className="btn btn-primary btn-sm d-flex justify-content-center align-items-center "
-                                    style={{ height: '40px', width: '100px' }}
-                                >
-                                    <Link to={`test/${moduleIndex}/${index}`} className='text-white fw-bold p-0 mb-1 text-decoration-none'>Take quiz</Link>
-                                </div>
+                                <Link to={`test/${moduleIndex}/${index}`} className='text-white fw-bold p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Take quiz</Link>
                             </Col>
                         </Row>
                     </Accordion.Header>

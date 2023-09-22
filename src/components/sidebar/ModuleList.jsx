@@ -12,8 +12,7 @@ export default function ModuleList({ modules, setModule }) {
             module.active = i === index;
         });
         
-        console.log("modlue in question", modules[index]);
-        setModule(modules[index]);
+        setModule(index);
     }
 
     var [questions, setQuestions] = useState(null);

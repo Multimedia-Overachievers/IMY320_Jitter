@@ -14,8 +14,8 @@ import { fadeIn, slideInLeft, slideInBottom, transition } from '../styles/framer
 
 import { formatTimer } from '../utils/functions.js';
 
-import { shuffle } from '../utils/functions.js';
-import { GetAllModules, GetAllQuestions } from '../services/api-requests';
+import { shuffle, GetModuleCode } from '../utils/functions.js';
+import { GetAllModules, GetQuestions } from '../services/api-requests';
 
 export default function Test() {
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function Test() {
     const [timeSpent, setTimeSpent] = useState(0);
     const [timerWarning, setTimerWarning] = useState(false);
     const [barPercentage, setBarPercentage] = useState(100);
-
+    
     const { moduleCode, chapterCode } = useParams();
     const isExam = false;
 
@@ -43,11 +43,11 @@ export default function Test() {
             }
         });
 
-        GetAllQuestions().then((response) => {
+        GetQuestions(GetModuleCode(moduleCode)).then((response) => {
             var questions = response.data;
 
             if (questions && moduleCode && chapterCode) {
-                setChapter(questions.module[moduleCode].chapters[chapterCode]);
+                setChapter(questions.chapters[chapterCode]);
             }
         });
 
@@ -65,11 +65,18 @@ export default function Test() {
 
             list[0].active = true;
             setQuestionList(list);
-            startTimer(3);
+            startTimer(600);
         }
     }, [chapter]);
 
-
+    // Display model if the user tries to go back to the previous page
+    useEffect(() => {
+        window.history.pushState(null, null, window.location.pathname);
+        window.addEventListener('popstate', onBackButtonEvent);
+        return () => {
+            window.removeEventListener('popstate', onBackButtonEvent);
+        };
+    }, []);
     const MoveToNext = () => {
         if (currentQuestion < questionsList.length - 1) {
             var newList = [...questionsList];
@@ -139,6 +146,11 @@ export default function Test() {
             navigate('/result', { state: CreateTestResult() });
         }
     }
+    
+    const onBackButtonEvent = (e) => {
+        e.preventDefault();
+        setModalShow(true);
+    }
 
     const CreateTestResult = () => {
         console.log("questionsList", questionsList);
@@ -159,33 +171,30 @@ export default function Test() {
     }
 
     const startTimer = (seconds) => {
-        var time = formatTimer(seconds);
+        
+        const endTime = new Date().getTime() + seconds * 1000;
 
-        if (timer !== '') {
-            clearInterval(timer);
-        }
+        console.log("seconds", seconds);
 
-        setTimer(time);
+        const interval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+            const secondsLeft = Math.floor((distance % (1000 * seconds)) / 1000);
 
-        var interval = setInterval(() => {
-            var time = formatTimer(seconds);
-
-            setTimer(time);
-            updateBar(seconds);
-            setTimeSpent(timeSpent => timeSpent + 1);
-
-            seconds--;
-            if (seconds < 60 && !timerWarning) {
-                setTimerWarning(true);
-            }
-
-            if (seconds < 0) {
+            if (distance < 0) {
                 clearInterval(interval);
+                setTimeSpent(secondsLeft);
+                setTimer('00:00');
+                setTimerWarning(true);
                 FinishQuiz(true);
+            } else {
+                updateBar(secondsLeft)
+                setTimeSpent(timeSpent => timeSpent + 1);
+                setTimer(formatTimer(secondsLeft));
             }
         }, 1000);
+        
     }
-
     const updateBar = (seconds) => {
         var percentage = (seconds / 600) * 100;
         setBarPercentage(percentage);
@@ -267,8 +276,7 @@ export default function Test() {
                                 transition={{ ...transition, delay: 0.5 }}
                             >
                                 <MdOutlineTimer className={timerWarning ? "text-danger me-2" : "text-primary me-2"} size={30} />
-
-                                {/* MAKE THIS TIME DYNAMIC */}
+                                
                                 <p className='text-dark m-0 p-0 '>{timer} left</p>
                             </motion.div>
 

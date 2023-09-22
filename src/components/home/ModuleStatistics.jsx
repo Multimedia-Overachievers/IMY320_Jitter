@@ -88,6 +88,11 @@ export default function ModuleStatistics({ module }) {
 
     const GetCompletedChapters = () => {
         var completed = 0;
+        
+        if(!questions.module) {
+            console.log('THERE WERE NO QUESTIONS');
+            return completed;
+        }
 
         var moduleQuestions = questions?.module[module.index];
         moduleQuestions?.chapters.forEach(chapter => {

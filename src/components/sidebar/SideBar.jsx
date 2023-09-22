@@ -40,6 +40,7 @@ export default function SideBar({ modules, setModule }) {
     const GetOverallProgress = () => {
         var progress = 0;
     
+        console.log(modules);
         modules?.forEach(module => {
             progress += GetProgressModule(module);
         });
