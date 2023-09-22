@@ -2,6 +2,8 @@
 
 This repository contains a React-based website designed to assist students at the University of Pretoria in practicing for their IT module tests and exams. The website allows users to take practice tests on specific chapters within a module, and even combine multiple chapters to create timed exams. It tracks users' progress within a module, providing statistics such as average performance per chapter, completed chapters, and hours spent on each module.
 
+[View the site here](uniq-site.netlify.app/)
+
 ## 📋Features
 
 - Practice tests on individual chapters within a module.
