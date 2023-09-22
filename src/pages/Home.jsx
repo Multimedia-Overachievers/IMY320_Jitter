@@ -4,6 +4,7 @@ import SideBar from '../components/sidebar/SideBar';
 import ModuleStatistics from '../components/home/ModuleStatistics';
 import Chapters from '../components/home/Chapters';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
 
 import { slideInRight, slideInLeft, transition } from '../styles/framerMotions';
 
@@ -37,6 +38,12 @@ export default function Home() {
 
     return (
         <div className="vh-100">
+            <Helmet>
+                <title>unIQ - Dashboard</title>
+                <meta name="description" content="unIQ is a web application that helps students to prepare for their exams." />
+                <meta name="keywords" content="unIQ, exam, preparation" />
+                <meta name="author" content="Keelan Matthews, Francois Smith, Ross Tordiffe, Dhairiya Chhipa, Tayla Orsmond" />
+            </Helmet>
             <Row>
                 <Col lg={9} className='scrollable vh-100'>
                     {/* Background image */}

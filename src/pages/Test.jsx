@@ -12,6 +12,7 @@ import ConfirmationModal from '../components/ConfirmationModal';
 import { motion } from 'framer-motion';
 import { fadeIn, slideInLeft, slideInBottom, transition } from '../styles/framerMotions';
 import { ProgressBar } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 
 import { formatTimer } from '../utils/functions.js';
 
@@ -37,7 +38,7 @@ export default function Test() {
     const [timeSpent, setTimeSpent] = useState(0);
     const [timerWarning, setTimerWarning] = useState(false);
     const [barPercentage, setBarPercentage] = useState(100);
-    
+
     const [isExam, setIsExam] = useState(false);
     const { moduleCode, chapterCode } = useParams();
 
@@ -81,7 +82,7 @@ export default function Test() {
             setIsExam(false);
             GetQuestions(GetModuleCode(moduleCode)).then((response) => {
                 var questions = response.data;
-    
+
                 if (questions && moduleCode && chapterCode) {
                     setChapter(questions.chapters[chapterCode]);
                 }
@@ -199,7 +200,7 @@ export default function Test() {
         localStorage.setItem('hasUpdated', JSON.stringify({ hasUpdated: false }));
         navigate('/result', { state: CreateTestResult() });
     }
-    
+
     const onBackButtonEvent = (e) => {
         e.preventDefault();
         setModalShow(true);
@@ -225,7 +226,7 @@ export default function Test() {
         const endTime = new Date().getTime() + seconds * 1000;
 
         //clear any existing timers if they exist
-       
+
         const interval = setInterval(() => {
             const now = new Date().getTime();
             const distance = endTime - now;
@@ -235,16 +236,16 @@ export default function Test() {
             setTimeSpent(timeSpent => timeSpent + 1);
             setTimer(formatTimer(secondsLeft));
 
-            if(secondsLeft < 60) {
+            if (secondsLeft < 60) {
                 setTimerWarning(true);
             }
 
-            if (distance <= 0){
+            if (distance <= 0) {
                 clearInterval(interval);
                 FinishQuiz(true);
             }
         }, 1000);
-        
+
         return interval;
     }
     const updateBar = (seconds) => {
@@ -268,6 +269,12 @@ export default function Test() {
 
     return (
         <div className="bg-light vh-100">
+            <Helmet>
+                <title>unIQ - {isExam ? "Exam" : "Test"}</title>
+                <meta name="description" content="unIQ is a web application that helps students to prepare for their exams." />
+                <meta name="keywords" content="unIQ, exam, preparation" />
+                <meta name="author" content="Keelan Matthews, Francois Smith, Ross Tordiffe, Dhairiya Chhipa, Tayla Orsmond" />
+            </Helmet>
             <div><Toaster /></div>
             <div className="p-5">
                 {/* Test header */}
@@ -301,7 +308,7 @@ export default function Test() {
                     variants={slideInLeft}
                     initial="hidden"
                     animate="visible"
-                    transition={{...transition, delay: 0.7 }}
+                    transition={{ ...transition, delay: 0.7 }}
                 >
                     <BiLeftArrowAlt className="text-dark me-3" size={30} />
                     <h4 className='text-dark m-0 p-0 fw-bold'>Leave Test</h4>
@@ -323,32 +330,32 @@ export default function Test() {
 
                             {
                                 isTimed ?
-                                <div>
-                                    <motion.div
-                                        className='d-flex align-items-center justify-content-center'
-                                        variants={fadeIn}
-                                        initial="hidden"
-                                        animate="visible"
-                                        transition={{ ...transition, delay: 0.5 }}
-                                    >
-                                        <MdOutlineTimer className={timerWarning ? "text-danger me-2" : "text-primary me-2"} size={30} />
-                                        
-                                        <p className='text-dark m-0 p-0 '>{timer} left</p>
-                                    </motion.div>
+                                    <div>
+                                        <motion.div
+                                            className='d-flex align-items-center justify-content-center'
+                                            variants={fadeIn}
+                                            initial="hidden"
+                                            animate="visible"
+                                            transition={{ ...transition, delay: 0.5 }}
+                                        >
+                                            <MdOutlineTimer className={timerWarning ? "text-danger me-2" : "text-primary me-2"} size={30} />
 
-                                    {/*  Progress bar */}
-                                    <motion.div
-                                        className="progress-bar mt-3" style={{ height: '5px' }}
-                                        variants={fadeIn}
-                                        initial="hidden"
-                                        animate="visible"
-                                        transition={{ ...transition, delay: 0.7 }}
-                                    >
-                                        <ProgressBar max={100} min={0} now={barPercentage} variant={!timerWarning ? "" : "danger"} className="bg-white" style={{ width: '100%' }} />
-                                        
-                                    </motion.div> 
-                                </div>
-                                : <></>
+                                            <p className='text-dark m-0 p-0 '>{timer} left</p>
+                                        </motion.div>
+
+                                        {/*  Progress bar */}
+                                        <motion.div
+                                            className="progress-bar mt-3" style={{ height: '5px' }}
+                                            variants={fadeIn}
+                                            initial="hidden"
+                                            animate="visible"
+                                            transition={{ ...transition, delay: 0.7 }}
+                                        >
+                                            <ProgressBar max={100} min={0} now={barPercentage} variant={!timerWarning ? "" : "danger"} className="bg-white" style={{ width: '100%' }} />
+
+                                        </motion.div>
+                                    </div>
+                                    : <></>
                             }
                         </div>
 
@@ -399,7 +406,7 @@ export default function Test() {
                         <QuestionBar questionData={questionsList} SelectEvent={MoveToIndex} />
 
                         {/* Logo */}
-                        <motion.div 
+                        <motion.div
                             className="d-flex justify-content-center mt-5"
                             variants={fadeIn}
                             initial="hidden"
