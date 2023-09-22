@@ -49,7 +49,6 @@ export default function Test() {
         });
 
         if(parseInt(chapterCode) === 5){
-            console.log("Exam");
             setIsExam(true);
             console.log(location.state);
             // GetQuestions(GetModuleCode(moduleCode)).then((response) => {
@@ -60,8 +59,7 @@ export default function Test() {
             //     }
             // });
 
-            setChapter({
-            });
+            setChapter(null);
         }
         else{
             setIsExam(false);
@@ -89,11 +87,13 @@ export default function Test() {
             setQuestionList(list);
 
             if(location.state?.duration !== -1){
+                console.log("Timed");
                 setTimed(true);
                 var interval = startTimer(testDuration);
                 return () => clearInterval(interval);
             }
             else{
+                console.log("Not timed");
                 setTimed(false);
             }
         }
