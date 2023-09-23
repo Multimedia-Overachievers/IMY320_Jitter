@@ -7,23 +7,38 @@ export default function Answer({ questions, results }) {
     const [questionsList, setQuestions] = useState(null);
 
     useEffect(() => {
-        //if its not a string
-
+        var chapterList = GetChapters();
         var tempList = [];
-        results?.questions.forEach(resultQuestion => {
-            questions?.forEach(question => {
-                if (resultQuestion.question === question.id) {
-                    tempList.push({
-                        question: question,
-                        selectedAnswer: resultQuestion.selectedAnswer,
-                        correct: IsAnswerCorrect(question, resultQuestion.selectedAnswer),
-                        NotAnswered: resultQuestion.selectedAnswer === -1 ? true : false
-                    });
-                }
+
+        chapterList.forEach(chapter => {
+            chapter?.questions.forEach(resultQuestion => {
+                questions?.forEach(question => {
+
+                    if (resultQuestion.question === question.id && parseInt(resultQuestion.chapter) === parseInt(question.chapter)) {
+                        tempList.push({
+                            question: question,
+                            selectedAnswer: resultQuestion.selectedAnswer,
+                            correct: IsAnswerCorrect(question, resultQuestion.selectedAnswer),
+                            NotAnswered: resultQuestion.selectedAnswer === -1 ? true : false
+                        });
+                    }
+                });
             });
         });
+
+
         setQuestions(tempList);
     }, [questions]);
+
+    const GetChapters = () => {
+        var chapters = [{questions: []}, {questions: []}, {questions: []}, {questions: []}];
+
+        results?.questions.forEach(question => {        
+            chapters[question.chapter].questions.push(question);
+        });
+
+        return chapters;
+    }
 
     const IsAnswerCorrect = (question, selectedAnswer) => {
         if(selectedAnswer === GetCorrectAnswer(question)) {

@@ -90,7 +90,6 @@ export default function ModuleStatistics({ module }) {
         var completed = 0;
 
         if (!questions.module) {
-            console.log('THERE WERE NO QUESTIONS');
             return completed;
         }
 

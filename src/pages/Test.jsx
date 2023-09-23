@@ -70,10 +70,13 @@ export default function Test() {
                 };
 
                 chapterList.forEach(chapter => {
+                    chapter.questions.forEach(question => {
+                        question.chapter = chapter.id;
+                    });
+
                     mergedChapter.questions = mergedChapter.questions.concat(chapter.questions);
                 });
 
-                console.log(mergedChapter);
                 setChapter(mergedChapter);
             });
         }
@@ -84,6 +87,10 @@ export default function Test() {
                 var questions = response.data;
 
                 if (questions && moduleCode && chapterCode) {
+                    questions.chapters[chapterCode].questions.forEach(question => {
+                        question.chapter = chapterCode;
+                    });
+
                     setChapter(questions.chapters[chapterCode]);
                 }
             });
@@ -216,9 +223,11 @@ export default function Test() {
                 return {
                     question: question.question.id,
                     selectedAnswer: question.selectedAnswer,
+                    chapter: question.question.chapter
                 }
             }),
             time: timeSpent,
+            exam: isExam,
         }
     }
 

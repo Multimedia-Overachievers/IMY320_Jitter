@@ -31,7 +31,6 @@ export default function Home() {
     }, [modules]);
 
     const SetModuleCallback = (index) => {
-
         setModule(modules.data[index]);
         SetActiveModule(index);
     }
