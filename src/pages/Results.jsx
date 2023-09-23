@@ -124,14 +124,16 @@ export default function Results() {
 
                 {/*  Leave test */}
                 <motion.div
-                    className="btn d-flex align-items-center mt-4"
+                    className="btn d-flex align-items-center mt-4 justify-content-start"
+                    onClick={() => navigate("/")}
+                    style={{ width: '180px' }}
                     variants={slideInLeft}
                     initial="hidden"
                     animate="visible"
                     transition={{ ...transition, delay: 0.7 }}
                 >
                     <BiLeftArrowAlt className="text-dark me-3" size={30} />
-                    <h4 className='text-dark m-0 p-0 fw-bold' onClick={() => navigate("/")}>Return home</h4>
+                    <h4 className='text-dark m-0 p-0 fw-bold'>Return home</h4>
                 </motion.div>
 
                 {/* Make only this scrollable */}
