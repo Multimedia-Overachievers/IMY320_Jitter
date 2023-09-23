@@ -25,7 +25,7 @@ export const GetActiveModule = () => {
 }
 
 export const UpdateChapterQuestion = (moduleIndex, chapterIndex, questionIndex) => {
-    return http.post('http://localhost:5000/update-chapter-question', {
+    return http.post('/update-chapter-question', {
         moduleIndex: moduleIndex,
         chapterIndex: chapterIndex,
         questionIndex: questionIndex
@@ -33,7 +33,7 @@ export const UpdateChapterQuestion = (moduleIndex, chapterIndex, questionIndex) 
 }
 
 export const AddQuizScore = (moduleIndex, chapterIndex, score, quizTime) => {
-    return http.post('http://localhost:5000/add-quiz-score', {
+    return http.post('/add-quiz-score', {
         moduleIndex: moduleIndex,
         chapterIndex: chapterIndex,
         score: score,
