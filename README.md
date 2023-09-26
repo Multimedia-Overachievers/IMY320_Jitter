@@ -1,5 +1,7 @@
 # 🌐IMY 320 Website - unIQ
 
+## ⚠️ We are hosting our server on a free site so our API sleeps after 30 minutes of inactivity. It will only take a bit to load the first time you open it, then it will work as intended. There isn't a student friendly way around this and the server was necessary so we apologize for any issues.
+
 This repository contains a React-based website designed to assist students at the University of Pretoria in practicing for their IT module tests and exams. The website allows users to take practice tests on specific chapters within a module, and even combine multiple chapters to create timed exams. It tracks users' progress within a module, providing statistics such as average performance per chapter, completed chapters, and hours spent on each module.
 
 [View the site here](uniq-site.netlify.app/)
