@@ -162,3 +162,8 @@ p {
 .scroll-container {
 	scroll-snap-align: start;
 }
+
+.custom-overflow {
+	overflow-y: auto;
+	overflow-x: hidden;
+}

@@ -17,7 +17,8 @@ body {
 .scrollable {
   overflow-y: scroll;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
 
@@ -148,4 +149,9 @@ p {
 
 .scroll-container {
   scroll-snap-align: start;
+}
+
+.custom-overflow {
+  overflow-y: auto;
+  overflow-x: hidden;
 }/*# sourceMappingURL=globals.css.map */
