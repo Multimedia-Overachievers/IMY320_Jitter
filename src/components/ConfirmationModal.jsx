@@ -20,7 +20,7 @@ export default function ConfirmationModal(props) {
                         <Button variant="outline" onClick={props.onHide}>
                             Cancel
                         </Button>
-                        <Button variant="danger" className='text-white' onClick={() => navigate("/")}>{props.confirmtext}</Button>
+                        <Button variant="danger" className='text-white' onClick={() => navigate("/dashboard")}>{props.confirmtext}</Button>
                     </div>
                 </Modal.Body>
             </Modal>

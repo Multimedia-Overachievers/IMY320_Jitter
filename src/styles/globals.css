@@ -14,6 +14,10 @@ body {
 
 .scrollable {
   overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 .pointer {
@@ -130,4 +134,17 @@ p {
 .results {
   height: 75vh;
   overflow-y: scroll;
+}
+
+.splash {
+  transform: translate(30%, 20%);
+}
+
+.slogan {
+  line-height: 1.9rem !important;
+  letter-spacing: 0.02rem !important;
+}
+
+.scroll-container {
+  scroll-snap-align: start;
 }/*# sourceMappingURL=globals.css.map */

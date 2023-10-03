@@ -155,7 +155,7 @@ export default function Results() {
                 {/*  Leave test */}
                 <motion.div
                     className="btn d-flex align-items-center mt-4 justify-content-start"
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/dashboard")}
                     style={{ width: '180px' }}
                     variants={slideInLeft}
                     initial="hidden"
