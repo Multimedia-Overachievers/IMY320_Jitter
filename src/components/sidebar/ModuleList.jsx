@@ -59,7 +59,7 @@ export default function ModuleList({ modules, setModule }) {
             >
                 Modules
             </motion.h3>
-            <div className="overflow-auto">
+            <div className="h-75 overflow-auto">
                 {
                     !modules ?
                         <span className='d-flex justify-content-center align-items-center h-100'>
