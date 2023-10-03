@@ -10,13 +10,14 @@ body {
   overflow: hidden;
   margin: 0;
   font-family: "Poppins", Arial, sans-serif;
+  scrollbar-color: #dbdbdb #ffffff;
+  scrollbar-width: thin;
 }
 
 .scrollable {
   overflow-y: scroll;
   overflow-x: hidden;
-  -ms-scroll-snap-type: y mandatory;
-      scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
 

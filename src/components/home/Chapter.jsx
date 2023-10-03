@@ -49,7 +49,7 @@ export default function Chapter({ moduleIndex, index, chapter, description }) {
                     <Accordion.Header className='rounded'>
                         <Row className="w-100 m-3">
                             <Col xs={5} className='d-flex align-items-center'>
-                                <h2 className='p-0 m-0 text-info'>{chapter}</h2>
+                                <h2 className='p-0 m-0 text-info d-block text-truncate'>{chapter}</h2>
                             </Col>
                             <Col xs={4} className='d-flex align-items-center'>
                                 {/* Progress bar */}

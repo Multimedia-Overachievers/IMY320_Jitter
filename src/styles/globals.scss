@@ -11,6 +11,8 @@ body {
 	overflow: hidden;
 	margin: 0;
 	font-family: "Poppins", Arial, sans-serif;
+	scrollbar-color: #dbdbdb #ffffff;
+	scrollbar-width: thin;
 }
 
 .scrollable {
@@ -35,7 +37,7 @@ body {
 // }
 
 ::-webkit-scrollbar-thumb {
-	background: #dbdbdb;
+	background: #dbdbdb; 
 }
 
 p {

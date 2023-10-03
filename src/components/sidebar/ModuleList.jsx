@@ -49,7 +49,7 @@ export default function ModuleList({ modules, setModule }) {
 
 
     return (
-        <div className='h-75'>
+        <div className='h-75 overflow-auto'>
             <motion.h3
                 className='text-dark mt-5'
                 variants={fadeIn}
