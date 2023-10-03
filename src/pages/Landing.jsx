@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Row, Col, Nav, Navbar, Button } from 'react-bootstrap';
+import { Row, Col, Nav, Navbar, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { Link } from "react-router-dom";
+import { BsFillPersonFill } from 'react-icons/bs';
 
 import { slideInRight, slideInLeft, transition } from '../styles/framerMotions';
 
@@ -26,6 +27,12 @@ const useIntersectionObserver = (ref, setInView, threshold) => {
         };
     }, [ref, setInView, threshold]);
 };
+
+const tooltip = (
+    <Tooltip id="tooltip">
+        Meet the team!
+    </Tooltip>
+);
 
 export default function Landing() {
     const ref = useRef();
@@ -82,7 +89,9 @@ export default function Landing() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Link to={"/dashboard"} className='text-info fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center me-4' style={{ height: '40px', width: '100px' }}>Login</Link>
+                    <Link to={"/dashboard"} className='text-primary fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center me-4' style={{ height: '40px', width: '100px' }}>Home</Link>
+                        <Link to={"/dashboard"} className='text-info fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center me-4' style={{ height: '40px', width: '100px' }}>Dashboard</Link>
+                        <Link to={"/team"} className='text-info fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center me-4' style={{ height: '40px', width: '100px' }}>Team</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -90,6 +99,15 @@ export default function Landing() {
             <div className='bg-light position-absolute w-100 h-100 d-flex align-items-center justify-content-center' style={{ zIndex: -1 }}>
                 <img className="splash" style={{ width: '90rem' }} src="/images/splash.png" alt="" />
             </div>
+            {/* Floating bottom in bottom right corner */}
+            <div className='position-absolute bottom-0 end-0 mb-3 me-3'>
+                <OverlayTrigger placement="left" overlay={tooltip}>
+                    <Link to={"/team"} className="rounded-circle bg-info p-3 d-flex justify-content-center align-items-center">
+                        <BsFillPersonFill className="text-white fs-1 m-0 p-0" size="30" />
+                    </Link>
+                </OverlayTrigger>
+            </div>
+
             <Row className='vh-100 mt-5 pt-5 scroll-container'>
                 {/* unIQ logo big in the middle with 2 cta */}
                 <Col xs={{ span: 5, offset: 1 }} className='mb-5 pb-5'>
