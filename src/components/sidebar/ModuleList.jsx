@@ -49,7 +49,7 @@ export default function ModuleList({ modules, setModule }) {
 
 
     return (
-        <div className='h-75 overflow-auto'>
+        <div className='h-75'>
             <motion.h3
                 className='text-dark mt-5'
                 variants={fadeIn}
@@ -59,19 +59,20 @@ export default function ModuleList({ modules, setModule }) {
             >
                 Modules
             </motion.h3>
-
-            {
-                !modules ?
-                    <span className='d-flex justify-content-center align-items-center h-100'>
-                        <Spinner animation="border" variant="primary" />
-                    </span>
-                    :
-                    modules.map((module, index) => (
-                        <div onClick={() => setActiveModule(index)} key={index}>
-                            <Module index={index} name={module.name} completion={GetOverallProgress(module)} icon={module.icon} active={module.active} />
-                        </div>
-                    ))
-            }
+            <div className="overflow-auto">
+                {
+                    !modules ?
+                        <span className='d-flex justify-content-center align-items-center h-100'>
+                            <Spinner animation="border" variant="primary" />
+                        </span>
+                        :
+                        modules.map((module, index) => (
+                            <div onClick={() => setActiveModule(index)} key={index}>
+                                <Module index={index} name={module.name} completion={GetOverallProgress(module)} icon={module.icon} active={module.active} />
+                            </div>
+                        ))
+                }
+            </div>
         </div>
     )
 }
