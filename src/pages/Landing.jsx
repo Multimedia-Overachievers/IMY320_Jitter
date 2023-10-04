@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { Link } from "react-router-dom";
 import { BsFillPersonFill } from 'react-icons/bs';
 
-import { slideInRight, slideInLeft, transition } from '../styles/framerMotions';
+import { slideInRight, slideInLeft, transition, fadeIn } from '../styles/framerMotions';
 
 const useIntersectionObserver = (ref, setInView, threshold) => {
     useEffect(() => {
@@ -97,7 +97,16 @@ export default function Landing() {
             </Navbar>
             {/* Background image */}
             <div className='bg-light position-absolute w-100 h-100 d-flex align-items-center justify-content-center' style={{ zIndex: -1 }}>
-                <img className="splash" style={{ width: '90rem' }} src="/images/splash.webp" alt="" />
+                <motion.img 
+                    className="splash" 
+                    style={{ width: '90rem' }} 
+                    src="/images/splash.webp" 
+                    alt="" 
+                    variants={fadeIn}
+                    initial='hidden'
+                    animate='visible'
+                    transition={{ duration: 0.3 }}
+                />
             </div>
             {/* Floating bottom in bottom right corner */}
             <div className='position-absolute bottom-0 end-0 mb-3 me-3'>
