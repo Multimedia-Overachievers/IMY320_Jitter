@@ -105,7 +105,7 @@ export default function Landing() {
                     variants={fadeIn}
                     initial='hidden'
                     animate='visible'
-                    transition={{ duration: 0.3 }}
+                    transition={{...transition, delay: 0.3 }}
                 />
             </div>
             {/* Floating bottom in bottom right corner */}
