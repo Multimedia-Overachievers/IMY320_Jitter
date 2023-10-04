@@ -92,7 +92,7 @@ function ExamChaptersModal({ errorCallback, ...props }) {
             return;
         }
 
-        navigate('/test/'+props.moduleindex+'/5', { state: {
+        navigate('/dashboard/test/'+props.moduleindex+'/5', { state: {
             duration: timeLimit ? chapters.length * 900 : -1,
             exam: true,
             chapters: chapters

@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ConfirmationModal from '../components/ConfirmationModal';
 import { motion } from 'framer-motion';
 import { fadeIn, slideInLeft, slideInBottom, transition } from '../styles/framerMotions';
-import { ProgressBar } from 'react-bootstrap';
+import { ProgressBar, Spinner } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 
 import { formatTimer } from '../utils/functions.js';
@@ -371,7 +371,10 @@ export default function Test() {
                         {/* Question */}
                         {questionsList && questionsList?.length > 0 && questionsList[currentQuestion]
                             ? <Question questionIndex={currentQuestion} SetCompleteCallback={SetCompleted} questionInstance={questionsList[currentQuestion]} />
-                            : <p>No Questions found for chapter</p>
+                            : 
+                            <span className='d-flex justify-content-center align-items-center mt-5 pt-5'>
+                                <Spinner animation="border" variant="primary" />
+                            </span>
                         }
 
                         {/* Next question button */}
