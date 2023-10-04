@@ -1,10 +1,10 @@
 import React from 'react';
-import { Row, Col, Container, Navbar, Nav, Button } from 'react-bootstrap';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
-import { slideInRight, slideInLeft, transition, slideInBottom } from '../styles/framerMotions';
+import { slideInRight, transition, slideInBottom } from '../styles/framerMotions';
 
 export default function Team() {
     return (

@@ -13,7 +13,7 @@ function App() {
 			<Route render exact path="/" element={<Landing />} />
 			<Route render exact path="/dashboard" element={<Home />} />
 			<Route exact path="/dashboard/test/:moduleCode/:chapterCode" element={<Test />} />
-			<Route exact path="/dashboard/result" element={<Results />} />
+			<Route exact path="/result" element={<Results />} />
 			<Route exact path="/team" element={<Team />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>

@@ -50,25 +50,6 @@ export default function Landing() {
     useIntersectionObserver(ref2, setInView2, threshold);
     useIntersectionObserver(ref3, setInView3, threshold);
 
-    // Console log when each section is in view
-    useEffect(() => {
-        if (inView) {
-            console.log('Module stats in view');
-        }
-    }, [inView]);
-
-    useEffect(() => {
-        if (inView2) {
-            console.log('Chapter quizzes in view');
-        }
-    }, [inView2]);
-
-    useEffect(() => {
-        if (inView3) {
-            console.log('Simple quiz system in view');
-        }
-    }, [inView3]);
-
     return (
         <div className="scrollable vh-100">
             <Helmet>
