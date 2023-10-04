@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import ModuleList from './ModuleList';
 import OverallStatistics from './OverallStatistics';
 import { formatSeconds } from '../../utils/functions';
@@ -29,7 +29,7 @@ export default function SideBar({ modules, setModule }) {
         var progress = 0;
 
         chapter.questions.forEach(question => {
-            if(question?.finished) {
+            if (question?.finished) {
                 progress++;
             }
         });
@@ -39,7 +39,7 @@ export default function SideBar({ modules, setModule }) {
 
     const GetOverallProgress = () => {
         var progress = 0;
-    
+
         modules?.forEach(module => {
             progress += GetProgressModule(module);
         });
@@ -59,17 +59,20 @@ export default function SideBar({ modules, setModule }) {
     }
 
     return (
-        <div className='vh-100 p-5 pb-3 d-flex flex-column justify-content-between' style={{backgroundColor: '#FCFDFE'}}>
+        <div className='vh-100 p-5 pb-3 d-flex flex-column justify-content-between' style={{ backgroundColor: '#FCFDFE' }}>
             {/* Logo */}
-            <div className='d-flex justify-content-center'>
-                <img src='images/logo.svg' alt='logo' className='img-fluid' />
+            <div>
+                <div className='d-flex justify-content-center'>
+                    <img src='images/logo.svg' alt='logo' className='img-fluid' />
+                </div>
+
+                {/* Module list */}
+                <ModuleList modules={modules} setModule={setModule} />
             </div>
 
-            {/* Module list */}
-            <ModuleList modules={modules} setModule={setModule} />
 
             {/* Overall statistics */}
-            <OverallStatistics totalHours={formatSeconds(GetOverallTime())} contentCovered={GetOverallProgress()} />
+            {/* <OverallStatistics totalHours={formatSeconds(GetOverallTime())} contentCovered={GetOverallProgress()} /> */}
 
             <small className='text-secondary text-center p-0 m-0'>jitter co.</small>
         </div>

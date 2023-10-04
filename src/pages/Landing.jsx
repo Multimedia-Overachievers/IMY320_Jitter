@@ -97,7 +97,7 @@ export default function Landing() {
             </Navbar>
             {/* Background image */}
             <div className='bg-light position-absolute w-100 h-100 d-flex align-items-center justify-content-center' style={{ zIndex: -1 }}>
-                <img className="splash" style={{ width: '90rem' }} src="/images/splash.png" alt="" />
+                <img className="splash" style={{ width: '90rem' }} src="/images/splash.webp" alt="" />
             </div>
             {/* Floating bottom in bottom right corner */}
             <div className='position-absolute bottom-0 end-0 mb-3 me-3'>

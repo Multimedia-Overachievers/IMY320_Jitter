@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
-import { slideInRight, slideInLeft, transition } from '../styles/framerMotions';
+import { slideInRight, slideInLeft, transition, slideInBottom } from '../styles/framerMotions';
 
 export default function Team() {
     return (
@@ -44,24 +44,24 @@ export default function Team() {
                     Meet the team
                 </motion.h1>
                 <div className='d-flex'>
-                    <Card image='/images/keelan.jpg' name='Keelan Matthews' role='Lead Frontend Developer' cta='Portfolio' link='https://keelanmatthews.com' slideLeft={true} />
-                    <Card image='/images/francois.jpeg' name='Francois Smith' role='Lead Backend Developer' cta='Portfolio' link='https://francois-smith.com' slideLeft={false} />
-                    <Card image='/images/ross.jpeg' name='Ross Tordiffe' role='Backend Developer' cta='GitHub' link='https://github.com/Ross-Tordiffe' slideLeft={true} />
-                    <Card image='/images/tayla.jpeg' name='Tayla Orsmond' role='Frontend Developer' cta='GitHub' link='https://github.com/tayla-orsmond' slideLeft={false} />
-                    <Card image='/images/dhairiya.jpeg' name='Dhairiya Chhipa' role='Content' cta='GitHub' link='https://github.com/DhairiyaChhipa' slideLeft={true} />
+                    <Card image='/images/keelan.webp' name='Keelan Matthews' role='Lead Frontend Developer' cta='Portfolio' link='https://keelanmatthews.com' delay={0.2}  />
+                    <Card image='/images/francois.webp' name='Francois Smith' role='Lead Backend Developer' cta='Portfolio' link='https://francois-smith.com' delay={0.4} />
+                    <Card image='/images/ross.webp' name='Ross Tordiffe' role='Backend Developer' cta='GitHub' link='https://github.com/Ross-Tordiffe' delay={0.6} />
+                    <Card image='/images/tayla.webp' name='Tayla Orsmond' role='Frontend Developer' cta='GitHub' link='https://github.com/tayla-orsmond' delay={0.8} />
+                    <Card image='/images/dhairiya.webp' name='Dhairiya Chhipa' role='Content' cta='GitHub' link='https://github.com/DhairiyaChhipa' delay={1}  />
                 </div>
             </div>
         </div>
     )
 }
 
-const Card = ({ image, name, role, cta, link, slideLeft }) => (
+const Card = ({ image, name, role, cta, link, delay }) => (
     <motion.div
         className="bg-white rounded shadow m-1 mb-4 me-4 p-4"
-        variants={slideLeft ? slideInLeft : slideInRight}
+        variants={slideInBottom}
         initial='hidden'
         animate='visible'
-        transition={transition}
+        transition={{ ...transition, delay }}
         style={{width: '20%'}}
     >
         <img src={image} className="rounded w-100" alt="..." />
