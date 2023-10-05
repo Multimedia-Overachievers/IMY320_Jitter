@@ -75,23 +75,23 @@ export default function Landing() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                    <Link to={"/"} className='text-primary fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center me-4' style={{ height: '40px', width: '100px' }}>Home</Link>
-                        <Link to={"/dashboard"} className='text-info fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center me-4' style={{ height: '40px', width: '100px' }}>Dashboard</Link>
-                        <Link to={"/team"} className='text-info fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center me-4' style={{ height: '40px', width: '100px' }}>Team</Link>
+                        <Link to={"/"} className='text-primary fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Home</Link>
+                        <Link to={"/team"} className='text-info fw-bold fs-3 p-0 mb-1 text-decoration-none btn btn-sm d-flex justify-content-center align-items-center me-4' style={{ height: '40px', width: '100px' }}>The Team</Link>
+                        <Link to={"/dashboard"} className='text-white fw-bold fs-4 p-0 mb-1 text-decoration-none btn btn-primary btn-sm d-flex justify-content-center align-items-center' style={{ height: '40px', width: '100px' }}>Login</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
             {/* Background image */}
             <div className='bg-light position-absolute w-100 h-100 d-flex align-items-center justify-content-center' style={{ zIndex: -1 }}>
-                <motion.img 
-                    className="splash" 
-                    style={{ width: '90rem' }} 
-                    src="/images/splash.webp" 
-                    alt="" 
+                <motion.img
+                    className="splash"
+                    style={{ width: '90rem' }}
+                    src="/images/splash.webp"
+                    alt=""
                     variants={fadeIn}
                     initial='hidden'
                     animate='visible'
-                    transition={{...transition, delay: 0.3 }}
+                    transition={{ ...transition, delay: 0.3 }}
                 />
             </div>
             {/* Floating bottom in bottom right corner */}
@@ -103,7 +103,13 @@ export default function Landing() {
                 </OverlayTrigger>
             </div>
 
-            <Row className='vh-100 mt-5 pt-5 scroll-container'>
+            <div class="scroll-downs">
+                <div class="mousey">
+                    <div class="scroller"></div>
+                </div>
+            </div>
+
+            <Row className='vh-100 mt-5 pt-5'>
                 {/* unIQ logo big in the middle with 2 cta */}
                 <Col xs={{ span: 5, offset: 1 }} className='mb-5 pb-5'>
                     <div className="d-flex flex-column justify-content-start mt-5 pt-5">
@@ -142,7 +148,7 @@ export default function Landing() {
                 </Col>
             </Row>
 
-            <Row className='vh-100 mt-5 pt-5 bg-white scroll-container' id="module-stats" ref={ref}>
+            <Row className='vh-100 mt-5 pt-5 bg-white' id="module-stats" ref={ref}>
                 <Col xs={{ span: 5, offset: 1 }} className="d-flex align-items-center">
                     {/* image */}
                     <motion.img
@@ -193,7 +199,7 @@ export default function Landing() {
                 </Col>
             </Row>
 
-            <Row className='vh-100 pt-5 bg-white scroll-container' ref={ref2}>
+            <Row className='vh-100 pt-5 bg-white' ref={ref2}>
                 <Col xs={{ span: 5, offset: 1 }} className="d-flex align-items-center">
                     {/* text */}
                     <div className="d-flex flex-column justify-content-start mt-5 pt-5">
@@ -244,7 +250,7 @@ export default function Landing() {
                 </Col>
             </Row>
 
-            <Row className='vh-100 pt-5 bg-white scroll-container' ref={ref3}>
+            <Row className='vh-100 pt-5 bg-white' ref={ref3}>
                 <Col xs={{ span: 5, offset: 1 }} className="d-flex align-items-center">
                     {/* image */}
                     <motion.img
