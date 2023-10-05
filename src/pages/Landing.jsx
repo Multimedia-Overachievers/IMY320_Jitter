@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { Link } from "react-router-dom";
 import { BsFillPersonFill } from 'react-icons/bs';
+import { Wake } from '../services/api-requests';
 
 import { slideInRight, slideInLeft, transition, fadeIn } from '../styles/framerMotions';
 
@@ -38,6 +39,10 @@ export default function Landing() {
     const ref = useRef();
     const ref2 = useRef();
     const ref3 = useRef();
+
+    useEffect(() => {
+        Wake();
+    }, []);
 
     const [inView, setInView] = useState(false);
     const [inView2, setInView2] = useState(false);

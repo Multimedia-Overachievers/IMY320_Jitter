@@ -1,5 +1,9 @@
 import http from "./api-url";
 
+export const Wake = () => {
+    return http.get("/wake");
+};
+
 export const GetAllModules = () => {
     return http.get("/modules");
 };
